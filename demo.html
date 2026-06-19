@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRL-2 Interactive Demo - AI Diabetic Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .demo-container {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e8eaed;
+            z-index: 0;
+        }
+
+        .step {
+            background: white;
+            border: 3px solid #e8eaed;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .step.active {
+            background: #1a73e8;
+            color: white;
+            border-color: #1a73e8;
+            transform: scale(1.2);
+        }
+
+        .step.completed {
+            background: #34a853;
+            color: white;
+            border-color: #34a853;
+        }
+
+        .step-content {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .data-viz {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .progress-bar-demo {
+            height: 30px;
+            background: #e8eaed;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill-demo {
+            height: 100%;
+            background: linear-gradient(90deg, #1a73e8, #34a853);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="demo-container">
+        <div class="hero-section">
+            <h1>🏥 Interactive TRL-2 Demonstration</h1>
+            <p>Experience the AI-Enabled Personalized Diabetic Management System</p>
+            <p style="font-size: 0.9rem; color: #666;">Follow the step-by-step journey of patient data through our
+                integrated AI pipeline</p>
+        </div>
+
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step active" data-step="1">1</div>
+            <div class="step" data-step="2">2</div>
+            <div class="step" data-step="3">3</div>
+            <div class="step" data-step="4">4</div>
+            <div class="step" data-step="5">5</div>
+            <div class="step" data-step="6">6</div>
+        </div>
+
+        <!-- Step 1: Select Patient -->
+        <div class="step-content active" id="step-1">
+            <h2>📋 Step 1: Select a Patient</h2>
+            <p>Choose a patient to demonstrate the complete AI-powered diabetes management workflow</p>
+
+            <div class="grid-3" style="margin-top: 30px;">
+                <div class="card" style="cursor: pointer; transition: all 0.3s;" onclick="selectPatient('PAT-001')">
+                    <h3>👨 Rajesh Kumar</h3>
+                    <div style="margin: 15px 0;">
+                        <div><strong>Age:</strong> 45 years</div>
+                        <div><strong>HbA1c:</strong> <span style="color: #ea4335;">7.2%</span></div>
+                        <div><strong>FBS:</strong> 142 mg/dL</div>
+                        <div><strong>BMI:</strong> 27.5</div>
+                        <div><strong>Risk Level:</strong> <span class="badge-orange">Moderate</span></div>
+                    </div>
+                    <button class="btn btn-primary btn-sm">Select Patient</button>
+                </div>
+
+                <div class="card" style="cursor: pointer; transition: all 0.3s;" onclick="selectPatient('PAT-002')">
+                    <h3>👩 Priya Sharma</h3>
+                    <div style="margin: 15px 0;">
+                        <div><strong>Age:</strong> 52 years</div>
+                        <div><strong>HbA1c:</strong> <span style="color: #d93025;">8.5%</span></div>
+                        <div><strong>FBS:</strong> 168 mg/dL</div>
+                        <div><strong>BMI:</strong> 29.8</div>
+                        <div><strong>Risk Level:</strong> <span style="color: #d93025;">High</span></div>
+                    </div>
+                    <button class="btn btn-primary btn-sm">Select Patient</button>
+                </div>
+
+                <div class="card" style="cursor: pointer; transition: all 0.3s;" onclick="selectPatient('PAT-003')">
+                    <h3>👨 Amit Patel</h3>
+                    <div style="margin: 15px 0;">
+                        <div><strong>Age:</strong> 38 years</div>
+                        <div><strong>HbA1c:</strong> <span style="color: #34a853;">6.8%</span></div>
+                        <div><strong>FBS:</strong> 128 mg/dL</div>
+                        <div><strong>BMI:</strong> 25.2</div>
+                        <div><strong>Risk Level:</strong> <span style="color: #34a853;">Low</span></div>
+                    </div>
+                    <button class="btn btn-primary btn-sm">Select Patient</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: OCR Processing -->
+        <div class="step-content" id="step-2">
+            <h2>📄 Step 2: OCR + Medical Entity Extraction</h2>
+            <p>Watch how our AI extracts diabetic indicators from medical reports</p>
+
+            <div class="grid-2" style="margin-top: 30px;">
+                <div>
+                    <h3>📑 Input: Medical Report</h3>
+                    <div class="card" style="background: #f8f9fa; font-family: monospace; font-size: 0.9rem;">
+                        <strong>LABORATORY REPORT</strong><br>
+                        Patient ID: <span id="patient-id">PAT-001</span><br>
+                        Name: <span id="patient-name">Rajesh Kumar</span><br>
+                        Date: 2026-01-15<br><br>
+
+                        <strong>DIABETIC PROFILE</strong><br>
+                        HbA1c: <span id="report-hba1c">7.2</span>%<br>
+                        Fasting Blood Sugar: <span id="report-fbs">142</span> mg/dL<br>
+                        Post Prandial: <span id="report-ppbs">198</span> mg/dL<br>
+                        Blood Pressure: <span id="report-bp">130/85</span><br>
+                        Cholesterol: <span id="report-chol">190</span> mg/dL<br>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>🤖 Output: Extracted Entities</h3>
+                    <div id="extracted-data" class="card">
+                        <div class="data-viz">
+                            <div style="margin-bottom: 15px;">
+                                <strong>HbA1c:</strong> <span id="ext-hba1c"
+                                    style="font-size: 1.5rem; color: #1a73e8;">--</span>%
+                                <div class="progress-bar-demo">
+                                    <div class="progress-fill-demo" id="progress-hba1c" style="width: 0%">0%</div>
+                                </div>
+                                <small>Confidence: <span id="conf-hba1c">--</span>%</small>
+                            </div>
+
+                            <div style="margin-bottom: 15px;">
+                                <strong>FBS:</strong> <span id="ext-fbs"
+                                    style="font-size: 1.5rem; color: #1a73e8;">--</span> mg/dL
+                                <div class="progress-bar-demo">
+                                    <div class="progress-fill-demo" id="progress-fbs" style="width: 0%">0%</div>
+                                </div>
+                                <small>Confidence: <span id="conf-fbs">--</span>%</small>
+                            </div>
+
+                            <div class="highlight-box success">
+                                <strong>✅ OCR Accuracy:</strong> 94.5%<br>
+                                <strong>✅ Entity Extraction:</strong> 5/5 entities found<br>
+                                <strong>✅ Processing Time:</strong> 0.8 seconds
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="runOCRDemo()" style="margin-top: 20px;">▶ Run OCR
+                Extraction</button>
+            <button class="btn btn-outline" onclick="nextStep()" style="margin-top: 20px;">Next Step →</button>
+        </div>
+
+        <!-- Step 3: Federated Learning -->
+        <div class="step-content" id="step-3">
+            <h2>🌐 Step 3: Federated Learning Risk Prediction</h2>
+            <p>Privacy-preserving AI model trained across multiple hospitals</p>
+
+            <div class="fl-network" style="margin: 30px 0;">
+                <div class="fl-hospital" id="hosp-a">
+                    <div class="hospital-icon">🏥</div>
+                    <div class="hospital-name">City General Hospital</div>
+                    <div class="hospital-stats">Delhi • 130 patients</div>
+                    <div class="progress-bar-demo" style="margin-top: 10px;">
+                        <div class="progress-fill-demo" id="fl-progress-a" style="width: 0%">0%</div>
+                    </div>
+                </div>
+
+                <div class="fl-hospital" id="hosp-b">
+                    <div class="hospital-icon">🏥</div>
+                    <div class="hospital-name">Unity Medical Center</div>
+                    <div class="hospital-stats">Mumbai • 95 patients</div>
+                    <div class="progress-bar-demo" style="margin-top: 10px;">
+                        <div class="progress-fill-demo" id="fl-progress-b" style="width: 0%">0%</div>
+                    </div>
+                </div>
+
+                <div class="fl-hospital" id="hosp-c">
+                    <div class="hospital-icon">🏥</div>
+                    <div class="hospital-name">Sparsh Hospital</div>
+                    <div class="hospital-stats">Bangalore • 80 patients</div>
+                    <div class="progress-bar-demo" style="margin-top: 10px;">
+                        <div class="progress-fill-demo" id="fl-progress-c" style="width: 0%">0%</div>
+                    </div>
+                </div>
+
+                <div class="fl-hospital" id="hosp-d">
+                    <div class="hospital-icon">🏥</div>
+                    <div class="hospital-name">Aarogya Healthcare</div>
+                    <div class="hospital-stats">Chennai • 70 patients</div>
+                    <div class="progress-bar-demo" style="margin-top: 10px;">
+                        <div class="progress-fill-demo" id="fl-progress-d" style="width: 0%">0%</div>
+                    </div>
+                </div>
+
+                <div class="fl-central">
+                    <h3>🔒 Global Model Server</h3>
+                    <p>Secure Aggregation with ε=0.5 Differential Privacy</p>
+                    <div id="fl-result" style="margin-top: 20px;">
+                        <div><strong>Global Accuracy:</strong> <span id="fl-accuracy">--</span>%</div>
+                        <div><strong>Privacy Budget:</strong> ε=0.5</div>
+                        <div><strong>Training Rounds:</strong> <span id="fl-rounds">0</span>/10</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎯 Risk Prediction for <span id="fl-patient-name">Patient</span></h3>
+                <div id="risk-prediction" style="margin-top: 20px; text-align: center;">
+                    <div style="font-size: 3rem; font-weight: 700; color: #1a73e8;" id="risk-score">--</div>
+                    <div style="font-size: 1.2rem; margin-top: 10px;">Risk Score</div>
+                    <div style="margin-top: 20px;">
+                        <span id="risk-level" class="badge-orange"
+                            style="padding: 10px 20px; font-size: 1.1rem;">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="runFLDemo()" style="margin-top: 20px;">▶ Run Federated
+                Learning</button>
+            <button class="btn btn-outline" onclick="nextStep()" style="margin-top: 20px;">Next Step →</button>
+        </div>
+
+        <!-- Step 4: Food Intelligence -->
+        <div class="step-content" id="step-4">
+            <h2>🍽️ Step 4: Food Intelligence & Meal Analysis</h2>
+            <p>AI-powered food recognition and glycemic impact calculation</p>
+
+            <div class="grid-2" style="margin-top: 30px;">
+                <div>
+                    <h3>Select Foods for Analysis</h3>
+                    <div class="food-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="food-item" onclick="toggleFood('idli')">
+                            <div class="food-emoji">🥘</div>
+                            <div class="food-name">Idli (2)</div>
+                        </div>
+                        <div class="food-item" onclick="toggleFood('dosa')">
+                            <div class="food-emoji">🥞</div>
+                            <div class="food-name">Dosa</div>
+                        </div>
+                        <div class="food-item" onclick="toggleFood('sambar')">
+                            <div class="food-emoji">🍲</div>
+                            <div class="food-name">Sambar</div>
+                        </div>
+                        <div class="food-item" onclick="toggleFood('rice')">
+                            <div class="food-emoji">🍚</div>
+                            <div class="food-name">Rice</div>
+                        </div>
+                        <div class="food-item" onclick="toggleFood('dal')">
+                            <div class="food-emoji">🍛</div>
+                            <div class="food-name">Dal</div>
+                        </div>
+                        <div class="food-item" onclick="toggleFood('curry')">
+                            <div class="food-emoji">🥗</div>
+                            <div class="food-name">Veg Curry</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Nutritional Analysis</h3>
+                    <div id="food-analysis" class="card">
+                        <div class="data-viz">
+                            <div style="margin-bottom: 15px;">
+                                <strong>Total Calories:</strong> <span id="total-calories"
+                                    style="font-size: 1.5rem; color: #1a73e8;">0</span> kcal
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <strong>Glycemic Index (GI):</strong> <span id="avg-gi"
+                                    style="font-size: 1.5rem; color: #34a853;">0</span>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <strong>Glycemic Load (GL):</strong> <span id="total-gl"
+                                    style="font-size: 1.5rem;">0</span>
+                            </div>
+
+                            <div style="margin-top: 20px;">
+                                <strong>Macronutrients:</strong>
+                                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                    <div style="flex: 1; text-align: center;">
+                                        <div style="font-size: 1.2rem; font-weight: 600;" id="total-protein">0g</div>
+                                        <div style="font-size: 0.8rem;">Protein</div>
+                                    </div>
+                                    <div style="flex: 1; text-align: center;">
+                                        <div style="font-size: 1.2rem; font-weight: 600;" id="total-carbs">0g</div>
+                                        <div style="font-size: 0.8rem;">Carbs</div>
+                                    </div>
+                                    <div style="flex: 1; text-align: center;">
+                                        <div style="font-size: 1.2rem; font-weight: 600;" id="total-fat">0g</div>
+                                        <div style="font-size: 0.8rem;">Fat</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="food-recommendation" class="highlight-box"
+                                style="margin-top: 20px; display: none;">
+                                <strong>🎯 Recommendation:</strong> <span id="food-rec-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-outline" onclick="nextStep()" style="margin-top: 20px;">Next Step →</button>
+        </div>
+
+        <!-- Step 5: Diet Recommendation -->
+        <div class="step-content" id="step-5">
+            <h2>🥗 Step 5: Personalized Diet Plan</h2>
+            <p>AI-generated meal recommendations based on patient profile and preferences</p>
+
+            <div class="card" style="margin-top: 30px;">
+                <h3>📋 Patient Profile Summary</h3>
+                <div class="grid-3">
+                    <div><strong>HbA1c:</strong> <span id="diet-hba1c">--</span>%</div>
+                    <div><strong>BMI:</strong> <span id="diet-bmi">--</span></div>
+                    <div><strong>Risk Level:</strong> <span id="diet-risk">--</span></div>
+                    <div><strong>Diet Preference:</strong> Vegetarian</div>
+                    <div><strong>Lifestyle:</strong> Moderately Active</div>
+                    <div><strong>Daily Calorie Target:</strong> <span id="calorie-target">--</span> kcal</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h3>🍳 Recommended Meal Plan</h3>
+                <div class="grid-3" style="margin-top: 20px;">
+                    <div class="card">
+                        <h4>Breakfast (7:00 AM)</h4>
+                        <div style="margin-top: 15px;">
+                            <div>🥘 2 Idlis</div>
+                            <div>🍲 Sambar (1 bowl)</div>
+                            <div>☕ Tea (without sugar)</div>
+                            <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                                <strong>Calories:</strong> 285 kcal<br>
+                                <strong>GL:</strong> 26
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>Lunch (1:00 PM)</h4>
+                        <div style="margin-top: 15px;">
+                            <div>🍚 Brown Rice (1 bowl)</div>
+                            <div>🍛 Dal (1 bowl)</div>
+                            <div>🥗 Mixed Veg Curry</div>
+                            <div>🥛 Curd (1 bowl)</div>
+                            <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                                <strong>Calories:</strong> 527 kcal<br>
+                                <strong>GL:</strong> 33
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>Dinner (8:00 PM)</h4>
+                        <div style="margin-top: 15px;">
+                            <div>🫓 2 Chapatis</div>
+                            <div>🍛 Dal (1 bowl)</div>
+                            <div>🥗 Green Salad</div>
+                            <div>🧃 Buttermilk</div>
+                            <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                                <strong>Calories:</strong> 409 kcal<br>
+                                <strong>GL:</strong> 27
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="margin-top: 20px;">
+                    <div class="card">
+                        <h4>Snacks</h4>
+                        <div style="margin-top: 15px;">
+                            <div>🍎 1 Apple (Mid-morning)</div>
+                            <div>🥜 Handful of nuts (Evening)</div>
+                            <div style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                                <strong>Calories:</strong> 263 kcal<br>
+                                <strong>GL:</strong> 10
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="background: linear-gradient(135deg, #e8f0fe, #e6f4ea);">
+                        <h4>Daily Summary</h4>
+                        <div style="margin-top: 15px; font-size: 1.1rem;">
+                            <div><strong>Total Calories:</strong> 1,484 kcal</div>
+                            <div><strong>Total GL:</strong> 96</div>
+                            <div><strong>Protein:</strong> 58g</div>
+                            <div><strong>Carbs:</strong> 215g (58%)</div>
+                            <div><strong>Fat:</strong> 28g (17%)</div>
+                            <div style="margin-top: 15px;">
+                                <span class="badge-green">✅ Optimized for HbA1c 7.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box success" style="margin-top: 30px;">
+                <strong>💡 Personalization Factors:</strong><br>
+                • Low Glycemic Index foods prioritized<br>
+                • Portion sizes adjusted for BMI<br>
+                • Balanced macronutrient distribution<br>
+                • Cultural food preferences respected<br>
+                • Activity level considered
+            </div>
+
+            <button class="btn btn-outline" onclick="nextStep()" style="margin-top: 20px;">Next Step →</button>
+        </div>
+
+        <!-- Step 6: Complete Pipeline -->
+        <div class="step-content" id="step-6">
+            <h2>🎯 Step 6: Complete AI Pipeline Results</h2>
+            <p>End-to-end demonstration summary with explainability</p>
+
+            <div class="pipeline" style="margin: 30px 0;">
+                <div class="pipeline-step completed">OCR<br><small>✓ 94.5%</small></div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step completed">FL<br><small>✓ 92.8%</small></div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step completed">Risk<br><small>✓ Score: <span id="final-risk">--</span></small>
+                </div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step completed">Food AI<br><small>✓ 91.2%</small></div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step completed">Diet Plan<br><small>✓ Generated</small></div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Patient Journey Summary</h3>
+                <div style="margin-top: 20px;">
+                    <div class="trace-panel">
+                        <div class="trace-step">
+                            <span class="trace-arrow">1</span>
+                            <div class="trace-content">
+                                <strong>Patient Selected:</strong> <span id="summary-patient">--</span><br>
+                                <small>Initial HbA1c: <span id="summary-hba1c">--</span>%, BMI: <span
+                                        id="summary-bmi">--</span></small>
+                            </div>
+                            <span class="trace-badge badge-blue">Input</span>
+                        </div>
+
+                        <div class="trace-step">
+                            <span class="trace-arrow">2</span>
+                            <div class="trace-content">
+                                <strong>OCR Extraction:</strong> 5/5 diabetic indicators extracted<br>
+                                <small>Accuracy: 94.5%, Processing: 0.8s</small>
+                            </div>
+                            <span class="trace-badge badge-green">Processed</span>
+                        </div>
+
+                        <div class="trace-step">
+                            <span class="trace-arrow">3</span>
+                            <div class="trace-content">
+                                <strong>Federated Learning:</strong> Risk score calculated<br>
+                                <small>Privacy: ε=0.5, Accuracy: 92.8%</small>
+                            </div>
+                            <span class="trace-badge badge-green">Analyzed</span>
+                        </div>
+
+                        <div class="trace-step">
+                            <span class="trace-arrow">4</span>
+                            <div class="trace-content">
+                                <strong>Food Intelligence:</strong> Meal analysis completed<br>
+                                <small>Recognition: 91.2%, GI/GL calculated</small>
+                            </div>
+                            <span class="trace-badge badge-green">Evaluated</span>
+                        </div>
+
+                        <div class="trace-step">
+                            <span class="trace-arrow">5</span>
+                            <div class="trace-content">
+                                <strong>Personalized Diet Plan:</strong> Generated successfully<br>
+                                <small>1,484 kcal, GL: 96, Optimized for HbA1c</small>
+                            </div>
+                            <span class="trace-badge badge-green">Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top: 30px;">
+                <div class="card">
+                    <h4>🎯 Expected Outcomes</h4>
+                    <div style="margin-top: 15px;">
+                        <div>📉 <strong>HbA1c Reduction:</strong> 1.2% predicted (in 3 months)</div>
+                        <div>💪 <strong>Adherence Rate:</strong> 85%+</div>
+                        <div>😊 <strong>Satisfaction Score:</strong> 4.2/5.0</div>
+                        <div>🔒 <strong>Privacy:</strong> Fully preserved (ε=0.5)</div>
+                    </div>
+                </div>
+
+                <div class="card" style="background: linear-gradient(135deg, #fff5e1, #e8f0fe);">
+                    <h4>✨ Research Innovation</h4>
+                    <div style="margin-top: 15px;">
+                        <div>✅ First integrated OCR + FL + Agentic AI</div>
+                        <div>✅ Privacy-preserving multi-hospital learning</div>
+                        <div>✅ Multimodal food intelligence</div>
+                        <div>✅ Real-time personalization</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box success" style="margin-top: 30px; text-align: center;">
+                <h3>🎉 Demo Complete!</h3>
+                <p>You've experienced the complete TRL-2 research demonstration.</p>
+                <button class="btn btn-primary" onclick="restartDemo()" style="margin-top: 15px;">🔄 Restart
+                    Demo</button>
+                <button class="btn btn-outline" onclick="window.location.href='index.html'" style="margin-top: 15px;">←
+                    Back to Main App</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/synthetic-data.js"></script>
+    <script>
+        // ==================== DEMO STATE ====================
+        let currentStep = 1;
+        let selectedPatientData = null;
+        let selectedFoods = [];
+
+        // ==================== PATIENT SELECTION ====================
+        function selectPatient(patientId) {
+            const patients = {
+                'PAT-001': { id: 'PAT-001', name: 'Rajesh Kumar', age: 45, hba1c: 7.2, fbs: 142, ppbs: 198, bmi: 27.5, bp: '130/85', chol: 190, risk: 'Moderate', riskScore: 65 },
+                'PAT-002': { id: 'PAT-002', name: 'Priya Sharma', age: 52, hba1c: 8.5, fbs: 168, ppbs: 235, bmi: 29.8, bp: '145/90', chol: 210, risk: 'High', riskScore: 78 },
+                'PAT-003': { id: 'PAT-003', name: 'Amit Patel', age: 38, hba1c: 6.8, fbs: 128, ppbs: 175, bmi: 25.2, bp: '125/80', chol: 175, risk: 'Low', riskScore: 42 }
+            };
+
+            selectedPatientData = patients[patientId];
+
+            // Update report
+            document.getElementById('patient-id').textContent = selectedPatientData.id;
+            document.getElementById('patient-name').textContent = selectedPatientData.name;
+            document.getElementById('report-hba1c').textContent = selectedPatientData.hba1c;
+            document.getElementById('report-fbs').textContent = selectedPatientData.fbs;
+            document.getElementById('report-ppbs').textContent = selectedPatientData.ppbs;
+            document.getElementById('report-bp').textContent = selectedPatientData.bp;
+            document.getElementById('report-chol').textContent = selectedPatientData.chol;
+
+            nextStep();
+        }
+
+        // ==================== STEP NAVIGATION ====================
+        function nextStep() {
+            if (currentStep < 6) {
+                // Mark current as completed
+                document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('completed');
+                document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+
+                currentStep++;
+
+                // Hide all steps
+                document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+
+                // Show next step
+                document.getElementById(`step-${currentStep}`).classList.add('active');
+                document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ==================== OCR DEMO ====================
+        function runOCRDemo() {
+            if (!selectedPatientData) return;
+
+            // Animate extraction
+            setTimeout(() => {
+                document.getElementById('ext-hba1c').textContent = selectedPatientData.hba1c;
+                document.getElementById('progress-hba1c').style.width = '95%';
+                document.getElementById('progress-hba1c').textContent = '95%';
+                document.getElementById('conf-hba1c').textContent = '95';
+            }, 500);
+
+            setTimeout(() => {
+                document.getElementById('ext-fbs').textContent = selectedPatientData.fbs;
+                document.getElementById('progress-fbs').style.width = '94%';
+                document.getElementById('progress-fbs').textContent = '94%';
+                document.getElementById('conf-fbs').textContent = '94';
+            }, 1000);
+        }
+
+        // ==================== FEDERATED LEARNING DEMO ====================
+        function runFLDemo() {
+            if (!selectedPatientData) return;
+
+            document.getElementById('fl-patient-name').textContent = selectedPatientData.name;
+
+            // Animate hospital training
+            const hospitals = ['a', 'b', 'c', 'd'];
+            hospitals.forEach((h, idx) => {
+                setTimeout(() => {
+                    document.getElementById(`fl-progress-${h}`).style.width = '100%';
+                    document.getElementById(`fl-progress-${h}`).textContent = 'Training...';
+                }, idx * 800);
+            });
+
+            // Show rounds
+            let round = 0;
+            const roundInterval = setInterval(() => {
+                round++;
+                document.getElementById('fl-rounds').textContent = round;
+                if (round >= 10) {
+                    clearInterval(roundInterval);
+                    document.getElementById('fl-accuracy').textContent = '92.8';
+                    document.getElementById('risk-score').textContent = selectedPatientData.riskScore;
+                    document.getElementById('risk-level').textContent = selectedPatientData.risk;
+                }
+            }, 400);
+        }
+
+        // ==================== FOOD SELECTION ====================
+        const foodData = {
+            'idli': { name: 'Idli (2 pieces)', calories: 156, protein: 5.1, carbs: 34.2, fat: 0.4, gi: 60, gl: 20.5 },
+            'dosa': { name: 'Dosa (Plain)', calories: 132, protein: 3.9, carbs: 25.8, fat: 1.8, gi: 55, gl: 14.2 },
+            'sambar': { name: 'Sambar (1 bowl)', calories: 85, protein: 4.2, carbs: 12.8, fat: 2.1, gi: 35, gl: 4.5 },
+            'rice': { name: 'White Rice (1 bowl)', calories: 206, protein: 4.2, carbs: 45.1, fat: 0.4, gi: 73, gl: 32.9 },
+            'dal': { name: 'Dal (1 bowl)', calories: 118, protein: 9.1, carbs: 17.3, fat: 1.2, gi: 32, gl: 5.5 },
+            'curry': { name: 'Mixed Veg Curry', calories: 98, protein: 2.8, carbs: 14.2, fat: 3.5, gi: 40, gl: 5.7 }
+        };
+
+        function toggleFood(foodId) {
+            const element = event.currentTarget;
+            element.classList.toggle('selected');
+
+            if (selectedFoods.includes(foodId)) {
+                selectedFoods = selectedFoods.filter(f => f !== foodId);
+            } else {
+                selectedFoods.push(foodId);
+            }
+
+            updateFoodAnalysis();
+        }
+
+        function updateFoodAnalysis() {
+            let totalCal = 0, totalProtein = 0, totalCarbs = 0, totalFat = 0, totalGL = 0, avgGI = 0;
+
+            selectedFoods.forEach(foodId => {
+                const food = foodData[foodId];
+                totalCal += food.calories;
+                totalProtein += food.protein;
+                totalCarbs += food.carbs;
+                totalFat += food.fat;
+                totalGL += food.gl;
+                avgGI += food.gi;
+            });
+
+            if (selectedFoods.length > 0) {
+                avgGI = Math.round(avgGI / selectedFoods.length);
+            }
+
+            document.getElementById('total-calories').textContent = Math.round(totalCal);
+            document.getElementById('avg-gi').textContent = avgGI;
+            document.getElementById('total-gl').textContent = Math.round(totalGL);
+            document.getElementById('total-protein').textContent = Math.round(totalProtein) + 'g';
+            document.getElementById('total-carbs').textContent = Math.round(totalCarbs) + 'g';
+            document.getElementById('total-fat').textContent = Math.round(totalFat) + 'g';
+
+            // Show recommendation
+            const recElement = document.getElementById('food-recommendation');
+            const recText = document.getElementById('food-rec-text');
+
+            if (totalGL > 20) {
+                recElement.style.display = 'block';
+                recElement.className = 'highlight-box warning';
+                recText.textContent = '⚠️ High glycemic load detected. Consider replacing white rice with brown rice.';
+            } else if (totalGL > 0) {
+                recElement.style.display = 'block';
+                recElement.className = 'highlight-box success';
+                recText.textContent = '✅ Good meal composition with moderate glycemic load!';
+            }
+        }
+
+        // ==================== INITIALIZE STEP 5 ====================
+        function initializeStep5() {
+            if (!selectedPatientData) return;
+
+            document.getElementById('diet-hba1c').textContent = selectedPatientData.hba1c + '%';
+            document.getElementById('diet-bmi').textContent = selectedPatientData.bmi;
+            document.getElementById('diet-risk').textContent = selectedPatientData.risk;
+            document.getElementById('calorie-target').textContent = '1500-1600';
+        }
+
+        // ==================== INITIALIZE STEP 6 ====================
+        function initializeStep6() {
+            if (!selectedPatientData) return;
+
+            document.getElementById('final-risk').textContent = selectedPatientData.riskScore;
+            document.getElementById('summary-patient').textContent = selectedPatientData.name;
+            document.getElementById('summary-hba1c').textContent = selectedPatientData.hba1c;
+            document.getElementById('summary-bmi').textContent = selectedPatientData.bmi;
+        }
+
+        // ==================== RESTART DEMO ====================
+        function restartDemo() {
+            currentStep = 1;
+            selectedPatientData = null;
+            selectedFoods = [];
+
+            // Reset all steps
+            document.querySelectorAll('.step').forEach(s => {
+                s.classList.remove('active', 'completed');
+            });
+            document.querySelector('.step[data-step="1"]').classList.add('active');
+
+            // Reset content
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-1').classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==================== AUTO-INITIALIZE ON STEP CHANGE ====================
+        setInterval(() => {
+            if (currentStep === 5 && selectedPatientData) {
+                initializeStep5();
+            }
+            if (currentStep === 6 && selectedPatientData) {
+                initializeStep6();
+            }
+        }, 500);
+    </script>
+
+</body>
+
+</html>
