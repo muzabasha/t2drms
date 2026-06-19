@@ -1332,40 +1332,29 @@ Macro Distribution (HbA1c-adjusted):
             <span class="trl4-status-item">📤 <strong>Output:</strong> Cross-module pipeline visualization</span>
         </div>
 
-        <!-- Main Pipeline -->
+        <!-- Data Transformation Pipeline -->
         <div class="card mb-3">
             <div class="card-header">
-                <span class="card-title">🔬 Complete Research Pipeline</span>
-                <span class="text-muted" style="font-size:0.8rem">Click any stage to inspect</span>
+                <span class="card-title">📊 Data Transformation Pipeline</span>
+                <span class="text-muted" style="font-size:0.75rem">Click tabs to see input → transformation → output at each stage</span>
             </div>
-            <div class="pipeline" style="flex-direction:column;gap:8px;" id="workflowPipeline">
-                <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;width:100%;">
-                    <div class="pipeline-step" onclick="showWorkflowDetail('medical-report', this)" style="flex:1;min-width:100px;">📄 Medical<br>Report</div>
-                    <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-step" onclick="showWorkflowDetail('ocr', this)" style="flex:1;min-width:100px;">🔍 OCR<br>Processing</div>
-                    <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-step" onclick="showWorkflowDetail('fl', this)" style="flex:1;min-width:100px;">🌐 Federated<br>Learning</div>
-                    <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-step" onclick="showWorkflowDetail('agentic', this)" style="flex:1;min-width:100px;">🤖 Agentic<br>AI</div>
-                    <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-step" onclick="showWorkflowDetail('food', this)" style="flex:1;min-width:100px;">🍽️ Food<br>Intelligence</div>
-                    <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-step" onclick="showWorkflowDetail('diet', this)" style="flex:1;min-width:100px;">🥗 Diet<br>Recommendation</div>
-                    <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-step" onclick="showWorkflowDetail('insights', this)" style="flex:1;min-width:100px;">💡 Health<br>Insights</div>
+            <div class="dt-pipeline" id="dtPipeline">
+                <!-- Stage tabs -->
+                <div class="dt-stage-tabs" id="dtStageTabs"></div>
+                <!-- Data viewer for current stage -->
+                <div class="dt-viewer" id="dtViewer">
+                    <div class="dt-legend">
+                        <span class="dt-legend-item"><span class="legend-swatch input"></span> Input Data</span>
+                        <span class="dt-legend-item"><span class="legend-swatch process"></span> AI Processing</span>
+                        <span class="dt-legend-item"><span class="legend-swatch output"></span> Output / Decision</span>
+                        <span class="dt-legend-item">💡 Click any JSON to expand</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Detail Panel -->
-        <div class="card" id="workflowDetail">
-            <div class="card-header">
-                <span class="card-title" id="workflowDetailTitle">Select a stage above</span>
-            </div>
-            <div id="workflowDetailContent" class="text-muted">
-                Click any stage in the pipeline above to inspect its internal processing and see how data flows through the system.
-            </div>
-        </div>
+        <!-- Method Comparison -->
+        <div class="card mt-3">
 
         <!-- Method Comparison -->
         <div class="card mt-3">
@@ -1716,6 +1705,19 @@ Threat Model:
         <button class="btn btn-sm btn-outline" onclick="endTour()" id="tourSkipBtn">Skip Tour</button>
         <button class="btn btn-sm btn-outline" onclick="prevTourStep()" id="tourPrevBtn" style="display:none;">← Back</button>
         <button class="btn btn-sm btn-primary" onclick="nextTourStep()" id="tourNextBtn">Next →</button>
+    </div>
+</div>
+
+<!-- Data Inspector Button -->
+<button class="dt-inspector-btn" id="dtInspectorBtn" onclick="dtOpenFullPipeline()" aria-label="Open Data Transformation Pipeline" title="View Data Transformation Pipeline">
+    🔍
+</button>
+
+<!-- Data JSON Modal -->
+<div class="dt-json-modal" id="dtJsonModal">
+    <div class="dt-json-modal-content" id="dtJsonModalContent">
+        <button class="dt-json-close" onclick="dtCloseJsonModal()">✕</button>
+        <pre id="dtJsonModalBody"></pre>
     </div>
 </div>
 
@@ -2628,6 +2630,428 @@ function trl4ClosePipeline() {
 // Init TRL-4 on load
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(trl4Init, 300);
+});
+
+/* ============================================================
+   DATA TRANSFORMATION PIPELINE (v3.1)
+   ============================================================ */
+
+// 7 stages of data transformation with realistic JSON
+const DT_STAGES = [
+    {
+        id: 'patient',
+        icon: '👤',
+        title: 'Patient Data Collection',
+        badge: 'Raw Input',
+        badgeClass: 'warning',
+        input: JSON.stringify({
+            name: 'Rajesh Kumar',
+            age: 45,
+            gender: 'Male',
+            weight_kg: 78,
+            height_cm: 172,
+            activity_level: 'Moderate',
+            dietary_preference: 'Vegetarian',
+            medical_history: ['Type-2 Diabetes (2019)', 'Hypertension']
+        }, null, 2),
+        process: {
+            icon: '⚙️',
+            desc: 'Raw patient demographics are processed through <strong>Mifflin-St Jeor equation</strong> to compute BMR and TDEE. Medical history is parsed for comorbidities.',
+            metrics: [
+                { val: 'BMR: 1680', label: 'kcal/day' },
+                { val: 'TDEE: 2604', label: 'kcal/day' }
+            ]
+        },
+        output: JSON.stringify({
+            computed_bmr: 1680,
+            computed_tdee: 2604,
+            risk_factors: [
+                'Age > 40: +3 points',
+                'BMI 26.4: +2 points',
+                'Diabetes duration 5y: +2 points',
+                'Hypertension: +2 points'
+            ],
+            patient_profile: {
+                category: 'High Risk T2DM',
+                recommended_calories: 2104,
+                protein_need_g: 82,
+                carb_need_g: 237
+            }
+        }, null, 2),
+        decision: '✅ Patient classified as High Risk — prioritizing aggressive dietary intervention'
+    },
+    {
+        id: 'ocr',
+        icon: '📄',
+        title: 'OCR Medical Report Extraction',
+        badge: 'AI Processing',
+        badgeClass: 'info',
+        input: JSON.stringify({
+            raw_report: 'PATIENT: Rajesh Kumar\nHbA1c: 8.2%\nFBS: 142 mg/dL\nPPBS: 198 mg/dL\nTotal Cholesterol: 190 mg/dL\nTriglycerides: 165 mg/dL\nSerum Creatinine: 1.1 mg/dL',
+            report_id: 'LAB-2024-0847',
+            date: '2024-03-15'
+        }, null, 2),
+        process: {
+            icon: '🔍',
+            desc: 'OCR engine processes the report with <strong>medical-domain vocabulary</strong>. Entity recognition isolates diabetic biomarkers. Each extraction is assigned a confidence score (90-99%).',
+            metrics: [
+                { val: '94.5%', label: 'OCR Accuracy' },
+                { val: '6 fields', label: 'Extracted' }
+            ]
+        },
+        output: JSON.stringify({
+            extracted_biomarkers: {
+                hba1c: { value: 8.2, unit: '%', confidence: 97, status: 'Above target' },
+                fbs: { value: 142, unit: 'mg/dL', confidence: 95, status: 'Elevated' },
+                ppbs: { value: 198, unit: 'mg/dL', confidence: 93, status: 'High' },
+                cholesterol: { value: 190, unit: 'mg/dL', confidence: 96, status: 'Borderline' },
+                triglycerides: { value: 165, unit: 'mg/dL', confidence: 94, status: 'Elevated' },
+                creatinine: { value: 1.1, unit: 'mg/dL', confidence: 99, status: 'Normal' }
+            },
+            ocr_quality_score: 94.5
+        }, null, 2),
+        decision: '✅ 6 biomarkers extracted with high confidence — data ready for risk modeling'
+    },
+    {
+        id: 'fl',
+        icon: '🌐',
+        title: 'Federated Learning Risk Prediction',
+        badge: 'AI Model',
+        badgeClass: 'info',
+        input: JSON.stringify({
+            biomarkers: {
+                hba1c: 8.2,
+                fbs: 142,
+                ppbs: 198,
+                cholesterol: 190,
+                triglycerides: 165
+            },
+            patient_age: 45,
+            patient_bmi: 26.4,
+            model_version: 'FedAvg_v3_round_75',
+            num_hospitals_contributing: 4
+        }, null, 2),
+        process: {
+            icon: '🧠',
+            desc: '<strong>Federated Averaging (FedAvg)</strong> combines models from 4 hospitals. <strong>Differential Privacy (ε=0.5)</strong> adds calibrated noise. Risk computed as weighted composite of 5 biomarkers.',
+            metrics: [
+                { val: '92.8%', label: 'Model Accuracy' },
+                { val: 'ε=0.5', label: 'Privacy Budget' }
+            ]
+        },
+        output: JSON.stringify({
+            risk_score: 72,
+            risk_category: 'High',
+            diabetes_probability: 0.86,
+            contributing_factors: [
+                { factor: 'HbA1c (8.2%)', weight: 0.35, impact: 'Primary driver' },
+                { factor: 'PPBS (198)', weight: 0.20, impact: 'Secondary' },
+                { factor: 'FBS (142)', weight: 0.25, impact: 'Significant' },
+                { factor: 'Triglycerides (165)', weight: 0.12, impact: 'Contributor' }
+            ],
+            prediction_interval: { lower: 64, upper: 79 }
+        }, null, 2),
+        decision: '⚠️ Risk score 72/100 — HIGH risk. Recommend immediate clinical intervention.'
+    },
+    {
+        id: 'agentic',
+        icon: '🤖',
+        title: 'Agentic AI Clinical Reasoning',
+        badge: 'Multi-Agent',
+        badgeClass: 'info',
+        input: JSON.stringify({
+            patient: {
+                name: 'Rajesh Kumar', age: 45, gender: 'Male',
+                bmr: 1680, tdee: 2604, bmi: 26.4
+            },
+            risk_assessment: {
+                score: 72, category: 'High', probability: 0.86
+            },
+            biomarkers: {
+                hba1c: 8.2, fbs: 142, ppbs: 198
+            },
+            query: 'Generate comprehensive diabetes management plan'
+        }, null, 2),
+        process: {
+            icon: '🤝',
+            desc: '<strong>5 specialized AI agents</strong> collaborate via message-passing protocol. Each agent analyzes from its domain expertise: Diagnostic, Nutrition, Lifestyle, Medication, Risk.',
+            metrics: [
+                { val: '5 agents', label: 'Collaborating' },
+                { val: '2.1s', label: 'Reasoning Time' }
+            ]
+        },
+        output: JSON.stringify({
+            diagnostic_analyst: {
+                observation: 'HbA1c 8.2% (target <7%), FBS 142 (target <130)',
+                recommendation: 'Intensify glucose monitoring: 4x daily'
+            },
+            nutrition_expert: {
+                observation: 'BMI 26.4, vegetarian diet',
+                recommendation: 'Mediterranean-style vegetarian: 2100 kcal, low GI foods'
+            },
+            lifestyle_coach: {
+                observation: 'Sedentary office job, moderate activity',
+                recommendation: '150 min/week moderate exercise, sleep 7-8h'
+            },
+            medication_advisor: {
+                observation: 'Metformin 500mg BD, no recent adjust',
+                recommendation: 'Consider dose escalation to 1000mg BD'
+            },
+            risk_strategist: {
+                observation: 'Multiple risk factors (HbA1c, lipids, age)',
+                recommendation: '3-month follow-up with comprehensive panel'
+            },
+            consensus: 'HIGH priority — combined lifestyle + medication intervention required'
+        }, null, 2),
+        decision: '✅ 5-agent consensus: High priority intervention — lifestyle + medication combined'
+    },
+    {
+        id: 'food',
+        icon: '🍽️',
+        title: 'Food Intelligence & NLP',
+        badge: 'AI Processing',
+        badgeClass: 'info',
+        input: JSON.stringify({
+            food_description: 'I ate two whole wheat chapatis, a bowl of mixed dal, green salad, and a small bowl of brown rice with vegetables for lunch',
+            dietary_preference: 'Vegetarian',
+            meal_time: 'Lunch'
+        }, null, 2),
+        process: {
+            icon: '🔬',
+            desc: '<strong>NLP pipeline</strong> tokenizes food text → identifies entities → estimates portion sizes → maps to nutritional DB → computes GI/GL and glycemic impact.',
+            metrics: [
+                { val: '4 items', label: 'Detected' },
+                { val: 'GI Range', label: '42-65' }
+            ]
+        },
+        output: JSON.stringify({
+            detected_foods: [
+                { name: 'Whole wheat chapati', quantity_g: 140, calories: 280, gi: 55, gl: 28, fiber_g: 6 },
+                { name: 'Mixed dal', quantity_g: 200, calories: 180, gi: 42, gl: 17, protein_g: 14 },
+                { name: 'Brown rice', quantity_g: 150, calories: 165, gi: 50, gl: 23, fiber_g: 3 },
+                { name: 'Green salad', quantity_g: 100, calories: 25, gi: 15, gl: 2, fiber_g: 3 }
+            ],
+            total_nutrition: { calories: 650, protein_g: 28, carbs_g: 98, fiber_g: 14, fat_g: 12 },
+            glycemic_impact: { average_gi: 49.5, total_gl: 70, glycemic_load_category: 'Moderate' }
+        }, null, 2),
+        decision: '✅ Moderate glycemic impact (avg GI 49.5) — suitable for diabetic meal plan'
+    },
+    {
+        id: 'diet',
+        icon: '🥗',
+        title: 'Personalized Diet Recommendation',
+        badge: 'Decision Engine',
+        badgeClass: 'success',
+        input: JSON.stringify({
+            patient: { bmr: 1680, tdee: 2604, target_calories: 2104 },
+            risk_profile: { score: 72, category: 'High' },
+            analyzed_foods: { total_calories: 650, avg_gi: 49.5 },
+            preferences: { diet: 'Vegetarian', goal: 'Weight management + glucose control' }
+        }, null, 2),
+        process: {
+            icon: '🧮',
+            desc: '<strong>Diet optimization algorithm</strong> computes macro distribution (Carbs 45%, Protein 22%, Fat 28%). 4-meal plan generated with caloric targets: Breakfast 25%, Lunch 35%, Dinner 30%, Snack 10%.',
+            metrics: [
+                { val: '2104 kcal', label: 'Target' },
+                { val: '4 meals', label: 'Planned' }
+            ]
+        },
+        output: JSON.stringify({
+            meal_plan: {
+                breakfast: { time: '07:30', items: ['Oatmeal 50g (dry)', 'Low-fat milk 200ml', 'Apple 1 medium'], calories: 530, carbs_g: 58, protein_g: 20, fat_g: 14 },
+                lunch: { time: '12:30', items: ['Brown rice 100g', 'Dal 150g', 'Mixed vegetables 150g', 'Curd 100g'], calories: 735, carbs_g: 82, protein_g: 28, fat_g: 16 },
+                dinner: { time: '19:00', items: ['Whole wheat chapati 2', 'Paneer curry 100g', 'Green salad 150g'], calories: 630, carbs_g: 65, protein_g: 30, fat_g: 18 },
+                snack: { time: '16:00', items: ['Mixed nuts 20g', 'Green tea 1 cup'], calories: 210, carbs_g: 12, protein_g: 6, fat_g: 14 }
+            },
+            total_daily: { calories: 2105, protein_g: 84, carbs_g: 217, fat_g: 62, fiber_g: 32 }
+        }, null, 2),
+        decision: '✅ Personalized 2105 kcal plan generated — 32g fiber supports glycemic control'
+    },
+    {
+        id: 'insights',
+        icon: '💡',
+        title: 'Health Insights & Decisions',
+        badge: 'Final Output',
+        badgeClass: 'success',
+        input: JSON.stringify({
+            patient: 'Rajesh Kumar, 45y',
+            risk_score: 72,
+            meal_plan: { total_calories: 2105, meals: 4 },
+            agents: { consensus: 'High priority intervention' },
+            sustainability_estimate: { co2_kg: 2.1, water_l: 280 }
+        }, null, 2),
+        process: {
+            icon: '🎯',
+            desc: '<strong>Multi-layer decision synthesizer</strong> aggregates all upstream outputs: risk assessment → agent recommendations → diet plan → sustainability impact. Generates prioritized action list.',
+            metrics: [
+                { val: '5 insights', label: 'Generated' },
+                { val: '5 actions', label: 'Prioritized' }
+            ]
+        },
+        output: JSON.stringify({
+            health_insights: [
+                'HbA1c 8.2% indicates poor glycemic control — target <7%',
+                'High cardiovascular risk due to elevated triglycerides (165)',
+                'Vegetarian diet is well-aligned but needs protein optimization',
+                'Current meal plan reduces glycemic load by 35% vs baseline',
+                'Sustainability score: 7.8/10 — environmentally conscious choices'
+            ],
+            prioritized_actions: [
+                { priority: 1, action: 'Increase Metformin to 1000mg BD', due: 'Within 2 weeks' },
+                { priority: 2, action: 'Begin 2100 kcal Mediterranean-vegetarian diet', due: 'Start immediately' },
+                { priority: 3, action: 'Monitor HbA1c at 3-month follow-up', due: 'June 2024' },
+                { priority: 4, action: '150 min/week moderate exercise', due: 'This week' },
+                { priority: 5, action: 'Lipid profile recheck in 6 weeks', due: 'April 2024' }
+            ],
+            expected_outcomes: {
+                hba1c_reduction: 'Target 1-1.5% reduction in 3 months',
+                weight_loss: '4-6 kg over 12 weeks',
+                risk_score_change: 'From 72 → projected 55'
+            }
+        }, null, 2),
+        decision: '🎯 FINAL DECISION: 5 evidence-based actions prioritized. HbA1c target: <7%. First review: 2 weeks.'
+    }
+];
+
+// Current stage index
+let dtCurrentStage = 0;
+
+// Render the data transformation pipeline
+function dtRenderPipeline() {
+    const tabs = document.getElementById('dtStageTabs');
+    const viewer = document.getElementById('dtViewer');
+    
+    // Render tabs
+    tabs.innerHTML = '';
+    DT_STAGES.forEach((s, i) => {
+        const tab = document.createElement('div');
+        tab.className = 'dt-stage-tab' + (i === 0 ? ' active' : '');
+        tab.innerHTML = `<span class="tab-dot"></span> ${s.icon} ${s.title}`;
+        tab.onclick = () => dtShowStage(i);
+        tab.dataset.index = i;
+        tabs.appendChild(tab);
+    });
+    
+    // Show first stage
+    dtShowStage(0);
+}
+
+// Show a specific transformation stage
+function dtShowStage(index) {
+    if (index < 0 || index >= DT_STAGES.length) return;
+    dtCurrentStage = index;
+    const s = DT_STAGES[index];
+    
+    // Update tabs
+    document.querySelectorAll('.dt-stage-tab').forEach((el, i) => {
+        el.className = 'dt-stage-tab';
+        if (i === index) el.classList.add('active');
+        else if (i < index) el.classList.add('completed');
+    });
+    
+    // Color syntax the JSON
+    const inputHtml = dtHighlightJson(s.input);
+    const outputHtml = dtHighlightJson(s.output);
+    
+    // Build the viewer
+    const viewer = document.getElementById('dtViewer');
+    
+    // Mark completed tabs in decision trail
+    const trailSteps = s.id === 'insights' ? DT_STAGES.map(st => st.id) : DT_STAGES.slice(0, index + 1).map(st => st.id);
+    
+    viewer.innerHTML = `
+        <div class="dt-stage-header">
+            <div class="dt-stage-title">${s.icon} ${s.title}</div>
+            <span class="dt-stage-badge ${s.badgeClass}">${s.badge}</span>
+        </div>
+        
+        <div class="dt-transform-card">
+            <div class="dt-box">
+                <div class="dt-box-label input-label">📥 Raw Input</div>
+                <div class="dt-json" onclick="dtOpenJson('${s.id}_input', \`${s.input.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)">${inputHtml}</div>
+            </div>
+            <div class="dt-arrow-col">
+                <div class="dt-arrow">
+                    <span class="arrow-icon">➡️</span>
+                    <span>TRANSFORM</span>
+                </div>
+            </div>
+            <div class="dt-box">
+                <div class="dt-box-label output-label">📤 Output / Decision</div>
+                <div class="dt-json" onclick="dtOpenJson('${s.id}_output', \`${s.output.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)">${outputHtml}</div>
+            </div>
+        </div>
+        
+        <div class="dt-process-panel">
+            <div class="dt-process-icon">${s.process.icon}</div>
+            <div class="dt-process-desc">${s.process.desc}</div>
+            <div class="dt-process-metrics">
+                ${s.process.metrics.map(m => `<div class="dt-metric"><div class="dt-metric-val">${m.val}</div><div class="dt-metric-label">${m.label}</div></div>`).join('')}
+            </div>
+        </div>
+        
+        <div class="dt-decision-trail">
+            <div class="dt-trail-title">📋 Decision Trail</div>
+            <div class="dt-trail-steps">
+                ${DT_STAGES.map((st, i) => `
+                    <div class="dt-trail-step${i === index ? ' active' : ''}${i < index ? ' done' : ''}" onclick="dtShowStage(${i})">
+                        ${st.icon} ${st.title.split(' ')[0]}
+                    </div>
+                `).join('')}
+            </div>
+            <div style="margin-top:10px;padding:10px 14px;background:#e8f5e9;border-radius:8px;font-size:0.82rem;color:#2e7d32;font-weight:500;border:1px solid #a5d6a7;">
+                ${s.decision}
+            </div>
+        </div>
+    `;
+}
+
+// Syntax-highlight JSON
+function dtHighlightJson(json) {
+    return json
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"([^"]+)":/g, '<span class="json-key">"$1"</span>:')
+        .replace(/: "([^"]+)"/g, (m, v) => { 
+            if (v === 'true' || v === 'false') return ': <span class="json-boolean">"' + v + '"</span>';
+            return ': <span class="json-string">"' + v + '"</span>';
+        })
+        .replace(/: (\d+\.?\d*)/g, ': <span class="json-number">$1</span>')
+        .replace(/: (true|false)/g, ': <span class="json-boolean">$1</span>')
+        .replace(/: (null)/g, ': <span class="json-null">$1</span>')
+        .replace(/([\[\]{}])/g, '<span class="json-bracket">$1</span>');
+}
+
+// Open JSON in fullscreen modal
+function dtOpenJson(id, json) {
+    const modal = document.getElementById('dtJsonModal');
+    const body = document.getElementById('dtJsonModalBody');
+    body.textContent = json;
+    // Apply highlighting
+    body.innerHTML = dtHighlightJson(json);
+    modal.classList.add('open');
+}
+
+function dtCloseJsonModal() {
+    document.getElementById('dtJsonModal').classList.remove('open');
+}
+
+// Open full pipeline from data inspector button
+function dtOpenFullPipeline() {
+    navigateTo('module-9');
+    // Auto-select first dt stage if on module 9
+    setTimeout(() => {
+        if (dtCurrentStage >= 0) dtShowStage(dtCurrentStage);
+    }, 300);
+    showToast('🔍 Data Transformation Pipeline — showing how raw data becomes decisions', 'info');
+}
+
+// Initialize on module 9 navigation
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        dtRenderPipeline();
+    }, 500);
 });
 
 // ============================================================
