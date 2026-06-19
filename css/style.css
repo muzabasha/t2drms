@@ -2977,3 +2977,453 @@ html {
         transform: rotate(90deg);
     }
 }
+
+/* ============================================================
+   TRL-4 UPGRADE: Integration Bar, Validation, Pipeline
+   ============================================================ */
+
+/* --- TRL-4 Badge --- */
+.trl4-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: help;
+    transition: var(--transition);
+}
+
+.trl4-badge.validated {
+    background: var(--medical-green-light);
+    color: var(--medical-green);
+    border: 1px solid var(--medical-green);
+}
+
+.trl4-badge.integrated {
+    background: var(--medical-blue-light);
+    color: var(--medical-blue);
+    border: 1px solid var(--medical-blue);
+}
+
+.trl4-badge.testing {
+    background: #fef3e2;
+    color: #e65100;
+    border: 1px solid #ffb300;
+}
+
+.trl4-badge .trl4-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: trl4-pulse 2s ease infinite;
+}
+
+.trl4-badge.validated .trl4-dot { background: var(--medical-green); }
+.trl4-badge.integrated .trl4-dot { background: var(--medical-blue); }
+.trl4-badge.testing .trl4-dot { background: #ffb300; }
+
+@keyframes trl4-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* --- TRL-4 Integration Bar --- */
+.trl4-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 3000;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 12px rgba(26,35,126,0.3);
+    min-height: 48px;
+}
+
+.trl4-bar .trl4-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.9;
+    white-space: nowrap;
+}
+
+.trl4-bar .trl4-label .trl4-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    font-size: 0.8rem;
+}
+
+.trl4-bar .trl4-patient-select {
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 0.75rem;
+    cursor: pointer;
+    min-width: 140px;
+}
+
+.trl4-bar .trl4-patient-select option {
+    color: var(--medical-gray-900);
+    background: white;
+}
+
+.trl4-bar .trl4-patient-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.72rem;
+    opacity: 0.9;
+}
+
+.trl4-bar .trl4-patient-info .trl4-stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.trl4-bar .trl4-patient-info .trl4-stat .stat-val {
+    font-weight: 700;
+}
+
+.trl4-bar .trl4-pipeline-btn {
+    padding: 5px 14px;
+    border-radius: 6px;
+    border: none;
+    background: #66bb6a;
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+.trl4-bar .trl4-pipeline-btn:hover {
+    background: #43a047;
+    transform: scale(1.03);
+}
+
+.trl4-bar .trl4-pipeline-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.trl4-bar .trl4-pipeline-btn.running {
+    background: #ef5350;
+    animation: trl4-btn-pulse 1s ease infinite;
+}
+
+@keyframes trl4-btn-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239,83,80,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(239,83,80,0); }
+}
+
+/* Status dots in the bar */
+.trl4-bar .trl4-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.trl4-bar .trl4-status-dot.online { background: #66bb6a; box-shadow: 0 0 6px rgba(102,187,106,0.6); }
+.trl4-bar .trl4-status-dot.processing { background: #ffa726; animation: trl4-pulse 0.8s ease infinite; }
+.trl4-bar .trl4-status-dot.offline { background: #ef5350; }
+
+@media (max-width: 768px) {
+    .trl4-bar {
+        padding: 8px 12px;
+        gap: 8px;
+        min-height: 40px;
+    }
+    .trl4-bar .trl4-label { font-size: 0.65rem; }
+    .trl4-bar .trl4-patient-select { min-width: 100px; font-size: 0.65rem; }
+    .trl4-bar .trl4-patient-info { font-size: 0.65rem; gap: 6px; flex-wrap: wrap; }
+    .trl4-bar .trl4-pipeline-btn { font-size: 0.65rem; padding: 4px 10px; }
+}
+
+/* --- Module TRL-4 Status Header --- */
+.module-trl4-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    background: var(--medical-gray-50);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    border: 1px solid var(--medical-gray-200);
+}
+
+.module-trl4-status .trl4-status-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    color: var(--medical-gray-700);
+}
+
+.module-trl4-status .trl4-status-item strong {
+    color: var(--medical-gray-900);
+}
+
+/* --- Pipeline Progress Overlay --- */
+.trl4-pipeline-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 5000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.trl4-pipeline-overlay.open {
+    display: flex;
+}
+
+.trl4-pipeline-modal {
+    background: var(--medical-white);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 560px;
+    width: calc(100% - 32px);
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: summary-appear 0.3s ease;
+}
+
+.trl4-pipeline-modal .pipeline-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.trl4-pipeline-modal .pipeline-module {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--medical-gray-200);
+    margin-bottom: 8px;
+    transition: var(--transition);
+}
+
+.trl4-pipeline-modal .pipeline-module .pm-icon {
+    font-size: 1.3rem;
+}
+
+.trl4-pipeline-modal .pipeline-module .pm-info {
+    flex: 1;
+}
+
+.trl4-pipeline-modal .pipeline-module .pm-info .pm-name {
+    font-weight: 600;
+    font-size: 0.82rem;
+}
+
+.trl4-pipeline-modal .pipeline-module .pm-info .pm-status {
+    font-size: 0.7rem;
+    color: var(--medical-gray-500);
+}
+
+.trl4-pipeline-modal .pipeline-module.completed {
+    border-color: var(--medical-green);
+    background: var(--medical-green-light);
+}
+
+.trl4-pipeline-modal .pipeline-module.active {
+    border-color: var(--medical-blue);
+    background: var(--medical-blue-light);
+    animation: trl4-pulse 1s ease infinite;
+}
+
+.trl4-pipeline-modal .pipeline-module.pending {
+    opacity: 0.6;
+}
+
+/* --- Sophia Voice Indicator --- */
+.sophia-avatar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(118,75,162,0.3);
+    white-space: nowrap;
+}
+
+.sophia-avatar .sophia-ring {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: sophia-speak 1.5s ease infinite;
+}
+
+.sophia-avatar .sophia-ring.speaking {
+    border-color: #ffd54f;
+    animation: sophia-speak-active 0.5s ease infinite;
+}
+
+@keyframes sophia-speak {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes sophia-speak-active {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,213,79,0.4); }
+    50% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(255,213,79,0); }
+}
+
+/* Tour Voice Controls */
+.tour-voice-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 8px;
+    background: var(--medical-gray-50);
+    border-radius: 8px;
+}
+
+.tour-voice-control .tour-voice-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    color: var(--medical-gray-500);
+    cursor: pointer;
+}
+
+.tour-voice-control .tour-voice-toggle input[type="checkbox"] {
+    accent-color: #764ba2;
+}
+
+/* TRL-4 module connector arrows */
+.trl4-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 0;
+}
+
+.trl4-connector .connector-arrow {
+    color: var(--medical-gray-300);
+    font-size: 1rem;
+}
+
+.trl4-connector .connector-arrow.active {
+    color: var(--medical-blue);
+    animation: trl4-flow-arrow 1s ease infinite;
+}
+
+@keyframes trl4-flow-arrow {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+}
+
+/* Pipeline visualization in the integration dashboard */
+.trl4-pipeline-viz {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px;
+    background: var(--medical-gray-50);
+    border-radius: 12px;
+}
+
+.trl4-pipeline-viz .pv-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.trl4-pipeline-viz .pv-node {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-align: center;
+    min-width: 60px;
+    border: 1px solid var(--medical-gray-200);
+    background: var(--medical-white);
+    transition: var(--transition);
+}
+
+.trl4-pipeline-viz .pv-node.validated {
+    border-color: var(--medical-green);
+    color: var(--medical-green);
+}
+
+.trl4-pipeline-viz .pv-node.integrated {
+    border-color: var(--medical-blue);
+    background: var(--medical-blue-light);
+    color: var(--medical-blue);
+}
+
+.trl4-pipeline-viz .pv-arrow {
+    color: var(--medical-gray-300);
+    font-size: 0.8rem;
+}
+
+.trl4-pipeline-viz .pv-arrow.active {
+    color: var(--medical-blue);
+}
+
+/* Run Pipeline progress bar */
+.trl4-progress-track {
+    width: 100%;
+    height: 4px;
+    background: var(--medical-gray-200);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.trl4-progress-track .trl4-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+@media (max-width: 640px) {
+    .trl4-pipeline-viz .pv-node {
+        font-size: 0.6rem;
+        padding: 4px 8px;
+        min-width: 45px;
+    }
+    .trl4-pipeline-viz .pv-arrow { font-size: 0.6rem; }
+}
