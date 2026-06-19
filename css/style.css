@@ -1577,6 +1577,112 @@ a:focus-visible {
     100% { background-position: -200% 0; }
 }
 
+/* Research Workflow Pipeline (Module 9) */
+.workflow-pipeline {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 20px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+}
+
+.pipeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 2px solid var(--medical-gray-200);
+    background: var(--medical-white);
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 90px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.pipeline-step:hover {
+    border-color: var(--medical-blue);
+    background: var(--medical-blue-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.pipeline-step.active {
+    border-color: var(--medical-blue);
+    background: linear-gradient(135deg, #667eea15, #764ba215);
+    box-shadow: 0 2px 12px rgba(102,126,234,0.2);
+}
+
+.pipeline-step .step-icon {
+    font-size: 1.5rem;
+}
+
+.pipeline-step .step-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--medical-gray-900);
+    white-space: nowrap;
+}
+
+.pipeline-step .step-sub {
+    font-size: 0.58rem;
+    color: var(--medical-gray-500);
+    white-space: nowrap;
+}
+
+.pipeline-arrow {
+    font-size: 1.2rem;
+    color: var(--medical-gray-300);
+    flex-shrink: 0;
+    font-weight: 700;
+}
+
+.workflow-detail {
+    padding: 16px 20px;
+    border-top: 1px solid var(--medical-gray-200);
+    background: var(--medical-gray-50);
+}
+
+.workflow-detail-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.workflow-detail-content {
+    font-size: 0.82rem;
+    color: var(--medical-gray-700);
+    line-height: 1.6;
+}
+
+.workflow-detail-content .trace-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.workflow-detail-content .trace-step {
+    padding: 6px 10px;
+    background: var(--medical-white);
+    border-radius: 6px;
+    border-left: 3px solid var(--medical-blue);
+    font-size: 0.78rem;
+}
+
+.workflow-detail-content .trace-step:nth-child(2) { border-left-color: var(--medical-green); }
+.workflow-detail-content .trace-step:nth-child(3) { border-left-color: var(--risk-moderate); }
+
+@media (max-width: 768px) {
+    .workflow-pipeline {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .pipeline-arrow { transform: rotate(90deg); }
+}
+
 /* Loading pulse for empty containers */
 .loading-pulse {
     position: relative;

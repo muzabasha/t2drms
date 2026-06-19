@@ -483,8 +483,8 @@ Objective: max Σ(satisfaction_nutrient · preference_food · glycemic_score)
 Constraints:
   - Total calories ∈ [BMR×0.85, BMR×1.15]
   - Carbs ∈ [35%, 45%] of total calories (varies by HbA1c)
-  - GL per meal < 15 (for HbA1c > 7)
-  - Preference match > 80%
+  - GL per meal &lt; 15 (for HbA1c &gt; 7)
+  - Preference match &gt; 80%
                     </div>
                     <span class="tech-metric green">Plan Adherence: 85%+</span>
                     <span class="tech-metric">HbA1c Reduction: 1.2% predicted</span>
@@ -1315,7 +1315,7 @@ Macro Distribution (HbA1c-adjusted):
   HbA1c ≥ 8.0: Carbs 35% | Protein 30% | Fat 35%
   HbA1c 7.0-7.9: Carbs 40% | Protein 28% | Fat 32%
   HbA1c 6.0-6.9: Carbs 42% | Protein 26% | Fat 32%
-  HbA1c < 6.0: Carbs 45% | Protein 25% | Fat 30%
+    HbA1c &lt; 6.0: Carbs 45% | Protein 25% | Fat 30%
                 </div>
                 <span class="tech-metric green">BMR Accuracy: ±85 kcal</span>
                 <span class="tech-metric">Plan Variety: 50+ foods</span>
@@ -1335,6 +1335,68 @@ Macro Distribution (HbA1c-adjusted):
             <span class="trl4-badge integrated">🔗 <span class="trl4-dot"></span> System Integration Verifier</span>
             <span class="trl4-status-item">📥 <strong>Input:</strong> Aggregated data from modules 1-8</span>
             <span class="trl4-status-item">📤 <strong>Output:</strong> Cross-module pipeline visualization</span>
+        </div>
+
+        <!-- End-to-End Research Workflow Pipeline -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="card-title">🔄 Research Data Flow Pipeline</span>
+                <span class="text-muted-light" style="font-size:0.75rem">Click each stage to see input → process → output details</span>
+            </div>
+            <div class="workflow-pipeline" id="workflowPipeline">
+                <div class="pipeline-step active" onclick="showWorkflowDetail('medical-report', this)" tabindex="0" role="button">
+                    <span class="step-icon">📄</span>
+                    <span class="step-label">Medical Report</span>
+                    <span class="step-sub">Data Ingestion</span>
+                </div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step" onclick="showWorkflowDetail('ocr', this)" tabindex="0" role="button">
+                    <span class="step-icon">🔍</span>
+                    <span class="step-label">OCR Engine</span>
+                    <span class="step-sub">Text Extraction</span>
+                </div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step" onclick="showWorkflowDetail('fl', this)" tabindex="0" role="button">
+                    <span class="step-icon">🌐</span>
+                    <span class="step-label">Federated Learning</span>
+                    <span class="step-sub">Risk Modeling</span>
+                </div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step" onclick="showWorkflowDetail('agentic', this)" tabindex="0" role="button">
+                    <span class="step-icon">🤖</span>
+                    <span class="step-label">Agentic AI</span>
+                    <span class="step-sub">Clinical Reasoning</span>
+                </div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step" onclick="showWorkflowDetail('food', this)" tabindex="0" role="button">
+                    <span class="step-icon">🍽️</span>
+                    <span class="step-label">Food Intelligence</span>
+                    <span class="step-sub">Nutrition Analysis</span>
+                </div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step" onclick="showWorkflowDetail('diet', this)" tabindex="0" role="button">
+                    <span class="step-icon">🥗</span>
+                    <span class="step-label">Diet Plan</span>
+                    <span class="step-sub">Recommendation</span>
+                </div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step" onclick="showWorkflowDetail('insights', this)" tabindex="0" role="button">
+                    <span class="step-icon">💡</span>
+                    <span class="step-label">Health Insights</span>
+                    <span class="step-sub">Actionable Output</span>
+                </div>
+            </div>
+            <div class="workflow-detail" id="workflowDetail">
+                <h3 id="workflowDetailTitle" class="workflow-detail-title">📄 Stage 1: Medical Report Analysis</h3>
+                <div id="workflowDetailContent" class="workflow-detail-content">
+                    <div class="highlight-box"><strong>Input:</strong> Synthetic lab report PDF/image containing patient health data</div>
+                    <div class="trace-panel mt-2">
+                        <div class="trace-step"><strong>Process:</strong> OCR extracts text → Medical NER identifies biomarkers → HbA1c, FBS, PPBS isolated</div>
+                        <div class="trace-step"><strong>Output:</strong> Structured JSON with confidence scores for each extracted value</div>
+                        <div class="trace-step"><strong>AI Model:</strong> Custom-trained medical entity recognition model (94.5% accuracy)</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Data Transformation Pipeline -->
@@ -1358,10 +1420,6 @@ Macro Distribution (HbA1c-adjusted):
             </div>
         </div>
 
-        <!-- Method Comparison -->
-        <div class="card mt-3">
-
-        <!-- Method Comparison -->
         <div class="card mt-3">
             <div class="card-header">
                 <span class="card-title">📊 Method Comparison</span>
@@ -1853,6 +1911,7 @@ Threat Model:
     <span><kbd>←</kbd> <kbd>→</kbd> Navigate modules</span>
     <span><kbd>T</kbd> Tour</span>
     <span><kbd>V</kbd> Voice</span>
+    <span><kbd>B</kbd> Chat</span>
     <span><kbd>?</kbd> Help</span>
 </div>
 
@@ -1958,7 +2017,7 @@ document.addEventListener('keydown', (e) => {
             hint.classList.toggle('visible');
             setTimeout(() => hint.classList.remove('visible'), 4000);
         }
-        showToast('⌨️ Keyboard: ← → navigate, T: Tour, V: Voice, ?: Help', 'info');
+        showToast('⌨️ Keyboard: ← → navigate, T: Tour, V: Voice, B: Chat, ?: Help', 'info');
     } else if (e.key === 'Escape') {
         // Close chatbot
         const widget = document.getElementById('chatbotWidget');
@@ -1971,9 +2030,9 @@ document.addEventListener('keydown', (e) => {
             closeModal();
         }
         // Close voice assistant
-        const va = document.getElementById('voiceAssistantPanel');
-        if (va && va.classList.contains('open')) {
-            toggleVoiceAssistant();
+        if (window.speechSynthesis && window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            showToast('🔇 Speech stopped', 'info');
         }
         // Close mobile nav
         const nav = document.getElementById('sideNav');
@@ -2019,6 +2078,11 @@ document.addEventListener('DOMContentLoaded', () => {
     populateOCRReports();
     populateFoodGrid();
     renderAgentGraph();
+    // Initialize workflow pipeline
+    setTimeout(() => {
+        const firstStep = document.querySelector('#workflowPipeline .pipeline-step');
+        if (firstStep) showWorkflowDetail('medical-report', firstStep);
+    }, 300);
 });
 
 // ============================================================
@@ -2078,7 +2142,7 @@ function runOCRSimulation() {
         else if (values.hba1c >= 7.0 || values.ppbs >= 200) { status = '⚠️ High - Diabetic Range'; color = 'var(--risk-high)'; }
         else if (values.hba1c >= 6.0 || values.ppbs >= 160) { status = '🔶 Moderate - Pre-Diabetic Range'; color = '#fbbc04'; }
         else if (values.hba1c >= 5.5) { status = '🟢 Low - At Risk'; color = 'var(--medical-green)'; }
-        else { status = '✅ Normal - No Diabetes Detected'; color = 'var(--medical-green);'; }
+        else { status = '✅ Normal - No Diabetes Detected'; color = 'var(--medical-green)'; }
         
         document.getElementById('ocrStatus').innerHTML = `
             <div class="highlight-box ${values.hba1c >= 7 ? 'warning' : 'success'}">
@@ -2680,7 +2744,7 @@ function trl4AutoPopulate(p) {
         for (let i = 0; i < reportSelect.options.length; i++) {
             if (reportSelect.options[i].textContent.includes(p.name.split(' ')[0])) {
                 reportSelect.selectedIndex = i;
-                if (typeof simulateOCRPipeline === 'function') simulateOCRPipeline();
+                if (typeof runOCRSimulation === 'function') runOCRSimulation();
                 break;
             }
         }
@@ -2691,7 +2755,7 @@ function trl4AutoPopulate(p) {
     const weightInput = document.getElementById('dietWeight');
     const hba1cInput = document.getElementById('dietHba1c');
     if (ageInput) ageInput.value = p.age;
-    if (weightInput) weightInput.value = Math.round(p.weight || 70 + Math.random() * 20);
+    if (weightInput) weightInput.value = Math.round(p.weight || (p.bmi * 3.1) || 70 + Math.random() * 20);
     if (hba1cInput) hba1cInput.value = p.hba1c.toFixed(1);
     
     showToast(`📋 Patient data populated in OCR and Diet modules`, 'info');
@@ -4191,9 +4255,27 @@ function toggleVoiceAssistant() {
         
         showToast(`🎙️ Sophia (${voiceName}) is ready to guide you! Press T for tour.`, 'success');
         
+        // Module-specific context descriptions for Sophia
+        const moduleContexts = {
+            'module-1': 'the Research Overview Dashboard. Here we present the global burden of diabetes with 537 million adults affected, our TRL-2 research framework, and the novelty scorecard showing how our integrated AI approach differs from existing systems.',
+            'module-2': 'the Research Gap Explorer. This module identifies 6 critical gaps in current diabetes management — from data fragmentation to privacy concerns — and shows how our system addresses each one.',
+            'module-3': 'the OCR Demo Studio. This demonstrates how medical reports are digitized using optical character recognition enhanced with medical-domain-specific AI, achieving 94.5 percent accuracy in extracting biomarkers like HbA1c and blood glucose.',
+            'module-4': 'the Federated Learning Digital Twin. Patient data never leaves local hospitals. Instead, encrypted model updates are aggregated into a global privacy-preserving risk prediction model with differential privacy guarantees.',
+            'module-5': 'the Agentic AI Clinical Reasoning module. Five autonomous AI agents collaborate through a message-passing protocol to assess diabetes risk and generate explainable clinical recommendations.',
+            'module-6': 'the Food Intelligence module. Using computer vision and nutritional databases, this module analyzes meal images and natural language descriptions to estimate calories, glycemic index, and glycemic load.',
+            'module-7': 'the NLP Food Understanding module. It parses free-text food descriptions using BERT-based language models, extracting food entities and portion sizes for accurate nutritional assessment.',
+            'module-8': 'the Diet Recommendation module. It generates fully personalized meal plans optimized for each patient\'s HbA1c level, dietary preferences, and metabolic profile using a multi-objective constraint solver.',
+            'module-9': 'the End-to-End Research Workflow. This is critical for reviewers — it shows the complete data transformation pipeline from medical report to personalized health insights, with input-output details at every stage.',
+            'module-10': 'the Sustainability Impact Dashboard. It maps our system\'s contributions to UN Sustainable Development Goals, including healthcare access, responsible AI, and climate action through sustainable diet recommendations.',
+            'module-11': 'the Virtual Lab. This orchestrates all modules into a single data flow simulation. Watch patient data travel through the entire pipeline with real-time JSON visualization at each processing stage.',
+            'module-12': 'the TRL Roadmap and Gantt Chart. It presents our 6-phase project plan spanning 18 months, from foundation and data curation through clinical pilot preparation and deployment.'
+        };
+        
         const activeModule = document.querySelector('.module-section.active');
-        const moduleName = activeModule ? activeModule.id.replace('module-', 'Module ') : 'the research demonstrator';
-        const text = `Hello! I'm Sophia, your AI research guide. Welcome to ${moduleName}. This TRL-4 system integrates 5 AI paradigms for personalized diabetes management. Press T to start a guided tour with me.`;
+        const moduleId = activeModule ? activeModule.id : 'module-1';
+        const moduleContext = moduleContexts[moduleId] || 'the research demonstrator. This TRL-4 system integrates 5 AI paradigms — OCR, Federated Learning, Agentic AI, Computer Vision, and Natural Language Processing — into a unified clinical decision-support pipeline for personalized Type-2 diabetes management.';
+        
+        const text = `Hello! I'm Sophia, your AI research guide. Welcome to ${moduleContext} Press T to start a guided tour with me, or press V again to silence me.`;
         speakText(text);
         
         setTimeout(() => {
@@ -5236,6 +5318,28 @@ const CHATBOT_KB = [
     { id:'trl2', keywords:['integration','bar','trl4','top','bar','patient','selector','global','context','pipeline'], q:'What is the TRL-4 Integration Bar?', a:"The <strong>TRL-4 Integration Bar</strong> at the top of the page is the central nervous system of this upgrade. It provides:<br><br>• <strong>Patient Selector</strong>: Choose from 500+ synthetic patients<br>• <strong>Live Context</strong>: Shows selected patient's name, HbA1c, and risk level<br>• <strong>Status Indicator</strong>: Green dot = ready, spinning = processing<br>• <strong>Run Full Pipeline</strong> button: Processes the selected patient through all 11 modules sequentially with real-time progress tracking<br><br>This demonstrates <strong>cross-component integration</strong> — a key requirement for TRL-4.", c:'TRL4', m:'module-1' },
     { id:'trl3', keywords:['pipeline','run','full','pipeline','button','process','all','modules','sequential','end-to-end','batch'], q:'How does the Run Full Pipeline feature work?', a:"Click <strong>🚀 Run Full Pipeline</strong> in the TRL-4 Integration Bar to process the selected patient through all 11 modules:<br><br>1. A progress overlay appears showing all modules in sequence<br>2. Each module lights up as it's being processed<br>3. The system navigates to each module automatically<br>4. Progress bar fills up as modules complete<br>5. When all 11 modules are done, you see ✅ Complete<br><br>This demonstrates the <strong>integrated system validation</strong> at TRL-4 — all components work together as a cohesive pipeline.", c:'TRL4', m:'module-1' },
     { id:'trl4', keywords:['sophia','voice','beautiful','lady','female','voice','narrate','guide','tour'], q:'Who is Sophia?', a:"<strong>Sophia</strong> is the name we\'ve given to our beautiful lady voice assistant! She:<br><br>• Greets you with a warm, natural voice when you press <kbd>V</kbd><br>• <strong>Auto-narrates every step</strong> of the guided tour<br>• Speaks at a measured pace (rate 0.88) with a pleasant pitch (1.12)<br>• <strong>Auto-advances the tour</strong> when she finishes speaking each step<br>• Uses the best available female voice on your system — Samantha (macOS), Zira (Windows), or Google UK Female<br>• Her name appears in the voice button tooltip and toast messages<br><br>Press <kbd>T</kbd> to start a tour with Sophia as your guide!", c:'TRL4', m:'module-1' },
+
+    // ---- RESEARCH OBJECTIVE (for scrutiny / review teams) ----
+    { id:'s1', keywords:['scrutiny','review','evaluate','assess','validation','verification','committee','expert','panel','assessor'], q:'What should a scrutiny/review committee evaluate in this system?', a:"Review committees should evaluate this demonstrator against these key criteria:<br><br><strong>1. Novelty of Integration</strong> — First TRL-2 demonstrator integrating 5 AI paradigms (OCR+FL+Agentic AI+CV+NLP) for T2DM management. Check the <strong>Novelty Scorecard</strong> in Module 1 for the 6-dimensional comparison against existing systems.<br><br><strong>2. Technical Rigor</strong> — Each module has a Technical Deep-Dive accordion with algorithms, mathematical models, and performance metrics. Review the OCR accuracy (94.5%), FL privacy guarantees (ε=0.5 DP), and diet optimization algorithm in Module 8.<br><br><strong>3. Data Flow Integrity</strong> — Module 9 shows the complete End-to-End Research Workflow Pipeline with input → process → output details at every stage. The Data Transformation Pipeline below it shows actual JSON data transformations.<br><br><strong>4. Privacy & Ethics</strong> — All data is synthetic. FL architecture is documented. Review the privacy section in the chatbot for detailed guarantees.<br><br><strong>5. Feasibility & Roadmap</strong> — Module 12 presents a detailed 6-phase, 18-month Gantt chart from foundation through clinical pilot preparation.", c:'SCRUTINY', m:'module-9' },
+    { id:'s2', keywords:['objective','research','objective','goal','aim','purpose','mission','vision','what trying','achieve','overall'], q:'What is the overall research objective?', a:"The <strong>overarching research objective</strong> is to demonstrate the technical feasibility of integrating 5 distinct AI paradigms — OCR, Federated Learning, Agentic AI, Computer Vision, and NLP — into a <strong>unified, privacy-preserving, clinical decision-support pipeline</strong> for personalized Type-2 Diabetes Mellitus management.<br><br><strong>Core hypothesis:</strong> An integrated AI system can provide more comprehensive, personalized, and privacy-respecting diabetes care than isolated point solutions currently on the market.<br><br><strong>Key research questions:</strong><br>1. Can OCR + medical NER extract diabetic biomarkers from reports at clinically useful accuracy? (Module 3)<br>2. Can Federated Learning predict diabetes risk without centralizing patient data? (Module 4)<br>3. Can a multi-agent AI system reason about diabetes care as effectively as a single specialist model? (Module 5)<br>4. Can CV + NLP work together for accurate dietary assessment? (Modules 6 & 7)<br>5. Can all these be integrated into a single pipeline with real-time data flow? (Modules 9 & 11)<br><br>This demonstrator answers these questions at <strong>TRL-2</strong> using synthetic data.", c:'SCRUTINY', m:'module-1' },
+    { id:'s3', keywords:['data','flow','pipeline','end-to-end','how it works','data flow','transformation','journey','path','through'], q:'Explain the complete data flow from input to output.', a:"Here is the <strong>complete data journey</strong> through the system:<br><br><strong>Step 1 — Data Ingestion (Module 3):</strong><br>Medical report (synthetic PDF) → OCR extracts text → Medical NER identifies HbA1c, blood glucose, cholesterol → Structured JSON output<br><br><strong>Step 2 — Risk Prediction (Module 4):</strong><br>Patient biomarkers → Federated Learning model → Privacy-preserving risk score (Low/Moderate/High/Critical) → Encrypted global model update<br><br><strong>Step 3 — Clinical Reasoning (Module 5):</strong><br>Patient profile + risk score → 5 Agentic AI agents collaborate → Explainable assessment with confidence scores<br><br><strong>Step 4 — Food Understanding (Modules 6 & 7):</strong><br>Meal photo or text description → CV model identifies food → NLP extracts portions → Nutritional database lookup (calories, GI, GL)<br><br><strong>Step 5 — Personalization (Module 8):</strong><br>Patient profile + risk + food data → BMR calculation → Macro optimization → Personalized meal plan with 3 meals + 2 snacks<br><br><strong>Step 6 — Orchestration (Module 11):</strong><br>Virtual Lab simulates the entire pipeline with real-time JSON data visualization at each stage, showing how data transforms from raw input to personalized output.<br><br>See <strong>Module 9</strong> for the interactive Workflow Pipeline with detailed input/process/output descriptions at every stage.", c:'SCRUTINY', m:'module-9' },
+    { id:'s4', keywords:['novelty','innovation','new','unique','original','contribution','first','different','breakthrough','state-of-art'], q:'What is the novelty of this research?', a:"This research's <strong>primary novelty</strong> lies in the <strong>horizontal integration</strong> of 5 AI paradigms for T2DM management — something no existing system achieves. Here's the detailed breakdown:<br><br><strong>1. Integration Novelty (Primary)</strong><br>Existing solutions (Glooko, mySugr, One Drop) address one aspect each. This is the <strong>first TRL-2 demonstrator</strong> to integrate:<br>   • OCR → Medical NER for report digitization<br>   • Federated Learning → Privacy-preserving risk modeling<br>   • Agentic AI → Multi-agent clinical reasoning<br>   • Computer Vision → Food recognition<br>   • NLP → Dietary assessment<br><br><strong>2. Technical Novelty (Per Module)</strong><br>• <strong>Module 3:</strong> Medical-domain-specific OCR enhancement (23% improvement over generic OCR)<br>• <strong>Module 4:</strong> Differential privacy (ε=0.5) with FedAvg aggregation<br>• <strong>Module 5:</strong> 5-agent message-passing architecture with explainability<br>• <strong>Module 6/7:</strong> Dual-path food understanding (image + text)<br>• <strong>Module 8:</strong> HbA1c-adaptive macro optimization<br><br><strong>3. Process Novelty</strong><br>Cross-module data flow with integrated patient context — select a patient once and all modules update together (demonstrated via the TRL-4 Integration Bar).", c:'SCRUTINY', m:'module-1' },
+    { id:'s5', keywords:['module','how modules','connect','integration','together','workflow','link','relation','dependencies','cross-module'], q:'How do the modules connect to each other?', a:"The <strong>11 modules</strong> form a sequential pipeline with bidirectional data flow:<br><br><pre style='font-size:0.7rem;line-height:1.4;'>
+Module 1  (Overview)     ← Provides navigation context
+Module 2  (Gap Explorer) ← Informs the problem space
+Module 3  (OCR)          → Output: Structured biomarkers
+Module 4  (FL)           → Input: Biomarkers → Output: Risk score
+Module 5  (Agentic AI)   → Input: Risk + profile → Output: Reasoning
+Module 6  (Food CV)      → Output: Food identification
+Module 7  (Food NLP)     → Output: Nutritional parsing
+Module 8  (Diet)         ← Input: All upstream data → Output: Meal plan
+Module 9  (Workflow)     ← Aggregates & visualizes all data flows
+Module 10 (Sustainability) ← Input: Diet plan → Output: SDG impact
+Module 11 (Virtual Lab)  ← Orchestrates all 10 modules in one simulation
+Module 12 (TRL Roadmap)  ← Provides project timeline
+</pre><br>The <strong>TRL-4 Integration Bar</strong> at the top enables patient context sharing — select a patient once and all modules populate with relevant data. Module 9's Workflow Pipeline provides the most detailed view of cross-module connections.", c:'SCRUTINY', m:'module-9' },
+    { id:'s6', keywords:['architecture','system','design','structure','component','layered','overview','high-level','framework'], q:'Describe the system architecture.', a:"The system follows a <strong>layered architecture</strong> with 4 tiers:<br><br><strong>Layer 1: Data Input Layer</strong><br>• Medical reports (synthetic PDF/images)<br>• Patient demographic profiles<br>• Food images and text descriptions<br>• All data is synthetically generated (500+ profiles, 100+ reports, 50+ foods)<br><br><strong>Layer 2: AI Processing Layer</strong><br>• 5 AI paradigms running independently but sharing context<br>• OCR Engine (Tesseract-based with medical enhancement)<br>• Federated Learning (FedAvg + Differential Privacy)<br>• Agentic AI (5 agents with message-passing protocol)<br>• Computer Vision (Food classification CNN)<br>• NLP (BERT-based food entity extraction)<br><br><strong>Layer 3: Orchestration Layer</strong><br>• TRL-4 Integration Bar for cross-module patient context<br>• Virtual Lab for end-to-end pipeline simulation<br>• Data Transformation Pipeline for JSON-level data flow inspection<br><br><strong>Layer 4: Presentation Layer</strong><br>• 12 interactive modules with Chart.js + D3.js visualizations<br>• Explainable AI panels for every decision<br>• Sophia voice assistant for guided narration<br>• Chatbot knowledge base for Q&A<br><br>All layers run <strong>client-side</strong> in the browser. No backend server required.", c:'SCRUTINY', m:'module-1' },
+
 ];
 
 // Chatbot state
