@@ -98,7 +98,12 @@
         <div class="nav-item" data-module="module-11">
             <span class="nav-icon">🔬</span>
             Virtual Lab
-            <span class="nav-badge" style="background:var(--medical-green);color:white;">NEW</span>
+            <span class="nav-badge" style="background:var(--medical-green);color:white;">11</span>
+        </div>
+        <div class="nav-item" data-module="module-12">
+            <span class="nav-icon">🗺️</span>
+            TRL Roadmap
+            <span class="nav-badge" style="background:#764ba2;color:white;">12</span>
         </div>
     </div>
 </nav>
@@ -1688,6 +1693,84 @@ Threat Model:
                     <span class="log-time">[System]</span>
                     <span class="log-stage stage-input">INIT</span>
                     Virtual Lab ready. Click ▶ Play or ⏭ Step to begin.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MODULE 12: TRL ROADMAP & GANTT CHART ==================== -->
+    <section class="module-section" id="module-12">
+        <div class="module-header">
+            <span class="module-number">Module 12</span>
+            <h1>🗺️ TRL Roadmap & Gantt Chart</h1>
+            <p>Detailed progression plan through 6 phases — from foundation to deployment — with activities, timelines, and milestones</p>
+        </div>
+
+        <!-- Phase Tabs (rendered by JS) -->
+        <div class="trl-roadmap-tabs" id="trl-tabs-container"></div>
+
+        <!-- TRL Content (rendered by JS) -->
+        <div id="trl-roadmap-content">
+            <div class="trl-overview-card" id="trl-overview"></div>
+            <div class="trl-pipeline-flow" id="trl-pipeline"></div>
+            <div class="trl-gantt-container">
+                <div class="trl-gantt-header">
+                    <h3>📊 Gantt Chart — Activities & Timeline</h3>
+                    <div class="trl-gantt-legend">
+                        <span class="trl-legend-item"><span class="trl-legend-swatch dev"></span> Development</span>
+                        <span class="trl-legend-item"><span class="trl-legend-swatch val"></span> Validation</span>
+                        <span class="trl-legend-item"><span class="trl-legend-swatch dep"></span> Deployment</span>
+                        <span class="trl-legend-item"><span class="trl-legend-swatch doc"></span> Documentation</span>
+                        <span class="trl-legend-item"><span class="trl-legend-swatch mil"></span> Milestone</span>
+                    </div>
+                </div>
+                <div class="trl-gantt-chart">
+                    <table class="trl-gantt-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Type</th>
+                                <th>Duration</th>
+                                <th class="timeline-header">Timeline</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trl-gantt-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="trl-summary-card">
+                <div class="trl-summary-title">📋 Phase Summary</div>
+                <div class="trl-summary-stats" id="trl-summary"></div>
+            </div>
+        </div>
+
+        <!-- Cumulative Timeline -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <span class="card-title">📈 Cumulative Progression Timeline</span>
+            </div>
+            <div class="trl-timeline" id="trl-timeline">
+                <div class="trl-timeline-bar" id="trl-timeline-bar"></div>
+                <div class="trl-timeline-labels" id="trl-timeline-labels"></div>
+            </div>
+        </div>
+
+        <!-- TRL Definition Reference -->
+        <div class="tech-detail">
+            <button class="tech-detail-header" onclick="toggleTechDetail(this)" aria-expanded="false">
+                📖 TRL Definitions (ISO 16290:2013) <span class="arrow">▼</span>
+            </button>
+            <div class="tech-detail-body">
+                <div class="grid-3 gap-md">
+                    <div class="card"><div class="card-header"><span class="card-title">TRL-1</span></div><div class="card-body"><p class="text-muted" style="font-size:0.82rem">Basic principles observed and reported</p></div></div>
+                    <div class="card"><div class="card-header"><span class="card-title">TRL-2</span></div><div class="card-body"><p class="text-muted" style="font-size:0.82rem">Technology concept and/or application formulated</p></div></div>
+                    <div class="card"><div class="card-header"><span class="card-title">TRL-3</span></div><div class="card-body"><p class="text-muted" style="font-size:0.82rem">Analytical & experimental proof-of-concept</p></div></div>
+                    <div class="card"><div class="card-header"><span class="card-title">TRL-4</span></div><div class="card-body"><p class="text-muted" style="font-size:0.82rem">Component/subsystem validation in lab environment</p></div></div>
+                    <div class="card"><div class="card-header"><span class="card-title">TRL-5</span></div><div class="card-body"><p class="text-muted" style="font-size:0.82rem">Component/subsystem validation in relevant environment</p></div></div>
+                    <div class="card"><div class="card-header"><span class="card-title">TRL-6</span></div><div class="card-body"><p class="text-muted" style="font-size:0.82rem">System/subsystem model demo in relevant environment</p></div></div>
+                    <div class="card"><div class="card-header"><span class="card-title">TRL-7</span></div><div class="card-body"><p class="text-muted" style="font-size:0.82rem">System prototype demonstration in operational environment</p></div></div>
+                    <div class="card"><div class="card-header"><span class="card-title">TRL-8</span></div><div class="card-body"><p class="text-muted" style="font-size:0.82rem">System complete and qualified through test & demo</p></div></div>
+                    <div class="card"><div class="card-header"><span class="card-title">TRL-9</span></div><div class="card-body"><p class="text-muted" style="font-size:0.82rem">Actual system proven through successful operations</p></div></div>
                 </div>
             </div>
         </div>
@@ -4625,6 +4708,333 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         vlabInit();
     }, 100);
+});
+
+/* ============================================================
+   MODULE 12: TRL ROADMAP & GANTT CHART ENGINE
+   ============================================================ */
+
+/* ---------- Gantt Data ---------- */
+
+const TRL_PHASES = [
+    {
+        id: 'phase-1',
+        label: 'Phase 1',
+        sub: 'Months 1-3',
+        dot: 'current',
+        icon: '🔬',
+        title: 'Phase 1: Foundation & Data Curation',
+        subtitle: 'Establishing research framework, data collection, and fundamental algorithm development.',
+        stats: [
+            { val: '4', label: 'Work Packages' },
+            { val: '3 mo', label: 'Duration' },
+            { val: 'High', label: 'Priority' },
+        ],
+        pipeline: [
+            { label: 'Literature Review', icon: '📚', cls: 'dev' },
+            { label: 'Data Collection', icon: '📋', cls: 'val' },
+            { label: 'Synthetic Dataset', icon: '🖥️', cls: 'dev' },
+            { label: 'Ethics Approval', icon: '✅', cls: 'doc' },
+        ],
+        ganttActivities: [
+            { activity: 'Systematic Literature Review', cat: 'DOC', dur: '3 mo', width: '100%', cls: 'doc' },
+            { activity: 'Synthetic Data Generation', cat: 'DEV', dur: '2 mo', width: '67%', cls: 'dev' },
+            { activity: 'Dataset Curation & Labeling', cat: 'VAL', dur: '2 mo', width: '67%', cls: 'val' },
+            { activity: 'Ethics Committee Submission', cat: 'REG', dur: '3 mo', width: '100%', cls: 'doc' },
+            { activity: 'Research Framework Finalization', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 3' },
+        ],
+        summary: [
+            { val: '150+', label: 'Papers Reviewed' },
+            { val: '10K', label: 'Synthetic Records' },
+            { val: '15', label: 'Datasets Curated' },
+        ],
+    },
+    {
+        id: 'phase-2',
+        label: 'Phase 2',
+        sub: 'Months 4-6',
+        dot: '',
+        icon: '⚙️',
+        title: 'Phase 2: Core AI Development',
+        subtitle: 'Developing and validating individual AI modules with baseline performance metrics.',
+        stats: [
+            { val: '5', label: 'AI Modules' },
+            { val: '3 mo', label: 'Duration' },
+            { val: 'Critical', label: 'Priority' },
+        ],
+        pipeline: [
+            { label: 'OCR Engine', icon: '🔤', cls: 'dev' },
+            { label: 'CV Module', icon: '👁️', cls: 'dev' },
+            { label: 'NLP Pipeline', icon: '💬', cls: 'dev' },
+            { label: 'FL Framework', icon: '🔒', cls: 'dev' },
+            { label: 'Agentic AI', icon: '🤖', cls: 'dev' },
+        ],
+        ganttActivities: [
+            { activity: 'OCR Module — Document Parsing', cat: 'DEV', dur: '3 mo', width: '100%', cls: 'dev' },
+            { activity: 'Computer Vision — Food Recognition', cat: 'DEV', dur: '3 mo', width: '100%', cls: 'dev' },
+            { activity: 'NLP — Diet Personalization', cat: 'DEV', dur: '2 mo', width: '67%', cls: 'dev' },
+            { activity: 'Federated Learning — Risk Model', cat: 'DEV', dur: '3 mo', width: '100%', cls: 'dev' },
+            { activity: 'Agentic AI — Clinical Reasoning', cat: 'DEV', dur: '2.5 mo', width: '83%', cls: 'dev' },
+            { activity: 'Module Unit Testing', cat: 'VAL', dur: '1 mo', width: '33%', cls: 'val' },
+            { activity: 'Baseline Performance Report', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 6' },
+        ],
+        summary: [
+            { val: '5', label: 'AI Modules Built' },
+            { val: '85%', label: 'Avg Baseline Acc' },
+            { val: '2.5s', label: 'Avg Inference Time' },
+        ],
+    },
+    {
+        id: 'phase-3',
+        label: 'Phase 3',
+        sub: 'Months 7-9',
+        dot: '',
+        icon: '🔗',
+        title: 'Phase 3: System Integration & Prototype',
+        subtitle: 'Integrating all modules into a unified pipeline, building the frontend demonstrator.',
+        stats: [
+            { val: '11', label: 'Modules Integrated' },
+            { val: '3 mo', label: 'Duration' },
+            { val: 'High', label: 'Priority' },
+        ],
+        pipeline: [
+            { label: 'Pipeline Integration', icon: '🔗', cls: 'dev' },
+            { label: 'Data Flow Design', icon: '↔️', cls: 'val' },
+            { label: 'Frontend Build', icon: '🖥️', cls: 'dev' },
+            { label: 'UX Testing', icon: '🧪', cls: 'val' },
+        ],
+        ganttActivities: [
+            { activity: 'Pipeline Orchestration Design', cat: 'DEV', dur: '2 mo', width: '67%', cls: 'dev' },
+            { activity: 'Frontend UI/UX Development', cat: 'DEV', dur: '3 mo', width: '100%', cls: 'dev' },
+            { activity: 'API & Data Flow Integration', cat: 'DEV', dur: '2 mo', width: '67%', cls: 'dev' },
+            { activity: 'Module Interoperability Testing', cat: 'VAL', dur: '1.5 mo', width: '50%', cls: 'val' },
+            { activity: 'Cross-Module Data Validation', cat: 'VAL', dur: '1 mo', width: '33%', cls: 'val' },
+            { activity: 'Technical Documentation v1', cat: 'DOC', dur: '2 mo', width: '67%', cls: 'doc' },
+            { activity: 'Integration Milestone', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 9' },
+        ],
+        summary: [
+            { val: '1', label: 'Working Prototype' },
+            { val: '11 → 1', label: 'Modules → Pipeline' },
+            { val: '96%', label: 'Integration Success' },
+        ],
+    },
+    {
+        id: 'phase-4',
+        label: 'Phase 4',
+        sub: 'Months 10-12',
+        dot: '',
+        icon: '🧪',
+        title: 'Phase 4: Validation, Evaluation & Dissemination',
+        subtitle: 'Rigorous testing, performance evaluation, and academic dissemination of results.',
+        stats: [
+            { val: '4', label: 'Test Suites' },
+            { val: '3 mo', label: 'Duration' },
+            { val: 'High', label: 'Priority' },
+        ],
+        pipeline: [
+            { label: 'Validation Suite', icon: '📊', cls: 'val' },
+            { label: 'Performance Eval', icon: '📈', cls: 'val' },
+            { label: 'Deployment Guide', icon: '📦', cls: 'doc' },
+            { label: 'Paper Writing', icon: '📝', cls: 'doc' },
+        ],
+        ganttActivities: [
+            { activity: 'End-to-End System Validation', cat: 'VAL', dur: '3 mo', width: '100%', cls: 'val' },
+            { activity: 'Performance Benchmarking', cat: 'VAL', dur: '2 mo', width: '67%', cls: 'val' },
+            { activity: 'Ablation Studies', cat: 'VAL', dur: '1.5 mo', width: '50%', cls: 'val' },
+            { activity: 'Manuscript Preparation', cat: 'DOC', dur: '3 mo', width: '100%', cls: 'doc' },
+            { activity: 'Patent Filing Preparation', cat: 'REG', dur: '2 mo', width: '67%', cls: 'doc' },
+            { activity: 'Conference Submission', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 12' },
+        ],
+        summary: [
+            { val: '4', label: 'Validation Suites' },
+            { val: '2+', label: 'Paper Submissions' },
+            { val: '1', label: 'Patent Application' },
+        ],
+    },
+    {
+        id: 'phase-5',
+        label: 'Phase 5',
+        sub: 'Months 13-15',
+        dot: '',
+        icon: '🚀',
+        title: 'Phase 5: Clinical Pilot Preparation',
+        subtitle: 'Preparing for clinical pilot studies, regulatory engagement, and stakeholder demonstration.',
+        stats: [
+            { val: '3', label: 'Trial Sites' },
+            { val: '3 mo', label: 'Duration' },
+            { val: 'Critical', label: 'Priority' },
+        ],
+        pipeline: [
+            { label: 'Clinical IRB', icon: '📋', cls: 'reg' },
+            { label: 'Clinician UAT', icon: '👨‍⚕️', cls: 'val' },
+            { label: 'Regulatory Prep', icon: '⚖️', cls: 'reg' },
+            { label: 'Stakeholder Demo', icon: '🎤', cls: 'doc' },
+        ],
+        ganttActivities: [
+            { activity: 'Clinical IRB Application', cat: 'REG', dur: '3 mo', width: '100%', cls: 'reg' },
+            { activity: 'Clinician User Acceptance Testing', cat: 'VAL', dur: '2 mo', width: '67%', cls: 'val' },
+            { activity: 'Regulatory Compliance Review', cat: 'REG', dur: '2 mo', width: '67%', cls: 'reg' },
+            { activity: 'Data Privacy Audit', cat: 'REG', dur: '1 mo', width: '33%', cls: 'reg' },
+            { activity: 'Stakeholder Demonstration', cat: 'DOC', dur: '1 mo', width: '33%', cls: 'doc' },
+            { activity: 'Pilot Launch Approval', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 15' },
+        ],
+        summary: [
+            { val: '3', label: 'Clinical Sites' },
+            { val: '50+', label: 'Planned Patients' },
+            { val: 'Phase 1', label: 'Pilot Type' },
+        ],
+    },
+    {
+        id: 'phase-6',
+        label: 'Phase 6',
+        sub: 'Months 16-18',
+        dot: '',
+        icon: '🏁',
+        title: 'Phase 6: Deployment & Future Roadmap',
+        subtitle: 'Final deployment of TRL-4 demonstrator, comprehensive reporting, and transition planning.',
+        stats: [
+            { val: '1', label: 'Deployment' },
+            { val: '3 mo', label: 'Duration' },
+            { val: 'Medium', label: 'Priority' },
+        ],
+        pipeline: [
+            { label: 'TRL-4 Demo', icon: '🎯', cls: 'mil' },
+            { label: 'Final Report', icon: '📄', cls: 'doc' },
+            { label: 'Future Roadmap', icon: '🗺️', cls: 'doc' },
+            { label: 'Handover Docs', icon: '📎', cls: 'doc' },
+        ],
+        ganttActivities: [
+            { activity: 'TRL-4 Demonstrator Deployment', cat: 'DEP', dur: '2 mo', width: '67%', cls: 'dep' },
+            { activity: 'Comprehensive Project Report', cat: 'DOC', dur: '3 mo', width: '100%', cls: 'doc' },
+            { activity: 'Future Research Roadmap', cat: 'DOC', dur: '2 mo', width: '67%', cls: 'doc' },
+            { activity: 'Code & Knowledge Handover', cat: 'DOC', dur: '2 mo', width: '67%', cls: 'doc' },
+            { activity: 'Project Finalized', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 18' },
+        ],
+        summary: [
+            { val: 'TRL-4', label: 'Target Level' },
+            { val: '3', label: 'Deliverables' },
+            { val: '18 mo', label: 'Total Timeline' },
+        ],
+    },
+];
+
+/* ---------- Cumulative Timeline Data ---------- */
+const TRL_TIMELINE_SEGMENTS = [
+    { label: 'Phase 1', dur: 'Months 1-3', pct: 16.7, cls: 'completed' },
+    { label: 'Phase 2', dur: 'Months 4-6', pct: 16.7, cls: 'completed' },
+    { label: 'Phase 3', dur: 'Months 7-9', pct: 16.7, cls: '' },
+    { label: 'Phase 4', dur: 'Months 10-12', pct: 16.7, cls: '' },
+    { label: 'Phase 5', dur: 'Months 13-15', pct: 16.7, cls: '' },
+    { label: 'Phase 6', dur: 'Months 16-18', pct: 16.6, cls: '' },
+];
+
+/* ---------- Rendering Functions ---------- */
+
+function renderTrlRoadmap(phaseId) {
+    const phase = TRL_PHASES.find(p => p.id === phaseId) || TRL_PHASES[0];
+    const container = document.getElementById('trl-roadmap-content');
+    if (!container) return;
+
+    /* Tabs */
+    const tabsHtml = TRL_PHASES.map(p =>
+        `<div class="trl-tab ${p.id === phase.id ? 'active' : ''}" data-phase="${p.id}" onclick="switchTrlPhase('${p.id}')">
+            <span class="trl-tab-dot ${p.dot}"></span>
+            <span class="trl-tab-label">${p.label}</span>
+            <span class="trl-tab-sub">${p.sub}</span>
+        </div>`
+    ).join('');
+    document.getElementById('trl-tabs-container').innerHTML = tabsHtml;
+
+    /* Overview card */
+    document.getElementById('trl-overview').innerHTML = `
+        <div class="trl-overview-icon">${phase.icon}</div>
+        <div class="trl-overview-text">
+            <h3>${phase.title}</h3>
+            <p>${phase.subtitle}</p>
+        </div>
+        <div class="trl-overview-stats">
+            ${phase.stats.map(s => `<div class="trl-ostat"><span class="ostat-val">${s.val}</span><span class="ostat-label">${s.label}</span></div>`).join('')}
+        </div>
+    `;
+
+    /* Pipeline flow */
+    document.getElementById('trl-pipeline').innerHTML = phase.pipeline.map((p, i) =>
+        `${i > 0 ? '<span class="trl-pflow-arrow">→</span>' : ''}
+        <div class="trl-pflow-node ${p.cls}">
+            <span>${p.icon} ${p.label}</span>
+        </div>`
+    ).join('');
+
+    /* Gantt Chart */
+    const ganttRows = phase.ganttActivities.map(a =>
+        `<tr>
+            <td class="gantt-activity">${a.activity}</td>
+            <td class="gantt-category"><span class="trl-legend-swatch ${a.cls}"></span> ${a.cat}</td>
+            <td class="gantt-duration">${a.dur || '—'}</td>
+            <td class="gantt-bar-cell">
+                ${a.milestone ? `
+                    <div style="position:relative;">
+                        <div class="trl-gantt-milestone">
+                            <span class="milestone-label">◆ ${a.milestone}</span>
+                        </div>
+                    </div>
+                ` : `
+                    <div class="trl-gantt-bar ${a.cls}" style="width:${a.width};">
+                        <span class="gantt-bar-label">${a.activity}</span>
+                        <span class="gantt-bar-hover">${a.activity} (${a.dur})</span>
+                    </div>
+                `}
+            </td>
+        </tr>`
+    ).join('');
+    document.getElementById('trl-gantt-tbody').innerHTML = ganttRows;
+
+    /* Summary stats */
+    document.getElementById('trl-summary').innerHTML = phase.summary.map(s =>
+        `<div class="trl-summary-stat">
+            <div class="ss-val">${s.val}</div>
+            <div class="ss-label">${s.label}</div>
+        </div>`
+    ).join('');
+}
+
+function switchTrlPhase(phaseId) {
+    renderTrlRoadmap(phaseId);
+    renderTrlTimeline();
+}
+
+function renderTrlTimeline() {
+    const bar = document.getElementById('trl-timeline-bar');
+    const labels = document.getElementById('trl-timeline-labels');
+    const activePhaseId = document.querySelector('.trl-tab.active')?.dataset?.phase || 'phase-1';
+    const activeIdx = TRL_PHASES.findIndex(p => p.id === activePhaseId);
+
+    bar.innerHTML = TRL_TIMELINE_SEGMENTS.map((s, i) =>
+        `<div class="trl-timeline-segment ${s.cls}${i === activeIdx ? ' active' : ''}" style="width:${s.pct}%">
+            ${s.label}
+        </div>`
+    ).join('');
+
+    labels.innerHTML = TRL_TIMELINE_SEGMENTS.map((s, i) =>
+        `<div style="width:${s.pct}%">
+            ${s.dur}<br><small>${s.label}</small>
+            ${i === activeIdx ? ' ⬅️' : ''}
+        </div>`
+    ).join('');
+}
+
+function initTrlRoadmap() {
+    renderTrlRoadmap('phase-1');
+    renderTrlTimeline();
+}
+
+/* Initialize on DOM load */
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        if (document.getElementById('trl-roadmap-content')) {
+            initTrlRoadmap();
+        }
+    }, 200);
 });
 
 /* ============================================================
