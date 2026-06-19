@@ -1748,6 +1748,890 @@ html {
 }
 
 /* ============================================================
+   AI CHATBOT ASSISTANT
+   ============================================================ */
+
+.chatbot-widget {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 4000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.chatbot-bubble {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: chatbot-glow 2s ease infinite;
+}
+
+.chatbot-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(118, 75, 162, 0.5);
+}
+
+@keyframes chatbot-glow {
+    0%, 100% { box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4); }
+    50% { box-shadow: 0 4px 25px rgba(118, 75, 162, 0.7); }
+}
+
+.chatbot-bubble .badge-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ea4335;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+
+.chatbot-window {
+    position: absolute;
+    bottom: 68px;
+    left: 0;
+    width: 380px;
+    max-width: calc(100vw - 48px);
+    height: 520px;
+    max-height: calc(100vh - 200px);
+    background: var(--medical-white);
+    border-radius: 16px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: chatbot-slide-up 0.3s ease;
+}
+
+.chatbot-window.open {
+    display: flex;
+}
+
+@keyframes chatbot-slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chatbot-header {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.chatbot-header h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.chatbot-header .chatbot-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: var(--transition);
+    padding: 4px;
+}
+
+.chatbot-header .chatbot-close:hover {
+    opacity: 1;
+}
+
+.chatbot-status {
+    padding: 4px 16px;
+    font-size: 0.7rem;
+    color: var(--medical-gray-500);
+    background: var(--medical-gray-50);
+    border-bottom: 1px solid var(--medical-gray-200);
+    flex-shrink: 0;
+}
+
+.chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--medical-gray-50);
+}
+
+.chatbot-messages::-webkit-scrollbar { width: 4px; }
+.chatbot-messages::-webkit-scrollbar-thumb { background: var(--medical-gray-300); border-radius: 2px; }
+
+.chatbot-msg {
+    display: flex;
+    gap: 8px;
+    max-width: 85%;
+    animation: msg-in 0.3s ease;
+}
+
+@keyframes msg-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chatbot-msg.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.chatbot-msg .msg-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.chatbot-msg.bot .msg-avatar {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.chatbot-msg.user .msg-avatar {
+    background: var(--medical-blue);
+    color: white;
+}
+
+.chatbot-msg .msg-bubble {
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.chatbot-msg.bot .msg-bubble {
+    background: var(--medical-white);
+    border: 1px solid var(--medical-gray-200);
+    border-bottom-left-radius: 4px;
+    color: var(--medical-gray-900);
+}
+
+.chatbot-msg.user .msg-bubble {
+    background: var(--medical-blue);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.chatbot-msg.bot .msg-bubble .msg-source {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--medical-gray-500);
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--medical-gray-200);
+}
+
+.chatbot-typing {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 16px;
+    background: var(--medical-white);
+    border: 1px solid var(--medical-gray-200);
+    border-radius: 12px;
+    align-self: flex-start;
+    max-width: 80px;
+    border-bottom-left-radius: 4px;
+}
+
+.chatbot-typing .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--medical-gray-300);
+    animation: typing-bounce 1.4s ease infinite;
+}
+
+.chatbot-typing .dot:nth-child(2) { animation-delay: 0.2s; }
+.chatbot-typing .dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-bounce {
+    0%, 60%, 100% { transform: translateY(0); background: var(--medical-gray-300); }
+    30% { transform: translateY(-6px); background: var(--medical-blue); }
+}
+
+/* FAQ Quick Buttons */
+.chatbot-faqs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 16px 4px;
+    background: var(--medical-white);
+    border-top: 1px solid var(--medical-gray-200);
+    flex-shrink: 0;
+}
+
+.chatbot-faq-btn {
+    padding: 4px 10px;
+    border: 1px solid var(--medical-gray-200);
+    border-radius: 12px;
+    background: var(--medical-gray-50);
+    cursor: pointer;
+    font-size: 0.7rem;
+    color: var(--medical-gray-700);
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.chatbot-faq-btn:hover {
+    background: var(--medical-blue-light);
+    border-color: var(--medical-blue);
+    color: var(--medical-blue);
+}
+
+/* Chatbot Input */
+.chatbot-input-area {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    background: var(--medical-white);
+    border-top: 1px solid var(--medical-gray-200);
+    flex-shrink: 0;
+}
+
+.chatbot-input-area input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 2px solid var(--medical-gray-200);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.chatbot-input-area input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+.chatbot-input-area .chatbot-send {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatbot-input-area .chatbot-send:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 10px rgba(118, 75, 162, 0.4);
+}
+
+.chatbot-input-area .chatbot-send:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .chatbot-widget {
+        bottom: 16px;
+        left: 16px;
+    }
+    
+    .chatbot-bubble {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+    
+    .chatbot-window {
+        position: fixed;
+        top: 60px;
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        width: auto;
+        height: auto;
+        max-width: none;
+        max-height: none;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .chatbot-window {
+        background: var(--medical-white);
+    }
+    
+    .chatbot-msg.bot .msg-bubble {
+        background: var(--medical-white);
+    }
+    
+    .chatbot-messages {
+        background: var(--medical-gray-50);
+    }
+    
+    .chatbot-faqs {
+        background: var(--medical-white);
+    }
+    
+    .chatbot-input-area {
+        background: var(--medical-white);
+    }
+}
+
+/* ============================================================
+   FEDERATED LEARNING — STEP-BY-STEP DEMONSTRATION
+   ============================================================ */
+
+.fl-step-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Step Indicator Bar */
+.fl-step-indicator {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    background: var(--medical-white);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--medical-gray-200);
+    overflow: hidden;
+    position: relative;
+}
+
+.fl-step-item {
+    flex: 1;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    background: var(--medical-gray-50);
+    border-right: 1px solid var(--medical-gray-200);
+    min-width: 0;
+}
+
+.fl-step-item:last-child {
+    border-right: none;
+}
+
+.fl-step-item .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: var(--medical-gray-300);
+    color: white;
+    margin-bottom: 4px;
+    transition: var(--transition);
+}
+
+.fl-step-item .step-label {
+    font-size: 0.65rem;
+    color: var(--medical-gray-500);
+    display: block;
+    line-height: 1.2;
+    transition: var(--transition);
+}
+
+.fl-step-item.active {
+    background: var(--medical-blue-light);
+}
+
+.fl-step-item.active .step-num {
+    background: var(--medical-blue);
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.2);
+    animation: step-pulse 1.5s ease infinite;
+}
+
+.fl-step-item.active .step-label {
+    color: var(--medical-blue);
+    font-weight: 600;
+}
+
+.fl-step-item.completed .step-num {
+    background: var(--medical-green);
+}
+
+.fl-step-item.completed .step-label {
+    color: var(--medical-green);
+}
+
+@keyframes step-pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(26,115,232,0.2); }
+    50% { box-shadow: 0 0 0 6px rgba(26,115,232,0.1); }
+}
+
+/* Main Demo Area */
+.fl-demo-main {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 16px;
+}
+
+@media (max-width: 900px) {
+    .fl-demo-main {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Network Visualization */
+.fl-viz-panel {
+    background: linear-gradient(-45deg, #e8f0fe, #e6f4ea, #fef3e2, #fce8e6);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    min-height: 320px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--medical-gray-200);
+}
+
+.fl-viz-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.fl-viz-hospital {
+    background: var(--medical-white);
+    border: 2px solid var(--medical-gray-200);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.fl-viz-hospital .viz-hosp-icon {
+    font-size: 2rem;
+    margin-bottom: 6px;
+}
+
+.fl-viz-hospital .viz-hosp-name {
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+}
+
+.fl-viz-hospital .viz-hosp-detail {
+    font-size: 0.68rem;
+    color: var(--medical-gray-500);
+}
+
+.fl-viz-hospital .viz-hosp-data {
+    font-size: 0.65rem;
+    color: var(--medical-gray-500);
+    margin-top: 6px;
+    padding: 4px 8px;
+    background: var(--medical-gray-50);
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.fl-viz-hospital .viz-data-packet {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--medical-blue);
+    opacity: 0;
+    transition: none;
+}
+
+.fl-viz-hospital.active {
+    border-color: var(--medical-blue);
+    box-shadow: 0 0 20px rgba(26,115,232,0.2);
+    transform: scale(1.02);
+}
+
+.fl-viz-hospital.active .viz-hosp-icon {
+    animation: hospital-bounce 1s ease infinite;
+}
+
+.fl-viz-hospital.done {
+    border-color: var(--medical-green);
+    background: var(--medical-green-light);
+}
+
+.fl-viz-hospital.done .viz-hosp-icon {
+    animation: none;
+}
+
+@keyframes hospital-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+.fl-viz-server {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--medical-blue), var(--medical-blue-dark));
+    color: white;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.fl-viz-server .server-icon {
+    font-size: 2rem;
+    margin-bottom: 4px;
+}
+
+.fl-viz-server .server-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.fl-viz-server .server-stats {
+    font-size: 0.75rem;
+    opacity: 0.9;
+    margin-top: 4px;
+}
+
+.fl-viz-server.active {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(26,115,232,0.3);
+}
+
+.fl-viz-server.completed {
+    background: linear-gradient(135deg, var(--medical-green), #2d8e47);
+}
+
+/* Animated data flow arrows */
+.fl-data-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.fl-data-flow .flow-arrow {
+    flex: 1;
+    height: 2px;
+    background: var(--medical-gray-300);
+    position: relative;
+    max-width: 80px;
+}
+
+.fl-data-flow .flow-arrow .flow-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--medical-blue);
+    top: -3px;
+    animation: flow-dot-move 1s linear infinite;
+    opacity: 0;
+}
+
+.fl-data-flow .flow-arrow.active .flow-dot {
+    opacity: 1;
+}
+
+.fl-data-flow .flow-arrow.completed {
+    background: var(--medical-green);
+}
+
+.fl-data-flow .flow-arrow.completed .flow-dot {
+    background: var(--medical-green);
+    opacity: 1;
+}
+
+@keyframes flow-dot-move {
+    0% { left: 0; }
+    100% { left: calc(100% + 2px); }
+}
+
+/* Data packet animation */
+.fl-data-packet {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--medical-blue);
+    box-shadow: 0 0 10px rgba(26,115,232,0.5);
+    z-index: 5;
+    opacity: 0;
+    transition: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fl-data-packet::after {
+    content: '🔒';
+    font-size: 8px;
+}
+
+.fl-data-packet.animating {
+    opacity: 1;
+    animation: packet-fly 1.5s ease-in-out;
+}
+
+@keyframes packet-fly {
+    0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+    10% { opacity: 1; transform: translate(0, 0) scale(1); }
+    90% { opacity: 1; }
+    100% { transform: translate(var(--fx), var(--fy)) scale(0.5); opacity: 0; }
+}
+
+/* Step Description Panel */
+.fl-step-info {
+    background: var(--medical-white);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--medical-gray-200);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fl-step-info .step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--medical-blue);
+}
+
+.fl-step-info .step-desc {
+    font-size: 0.82rem;
+    color: var(--medical-gray-700);
+    line-height: 1.5;
+    flex: 1;
+}
+
+.fl-step-info .step-metrics {
+    background: var(--medical-gray-50);
+    border-radius: 8px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.fl-step-info .step-metric-item {
+    font-size: 0.72rem;
+    color: var(--medical-gray-700);
+}
+
+.fl-step-info .step-metric-item .metric-value {
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: block;
+}
+
+/* Controls */
+.fl-step-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.fl-step-controls .ctrl-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--medical-gray-200);
+    background: var(--medical-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    color: var(--medical-gray-700);
+}
+
+.fl-step-controls .ctrl-btn:hover {
+    border-color: var(--medical-blue);
+    color: var(--medical-blue);
+    background: var(--medical-blue-light);
+}
+
+.fl-step-controls .ctrl-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.fl-step-controls .ctrl-btn.primary {
+    background: var(--medical-blue);
+    border-color: var(--medical-blue);
+    color: white;
+}
+
+.fl-step-controls .ctrl-btn.primary:hover {
+    background: var(--medical-blue-dark);
+}
+
+.fl-step-controls .ctrl-btn.primary.playing {
+    background: var(--risk-high);
+    border-color: var(--risk-high);
+}
+
+.fl-step-controls .ctrl-btn.primary.playing:hover {
+    background: var(--risk-critical);
+}
+
+.fl-step-controls .step-indicator-text {
+    font-size: 0.8rem;
+    color: var(--medical-gray-500);
+    margin-left: 8px;
+    font-weight: 500;
+}
+
+.fl-step-controls .speed-select {
+    padding: 4px 8px;
+    border: 1px solid var(--medical-gray-200);
+    border-radius: 6px;
+    font-size: 0.72rem;
+    background: var(--medical-white);
+    color: var(--medical-gray-700);
+    margin-left: auto;
+}
+
+/* Step-specific log */
+.fl-step-log {
+    max-height: 100px;
+    overflow-y: auto;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.72rem;
+    background: var(--medical-gray-900);
+    color: #e0e0e0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    line-height: 1.5;
+}
+
+.fl-step-log::-webkit-scrollbar { width: 3px; }
+.fl-step-log::-webkit-scrollbar-thumb { background: #555; border-radius: 2px; }
+
+.fl-step-log .log-entry {
+    opacity: 0;
+    animation: log-fade 0.3s ease forwards;
+}
+
+.fl-step-log .log-entry .log-time {
+    color: #888;
+}
+
+.fl-step-log .log-entry .log-step {
+    color: #4fc3f7;
+    font-weight: 600;
+}
+
+.fl-step-log .log-entry .log-ok {
+    color: #81c784;
+}
+
+.fl-step-log .log-entry .log-warn {
+    color: #ffb74d;
+}
+
+.fl-step-log .log-entry .log-data {
+    color: #ce93d8;
+}
+
+@keyframes log-fade {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* FL final summary overlay */
+.fl-summary-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.95);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 10;
+    animation: summary-appear 0.5s ease;
+}
+
+@keyframes summary-appear {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.fl-summary-overlay .summary-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--medical-green);
+}
+
+.fl-summary-overlay .summary-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 400px;
+}
+
+.fl-summary-overlay .summary-stat {
+    text-align: center;
+}
+
+.fl-summary-overlay .summary-stat .stat-num {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--medical-blue);
+}
+
+.fl-summary-overlay .summary-stat .stat-label {
+    font-size: 0.72rem;
+    color: var(--medical-gray-500);
+}
+
+@media (max-width: 768px) {
+    .fl-step-item .step-label { font-size: 0.55rem; }
+    .fl-step-item { padding: 8px 4px; }
+    .fl-step-item .step-num { width: 22px; height: 22px; font-size: 0.65rem; }
+    .fl-viz-grid { grid-template-columns: repeat(2, 1fr); }
+    .fl-step-info .step-metrics { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
    VIRTUAL LAB (Module 11)
    ============================================================ */
 
