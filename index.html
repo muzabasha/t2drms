@@ -39,68 +39,68 @@
             <a href="https://scholar-sparkle-web.lovable.app/" target="_blank" rel="noopener noreferrer" class="pi-btn" aria-label="Visit Principle Investigator profile">
                 👨‍🔬 Principle Investigator
             </a>
-            <button class="btn btn-sm btn-outline" onclick="startGuidedTour()" style="font-size:0.7rem;padding:6px 10px;" aria-label="Start guided tour">
+            <button class="btn btn-sm btn-outline fs-sm" onclick="startGuidedTour()" aria-label="Start guided tour">
                 🎯 Tour
             </button>
         </div>
     </div>
     <div class="nav-items">
-        <div class="nav-item active" data-module="module-1">
+        <div class="nav-item active" data-module="module-1" tabindex="0" role="button">
             <span class="nav-icon">📊</span>
             Overview Dashboard
             <span class="nav-badge">1</span>
         </div>
-        <div class="nav-item" data-module="module-2">
+        <div class="nav-item" data-module="module-2" tabindex="0" role="button">
             <span class="nav-icon">🔍</span>
             Research Gap Explorer
             <span class="nav-badge">2</span>
         </div>
-        <div class="nav-item" data-module="module-3">
+        <div class="nav-item" data-module="module-3" tabindex="0" role="button">
             <span class="nav-icon">📄</span>
             OCR Demo Studio
             <span class="nav-badge">3</span>
         </div>
-        <div class="nav-item" data-module="module-4">
+        <div class="nav-item" data-module="module-4" tabindex="0" role="button">
             <span class="nav-icon">🌐</span>
             Federated Learning
             <span class="nav-badge">4</span>
         </div>
-        <div class="nav-item" data-module="module-5">
+        <div class="nav-item" data-module="module-5" tabindex="0" role="button">
             <span class="nav-icon">🤖</span>
             Agentic AI
             <span class="nav-badge">5</span>
         </div>
-        <div class="nav-item" data-module="module-6">
+        <div class="nav-item" data-module="module-6" tabindex="0" role="button">
             <span class="nav-icon">🍽️</span>
             Food Intelligence
             <span class="nav-badge">6</span>
         </div>
-        <div class="nav-item" data-module="module-7">
+        <div class="nav-item" data-module="module-7" tabindex="0" role="button">
             <span class="nav-icon">💬</span>
             NLP Food Understanding
             <span class="nav-badge">7</span>
         </div>
-        <div class="nav-item" data-module="module-8">
+        <div class="nav-item" data-module="module-8" tabindex="0" role="button">
             <span class="nav-icon">🥗</span>
             Diet Recommendation
             <span class="nav-badge">8</span>
         </div>
-        <div class="nav-item" data-module="module-9">
+        <div class="nav-item" data-module="module-9" tabindex="0" role="button">
             <span class="nav-icon">🔬</span>
             Research Workflow
             <span class="nav-badge">9</span>
         </div>
-        <div class="nav-item" data-module="module-10">
+        <div class="nav-item" data-module="module-10" tabindex="0" role="button">
             <span class="nav-icon">🌍</span>
             Impact Dashboard
             <span class="nav-badge">10</span>
         </div>
-        <div class="nav-item" data-module="module-11">
+        <div class="nav-item" data-module="module-11" tabindex="0" role="button">
             <span class="nav-icon">🔬</span>
             Virtual Lab
             <span class="nav-badge" style="background:var(--medical-green);color:white;">11</span>
         </div>
-        <div class="nav-item" data-module="module-12">
+        <div class="nav-item" data-module="module-12" tabindex="0" role="button">
             <span class="nav-icon">🗺️</span>
             TRL Roadmap
             <span class="nav-badge" style="background:#764ba2;color:white;">12</span>
@@ -1617,7 +1617,7 @@ Threat Model:
                 <span>🐢</span>
                 <input type="range" id="vlabSpeed" min="1" max="5" value="3" onchange="vlabUpdateSpeed()" aria-label="Animation speed">
                 <span>🐇</span>
-                <span id="vlabSpeedLabel" style="min-width:30px;">3x</span>
+                <span id="vlabSpeedLabel" class="fs-sm" style="min-width:30px;">3x</span>
             </div>
             <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
                 <span style="font-size:0.8rem;color:var(--medical-gray-500);">Stage:</span>
@@ -1734,7 +1734,11 @@ Threat Model:
                                 <th class="timeline-header">Timeline</th>
                             </tr>
                         </thead>
-                        <tbody id="trl-gantt-tbody"></tbody>
+                        <tbody id="trl-gantt-tbody">
+                            <tr><td colspan="4"><div class="skeleton-row"><div class="sk-cell"></div><div class="sk-cell"></div><div class="sk-cell"></div><div class="sk-cell"></div></div></td></tr>
+                            <tr><td colspan="4"><div class="skeleton-row"><div class="sk-cell"></div><div class="sk-cell"></div><div class="sk-cell"></div><div class="sk-cell"></div></div></td></tr>
+                            <tr><td colspan="4"><div class="skeleton-row"><div class="sk-cell"></div><div class="sk-cell"></div><div class="sk-cell"></div><div class="sk-cell"></div></div></td></tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -1841,6 +1845,17 @@ Threat Model:
     </button>
 </div>
 
+<!-- Back-to-Top Button -->
+<button class="back-to-top" id="backToTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top" title="Back to top">↑</button>
+
+<!-- Keyboard Shortcuts Hint -->
+<div class="kbd-hint" id="kbdHint" role="status" aria-live="polite">
+    <span><kbd>←</kbd> <kbd>→</kbd> Navigate modules</span>
+    <span><kbd>T</kbd> Tour</span>
+    <span><kbd>V</kbd> Voice</span>
+    <span><kbd>?</kbd> Help</span>
+</div>
+
 <!-- Modal for Data Flow -->
 <div class="modal-overlay" id="dataModal">
     <div class="modal-content">
@@ -1874,6 +1889,106 @@ document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', () => {
         navigateTo(item.dataset.module);
     });
+    item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            navigateTo(item.dataset.module);
+        }
+    });
+});
+
+// Scroll spy — highlight nav item for visible module
+function updateScrollSpy() {
+    const sections = document.querySelectorAll('.module-section');
+    const scrollPos = window.scrollY + 200;
+    let activeId = null;
+    sections.forEach(s => {
+        if (s.offsetTop <= scrollPos && s.offsetTop + s.offsetHeight > scrollPos) {
+            activeId = s.id;
+        }
+    });
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('in-viewport'));
+    if (activeId) {
+        document.querySelector(`.nav-item[data-module="${activeId}"]`)?.classList.add('in-viewport');
+    }
+}
+
+// Back-to-top visibility
+function updateBackToTop() {
+    const btn = document.getElementById('backToTopBtn');
+    if (!btn) return;
+    if (window.scrollY > 600) {
+        btn.classList.add('visible');
+    } else {
+        btn.classList.remove('visible');
+    }
+}
+
+// Scroll handler
+window.addEventListener('scroll', () => {
+    updateScrollSpy();
+    updateBackToTop();
+}, { passive: true });
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+    const modules = ['module-1','module-2','module-3','module-4','module-5','module-6','module-7','module-8','module-9','module-10','module-11','module-12'];
+    const navItems = document.querySelectorAll('.nav-item');
+    let activeIdx = -1;
+    navItems.forEach((n, i) => {
+        if (n.classList.contains('active') || n.classList.contains('in-viewport')) activeIdx = i;
+    });
+    if (e.key === 'ArrowRight' || e.key === 'n') {
+        e.preventDefault();
+        const idx = Math.min(activeIdx + 1, modules.length - 1);
+        navigateTo(modules[idx]);
+    } else if (e.key === 'ArrowLeft' || e.key === 'p') {
+        e.preventDefault();
+        const idx = Math.max(activeIdx - 1, 0);
+        navigateTo(modules[idx]);
+    } else if (e.key === 't' || e.key === 'T') {
+        if (typeof startGuidedTour === 'function') startGuidedTour();
+    } else if (e.key === 'v' || e.key === 'V') {
+        if (typeof toggleVoiceAssistant === 'function') toggleVoiceAssistant();
+    } else if (e.key === '?' || e.key === '/') {
+        e.preventDefault();
+        const hint = document.getElementById('kbdHint');
+        if (hint) {
+            hint.classList.toggle('visible');
+            setTimeout(() => hint.classList.remove('visible'), 4000);
+        }
+        showToast('⌨️ Keyboard: ← → navigate, T: Tour, V: Voice, ?: Help', 'info');
+    } else if (e.key === 'Escape') {
+        // Close chatbot
+        const widget = document.getElementById('chatbotWidget');
+        if (widget && widget.classList.contains('open')) {
+            toggleChatbot();
+        }
+        // Close modal
+        const modal = document.getElementById('dataModal');
+        if (modal && modal.classList.contains('open')) {
+            closeModal();
+        }
+        // Close voice assistant
+        const va = document.getElementById('voiceAssistantPanel');
+        if (va && va.classList.contains('open')) {
+            toggleVoiceAssistant();
+        }
+        // Close mobile nav
+        const nav = document.getElementById('sideNav');
+        if (nav && nav.classList.contains('open')) {
+            toggleMobileNav();
+        }
+    }
+});
+
+// Show keyboard hint briefly on first load
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const hint = document.getElementById('kbdHint');
+        if (hint) { hint.classList.add('visible'); setTimeout(() => hint.classList.remove('visible'), 5000); }
+    }, 3000);
 });
 
 // Animated Counters
@@ -1924,7 +2039,7 @@ function populateOCRReports() {
 function runOCRSimulation() {
     const select = document.getElementById('ocrReportSelect');
     const reportId = select.value;
-    if (!reportId) return alert('Please select a report first.');
+    if (!reportId) return showToast('Please select a report first.', 'error');
     
     const report = SyntheticData.medicalReports.find(r => r.id === reportId);
     if (!report) return;
@@ -3384,7 +3499,7 @@ function setNLPExample(text) {
 
 function processNLP() {
     const input = document.getElementById('nlpInput').value.trim();
-    if (!input) return alert('Please enter a food description.');
+    if (!input) return showToast('Please enter a food description.', 'error');
     
     document.getElementById('nlpResults').style.display = 'block';
     document.getElementById('nlpSummary').style.display = 'grid';
@@ -3853,12 +3968,17 @@ function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     toast.textContent = message;
+    toast.setAttribute('role', 'alert');
+    toast.style.cursor = 'pointer';
+    toast.title = 'Click to dismiss';
     container.appendChild(toast);
-    setTimeout(() => {
+    const dismiss = () => {
         toast.style.opacity = '0';
         toast.style.transform = 'translateX(100%)';
         setTimeout(() => toast.remove(), 300);
-    }, 4000);
+    };
+    toast.addEventListener('click', dismiss);
+    setTimeout(dismiss, 4000);
 }
 
 // ============================================================

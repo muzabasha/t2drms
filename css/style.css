@@ -1131,7 +1131,8 @@ select.form-control {
 /* Additional Utility Classes */
 .text-center { text-align: center; }
 .text-right { text-align: right; }
-.text-muted { color: var(--medical-gray-500); }
+.text-muted { color: var(--medical-gray-700); }
+.text-muted-light { color: var(--medical-gray-500); }
 .text-blue { color: var(--medical-blue); }
 .text-green { color: var(--medical-green); }
 .text-danger { color: var(--risk-high); }
@@ -1145,7 +1146,26 @@ select.form-control {
 .flex-wrap { flex-wrap: wrap; }
 .gap-1 { gap: 8px; }
 .gap-2 { gap: 16px; }
+.gap-3 { gap: 24px; }
 .w-full { width: 100%; }
+.d-none { display: none !important; }
+.d-block { display: block; }
+.d-flex { display: flex; }
+.fs-sm { font-size: 0.75rem; }
+.fs-md { font-size: 0.85rem; }
+.fs-lg { font-size: 1.5rem; }
+.fs-xl { font-size: 1.8rem; }
+.text-center { text-align: center; }
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+.p-1 { padding: 8px; }
+.p-2 { padding: 16px; }
+.p-3 { padding: 24px; }
 
 /* Animated background for FL module */
 .fl-animated-bg {
@@ -1534,6 +1554,14 @@ a:focus-visible {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
+    .back-to-top { display: none; }
+    .skeleton { animation: none; background: var(--medical-gray-200); }
+}
+
+/* Scroll-spy active nav item */
+.nav-item.in-viewport {
+    background: var(--medical-blue-light);
+    border-right: 3px solid var(--medical-blue);
 }
 
 /* --- Loading Skeleton --- */
@@ -1547,6 +1575,109 @@ a:focus-visible {
 @keyframes skeleton-loading {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
+}
+
+/* Loading pulse for empty containers */
+.loading-pulse {
+    position: relative;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--medical-gray-500);
+    font-size: 0.8rem;
+}
+.loading-pulse::after {
+    content: 'Loading...';
+    animation: loading-dots 1.5s steps(4, end) infinite;
+}
+@keyframes loading-dots {
+    0% { content: 'Loading'; }
+    25% { content: 'Loading.'; }
+    50% { content: 'Loading..'; }
+    75% { content: 'Loading...'; }
+}
+.loading-pulse.loaded::after { content: ''; }
+.loading-pulse.loaded { min-height: 0; }
+
+/* Skeleton box for table-like content */
+.skeleton-row {
+    display: flex;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--medical-gray-100);
+}
+.skeleton-row .sk-cell { height: 16px; border-radius: 4px; background: var(--medical-gray-200); }
+.skeleton-row .sk-cell:first-child { width: 35%; }
+.skeleton-row .sk-cell:nth-child(2) { width: 15%; }
+.skeleton-row .sk-cell:nth-child(3) { width: 15%; }
+.skeleton-row .sk-cell:last-child { width: 35%; }
+
+/* --- Back-to-Top Button --- */
+.back-to-top {
+    position: fixed;
+    bottom: 140px;
+    right: 20px;
+    z-index: 3999;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--medical-blue);
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    background: var(--medical-blue-dark);
+}
+
+/* --- Keyboard Shortcuts Hint --- */
+.kbd-hint {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 300;
+    background: rgba(32,33,36,0.85);
+    color: #e8eaed;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    display: none;
+    gap: 12px;
+    backdrop-filter: blur(4px);
+    white-space: nowrap;
+}
+
+.kbd-hint.visible { display: flex; }
+
+.kbd-hint kbd {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    min-width: 20px;
+    text-align: center;
 }
 
 /* --- Toast Notifications --- */
