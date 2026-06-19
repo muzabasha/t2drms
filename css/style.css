@@ -1746,3 +1746,350 @@ html {
         font-size: 16px; /* prevents iOS zoom */
     }
 }
+
+/* ============================================================
+   VIRTUAL LAB (Module 11)
+   ============================================================ */
+
+.vlab-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.vlab-control-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--medical-white);
+    border: 1px solid var(--medical-gray-200);
+    border-radius: var(--border-radius);
+    flex-wrap: wrap;
+}
+
+.vlab-control-bar .vlab-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--medical-gray-200);
+    background: var(--medical-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.vlab-control-bar .vlab-btn:hover {
+    border-color: var(--medical-blue);
+    background: var(--medical-blue-light);
+}
+
+.vlab-control-bar .vlab-btn.active {
+    border-color: var(--medical-blue);
+    background: var(--medical-blue);
+    color: white;
+}
+
+.vlab-control-bar .vlab-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.vlab-speed-slider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--medical-gray-500);
+}
+
+.vlab-speed-slider input[type="range"] {
+    width: 80px;
+    accent-color: var(--medical-blue);
+}
+
+.vlab-stage-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 8px 0;
+    overflow-x: auto;
+}
+
+.vlab-stage-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    min-width: 80px;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.vlab-stage-node .vlab-node-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 3px solid var(--medical-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    background: var(--medical-white);
+    transition: var(--transition);
+}
+
+.vlab-stage-node .vlab-node-label {
+    font-size: 0.65rem;
+    color: var(--medical-gray-500);
+    text-align: center;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.vlab-stage-node.active .vlab-node-icon {
+    border-color: var(--medical-blue);
+    background: var(--medical-blue-light);
+    box-shadow: 0 0 0 4px var(--medical-blue-light);
+    transform: scale(1.1);
+}
+
+.vlab-stage-node.active .vlab-node-label {
+    color: var(--medical-blue);
+    font-weight: 600;
+}
+
+.vlab-stage-node.done .vlab-node-icon {
+    border-color: var(--medical-green);
+    background: var(--medical-green-light);
+}
+
+.vlab-stage-node.done .vlab-node-label {
+    color: var(--medical-green);
+}
+
+.vlab-stage-connector {
+    width: 40px;
+    height: 2px;
+    background: var(--medical-gray-200);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.vlab-stage-connector.done {
+    background: var(--medical-green);
+}
+
+.vlab-stage-connector.active {
+    background: var(--medical-blue);
+    animation: vlab-flow 1s ease infinite;
+}
+
+@keyframes vlab-flow {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* Data Flow Animation */
+.vlab-data-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--medical-blue);
+    top: -3px;
+    animation: vlab-particle 1.5s ease infinite;
+}
+
+@keyframes vlab-particle {
+    0% { left: 0; opacity: 1; }
+    100% { left: calc(100% + 8px); opacity: 0; }
+}
+
+/* Stage Detail Panel */
+.vlab-detail {
+    background: var(--medical-white);
+    border: 1px solid var(--medical-gray-200);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.vlab-detail-header {
+    padding: 14px 20px;
+    background: var(--medical-gray-50);
+    border-bottom: 1px solid var(--medical-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vlab-detail-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.vlab-detail-body {
+    padding: 20px;
+}
+
+.vlab-data-viewer {
+    background: #1a1a2e;
+    color: #e8eaed;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.vlab-data-viewer .key { color: #7ec8e3; }
+.vlab-data-viewer .string { color: #a5d6a7; }
+.vlab-data-viewer .number { color: #ffcc80; }
+.vlab-data-viewer .boolean { color: #ce93d8; }
+.vlab-data-viewer .null { color: #ef9a9a; }
+
+.vlab-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.vlab-metric {
+    text-align: center;
+    padding: 10px;
+    background: var(--medical-gray-50);
+    border-radius: 8px;
+}
+
+.vlab-metric .vlab-metric-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--medical-blue);
+}
+
+.vlab-metric .vlab-metric-label {
+    font-size: 0.7rem;
+    color: var(--medical-gray-500);
+    margin-top: 2px;
+}
+
+/* Data transform arrow */
+.vlab-transform {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+}
+
+.vlab-transform .vlab-input-box,
+.vlab-transform .vlab-output-box {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid var(--medical-gray-200);
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+.vlab-transform .vlab-input-box {
+    background: var(--medical-blue-light);
+    border-color: var(--medical-blue);
+}
+
+.vlab-transform .vlab-output-box {
+    background: var(--medical-green-light);
+    border-color: var(--medical-green);
+}
+
+.vlab-transform .vlab-arrow-transform {
+    font-size: 1.5rem;
+    color: var(--medical-gray-500);
+    flex-shrink: 0;
+}
+
+/* Live log */
+.vlab-log {
+    max-height: 180px;
+    overflow-y: auto;
+    background: var(--medical-gray-50);
+    border: 1px solid var(--medical-gray-200);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+.vlab-log-entry {
+    padding: 2px 0;
+    border-bottom: 1px solid var(--medical-gray-200);
+}
+
+.vlab-log-entry:last-child {
+    border-bottom: none;
+}
+
+.vlab-log-entry .log-time {
+    color: var(--medical-gray-500);
+    margin-right: 8px;
+}
+
+.vlab-log-entry .log-stage {
+    display: inline-block;
+    padding: 0 6px;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+.vlab-log-entry .log-stage.stage-input { background: var(--medical-blue-light); color: var(--medical-blue); }
+.vlab-log-entry .log-stage.stage-process { background: #fef3e2; color: #ea4335; }
+.vlab-log-entry .log-stage.stage-output { background: var(--medical-green-light); color: var(--medical-green); }
+
+/* Virtual Lab responsive */
+@media (max-width: 768px) {
+    .vlab-control-bar {
+        padding: 12px;
+        gap: 8px;
+    }
+    
+    .vlab-stage-node {
+        min-width: 60px;
+        padding: 4px 8px;
+    }
+    
+    .vlab-stage-node .vlab-node-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+    
+    .vlab-stage-node .vlab-node-label {
+        font-size: 0.55rem;
+    }
+    
+    .vlab-stage-connector {
+        width: 20px;
+    }
+    
+    .vlab-transform {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .vlab-transform .vlab-arrow-transform {
+        transform: rotate(90deg);
+    }
+}
