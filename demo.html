@@ -503,6 +503,294 @@
                 opacity: 0.7;
             }
         }
+
+        /* ==================== FOOD PROCESSING PIPELINE ==================== */
+        .food-processing-pipeline {
+            background: linear-gradient(135deg, #fff5e1 0%, #e8f0fe 100%);
+            border-radius: 12px;
+            padding: 30px 20px;
+            margin: 30px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .pipeline-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pipeline-stage-food {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 2px solid #e8eaed;
+        }
+
+        .pipeline-stage-food.processing {
+            border-color: #1a73e8;
+            box-shadow: 0 4px 16px rgba(26, 115, 232, 0.3);
+            animation: stagePulse 1.5s ease-in-out infinite;
+        }
+
+        .pipeline-stage-food.completed {
+            border-color: #34a853;
+            background: #e6f4ea;
+        }
+
+        @keyframes stagePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .stage-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .stage-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #202124;
+            margin-bottom: 5px;
+        }
+
+        .stage-status {
+            font-size: 0.75rem;
+            color: #5f6368;
+            padding: 3px 8px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 5px 0;
+        }
+
+        .stage-status.processing {
+            background: #e8f0fe;
+            color: #1a73e8;
+            font-weight: 600;
+        }
+
+        .stage-status.completed {
+            background: #e6f4ea;
+            color: #34a853;
+            font-weight: 600;
+        }
+
+        .stage-tech {
+            font-size: 0.7rem;
+            color: #80868b;
+            margin-top: 3px;
+        }
+
+        .pipeline-arrow-food {
+            font-size: 1.5rem;
+            color: #dadce0;
+            font-weight: bold;
+        }
+
+        .pipeline-arrow-food.flowing {
+            color: #1a73e8;
+            animation: arrowFlow 1s ease-in-out infinite;
+        }
+
+        @keyframes arrowFlow {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: translateX(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateX(3px);
+            }
+        }
+
+        .technical-details-panel {
+            background: #f8f9fa;
+            border-left: 4px solid #1a73e8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .technical-details-panel h4 {
+            margin-top: 0;
+            color: #202124;
+            font-size: 1.1rem;
+        }
+
+        .tech-details-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .tech-detail-item {
+            font-size: 0.9rem;
+        }
+
+        .tech-detail-item strong {
+            color: #5f6368;
+        }
+
+        .tech-detail-item span {
+            color: #202124;
+            font-weight: 600;
+        }
+
+        .upload-simulation-box {
+            background: linear-gradient(135deg, #e8f0fe, #e6f4ea);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            border: 2px dashed #1a73e8;
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: iconFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .macro-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .macro-bar-item {
+            width: 100%;
+        }
+
+        .macro-bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #202124;
+        }
+
+        .macro-bar-bg {
+            height: 24px;
+            background: #e8eaed;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .macro-bar-fill {
+            height: 100%;
+            transition: width 1s ease;
+            border-radius: 12px;
+        }
+
+        .protein-bar {
+            background: linear-gradient(90deg, #ea4335, #d93025);
+        }
+
+        .carbs-bar {
+            background: linear-gradient(90deg, #fbbc04, #f9ab00);
+        }
+
+        .fat-bar {
+            background: linear-gradient(90deg, #34a853, #1e8e3e);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #e8eaed;
+            transition: all 0.3s;
+        }
+
+        .metric-card:hover {
+            border-color: #1a73e8;
+            box-shadow: 0 2px 8px rgba(26, 115, 232, 0.2);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a73e8;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: #5f6368;
+        }
+
+        .glucose-impact-meter {
+            margin-top: 10px;
+        }
+
+        .glucose-meter-bar {
+            height: 30px;
+            background: linear-gradient(90deg, #34a853, #fbbc04, #ea4335);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #e8eaed;
+        }
+
+        .glucose-meter-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            transition: width 1s ease;
+            position: relative;
+        }
+
+        .glucose-meter-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: white;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .tech-info-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #fbbc04;
+        }
     </style>
 </head>
 
@@ -946,78 +1234,226 @@
 
         <!-- Step 4: Food Intelligence -->
         <div class="step-content" id="step-4">
-            <h2>🍽️ Step 4: Food Intelligence & Meal Analysis</h2>
-            <p>AI-powered food recognition and glycemic impact calculation</p>
+            <h2>🍽️ Step 4: Food Intelligence & Multimodal Meal Analysis</h2>
+            <p>Deep learning-powered food recognition with real-time nutritional computation and glycemic impact
+                prediction</p>
+
+            <!-- Technical Processing Pipeline Visualization -->
+            <div class="food-processing-pipeline" id="food-pipeline" style="display: none;">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #202124;">
+                    🔬 AI Food Processing Pipeline
+                </h3>
+                <div class="pipeline-flow">
+                    <div class="pipeline-stage-food" id="food-stage-1" data-stage="input">
+                        <div class="stage-icon">📸</div>
+                        <div class="stage-title">Image Input</div>
+                        <div class="stage-status" id="status-food-1">Ready</div>
+                        <div class="stage-tech">Camera/Upload</div>
+                    </div>
+
+                    <div class="pipeline-arrow-food">→</div>
+
+                    <div class="pipeline-stage-food" id="food-stage-2" data-stage="vision">
+                        <div class="stage-icon">👁️</div>
+                        <div class="stage-title">Vision AI</div>
+                        <div class="stage-status" id="status-food-2">Waiting</div>
+                        <div class="stage-tech">ResNet-50 CNN</div>
+                    </div>
+
+                    <div class="pipeline-arrow-food">→</div>
+
+                    <div class="pipeline-stage-food" id="food-stage-3" data-stage="recognition">
+                        <div class="stage-icon">🧠</div>
+                        <div class="stage-title">Recognition</div>
+                        <div class="stage-status" id="status-food-3">Waiting</div>
+                        <div class="stage-tech">Multi-class SVM</div>
+                    </div>
+
+                    <div class="pipeline-arrow-food">→</div>
+
+                    <div class="pipeline-stage-food" id="food-stage-4" data-stage="nutrition">
+                        <div class="stage-icon">🗄️</div>
+                        <div class="stage-title">Nutrition DB</div>
+                        <div class="stage-status" id="status-food-4">Waiting</div>
+                        <div class="stage-tech">IFCT 2024</div>
+                    </div>
+
+                    <div class="pipeline-arrow-food">→</div>
+
+                    <div class="pipeline-stage-food" id="food-stage-5" data-stage="glycemic">
+                        <div class="stage-icon">📊</div>
+                        <div class="stage-title">GI Analysis</div>
+                        <div class="stage-status" id="status-food-5">Waiting</div>
+                        <div class="stage-tech">Sydney GI DB</div>
+                    </div>
+
+                    <div class="pipeline-arrow-food">→</div>
+
+                    <div class="pipeline-stage-food" id="food-stage-6" data-stage="personalized">
+                        <div class="stage-icon">🎯</div>
+                        <div class="stage-title">Personalized</div>
+                        <div class="stage-status" id="status-food-6">Waiting</div>
+                        <div class="stage-tech">Patient Profile</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Details Panel -->
+            <div class="technical-details-panel" id="tech-details-panel" style="display: none;">
+                <h4>📋 Current Processing Stage</h4>
+                <div id="tech-stage-details" class="tech-details-content">
+                    <div class="tech-detail-item">
+                        <strong>Stage:</strong> <span id="current-stage-name">--</span>
+                    </div>
+                    <div class="tech-detail-item">
+                        <strong>Model:</strong> <span id="current-model">--</span>
+                    </div>
+                    <div class="tech-detail-item">
+                        <strong>Processing:</strong> <span id="current-processing">--</span>
+                    </div>
+                    <div class="tech-detail-item">
+                        <strong>Confidence:</strong> <span id="current-confidence">--</span>%
+                    </div>
+                </div>
+            </div>
 
             <div class="grid-2" style="margin-top: 30px;">
                 <div>
-                    <h3>Select Foods for Analysis</h3>
+                    <h3>📸 Food Image Upload / Selection</h3>
+                    <div class="upload-simulation-box">
+                        <div class="upload-icon">📷</div>
+                        <p style="margin: 15px 0; color: #5f6368;">Simulating camera capture or image upload</p>
+                        <button class="btn btn-primary" onclick="startFoodProcessing()" id="start-food-btn">
+                            📸 Start AI Food Analysis
+                        </button>
+                    </div>
+
+                    <h3 style="margin-top: 30px;">Select Foods for Manual Analysis</h3>
                     <div class="food-grid" style="grid-template-columns: repeat(3, 1fr);">
                         <div class="food-item" onclick="toggleFood('idli')">
                             <div class="food-emoji">🥘</div>
                             <div class="food-name">Idli (2)</div>
+                            <div class="food-confidence" style="font-size: 0.75rem; color: #5f6368;">GI: 60</div>
                         </div>
                         <div class="food-item" onclick="toggleFood('dosa')">
                             <div class="food-emoji">🥞</div>
                             <div class="food-name">Dosa</div>
+                            <div class="food-confidence" style="font-size: 0.75rem; color: #5f6368;">GI: 68</div>
                         </div>
                         <div class="food-item" onclick="toggleFood('sambar')">
                             <div class="food-emoji">🍲</div>
                             <div class="food-name">Sambar</div>
+                            <div class="food-confidence" style="font-size: 0.75rem; color: #5f6368;">GI: 42</div>
                         </div>
                         <div class="food-item" onclick="toggleFood('rice')">
                             <div class="food-emoji">🍚</div>
                             <div class="food-name">Rice</div>
+                            <div class="food-confidence" style="font-size: 0.75rem; color: #5f6368;">GI: 73</div>
                         </div>
                         <div class="food-item" onclick="toggleFood('dal')">
                             <div class="food-emoji">🍛</div>
                             <div class="food-name">Dal</div>
+                            <div class="food-confidence" style="font-size: 0.75rem; color: #5f6368;">GI: 38</div>
                         </div>
                         <div class="food-item" onclick="toggleFood('curry')">
                             <div class="food-emoji">🥗</div>
                             <div class="food-name">Veg Curry</div>
+                            <div class="food-confidence" style="font-size: 0.75rem; color: #5f6368;">GI: 45</div>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <h3>Nutritional Analysis</h3>
+                    <h3>🧪 Detailed Nutritional Analysis</h3>
                     <div id="food-analysis" class="card">
                         <div class="data-viz">
-                            <div style="margin-bottom: 15px;">
-                                <strong>Total Calories:</strong> <span id="total-calories"
-                                    style="font-size: 1.5rem; color: #1a73e8;">0</span> kcal
-                            </div>
-                            <div style="margin-bottom: 15px;">
-                                <strong>Glycemic Index (GI):</strong> <span id="avg-gi"
-                                    style="font-size: 1.5rem; color: #34a853;">0</span>
-                            </div>
-                            <div style="margin-bottom: 15px;">
-                                <strong>Glycemic Load (GL):</strong> <span id="total-gl"
-                                    style="font-size: 1.5rem;">0</span>
-                            </div>
-
-                            <div style="margin-top: 20px;">
-                                <strong>Macronutrients:</strong>
-                                <div style="display: flex; gap: 10px; margin-top: 10px;">
-                                    <div style="flex: 1; text-align: center;">
-                                        <div style="font-size: 1.2rem; font-weight: 600;" id="total-protein">0g</div>
-                                        <div style="font-size: 0.8rem;">Protein</div>
+                            <!-- Macronutrient Breakdown with Charts -->
+                            <div style="margin-bottom: 20px;">
+                                <strong>Macronutrient Distribution:</strong>
+                                <div class="macro-bars" style="margin-top: 10px;">
+                                    <div class="macro-bar-item">
+                                        <div class="macro-bar-label">
+                                            <span>Protein</span>
+                                            <span id="total-protein" style="font-weight: 700;">0g</span>
+                                        </div>
+                                        <div class="macro-bar-bg">
+                                            <div class="macro-bar-fill protein-bar" id="protein-bar" style="width: 0%;">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div style="flex: 1; text-align: center;">
-                                        <div style="font-size: 1.2rem; font-weight: 600;" id="total-carbs">0g</div>
-                                        <div style="font-size: 0.8rem;">Carbs</div>
+                                    <div class="macro-bar-item">
+                                        <div class="macro-bar-label">
+                                            <span>Carbs</span>
+                                            <span id="total-carbs" style="font-weight: 700;">0g</span>
+                                        </div>
+                                        <div class="macro-bar-bg">
+                                            <div class="macro-bar-fill carbs-bar" id="carbs-bar" style="width: 0%;">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div style="flex: 1; text-align: center;">
-                                        <div style="font-size: 1.2rem; font-weight: 600;" id="total-fat">0g</div>
-                                        <div style="font-size: 0.8rem;">Fat</div>
+                                    <div class="macro-bar-item">
+                                        <div class="macro-bar-label">
+                                            <span>Fat</span>
+                                            <span id="total-fat" style="font-weight: 700;">0g</span>
+                                        </div>
+                                        <div class="macro-bar-bg">
+                                            <div class="macro-bar-fill fat-bar" id="fat-bar" style="width: 0%;"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- Key Metrics -->
+                            <div class="metrics-grid">
+                                <div class="metric-card">
+                                    <div class="metric-value" id="total-calories">0</div>
+                                    <div class="metric-label">Calories (kcal)</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-value" id="avg-gi">0</div>
+                                    <div class="metric-label">Avg GI</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-value" id="total-gl">0</div>
+                                    <div class="metric-label">Total GL</div>
+                                </div>
+                            </div>
+
+                            <!-- Glycemic Impact Visualization -->
+                            <div style="margin-top: 20px;">
+                                <strong>🩸 Predicted Blood Glucose Impact:</strong>
+                                <div class="glucose-impact-meter" style="margin-top: 10px;">
+                                    <div class="glucose-meter-bar">
+                                        <div class="glucose-meter-fill" id="glucose-impact-fill" style="width: 0%;">
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #5f6368; margin-top: 5px;">
+                                        <span>Low</span>
+                                        <span>Moderate</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                                <div id="glucose-impact-text"
+                                    style="margin-top: 10px; font-size: 0.9rem; color: #5f6368;"></div>
+                            </div>
+
+                            <!-- Personalized Recommendation -->
                             <div id="food-recommendation" class="highlight-box"
                                 style="margin-top: 20px; display: none;">
-                                <strong>🎯 Recommendation:</strong> <span id="food-rec-text"></span>
+                                <strong>🎯 Personalized Recommendation:</strong> <span id="food-rec-text"></span>
+                            </div>
+
+                            <!-- Technical Processing Info -->
+                            <div id="processing-info" class="tech-info-box" style="margin-top: 20px; display: none;">
+                                <div style="font-size: 0.85rem; color: #5f6368;">
+                                    <strong>AI Models Used:</strong><br>
+                                    • ResNet-50 CNN (Food Recognition)<br>
+                                    • Multi-class SVM (Classification)<br>
+                                    • IFCT 2024 Database (Nutrition)<br>
+                                    • Sydney GI Database (Glycemic Index)<br>
+                                    • Patient Profile Algorithm (Personalization)
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1374,25 +1810,77 @@
                 avgGI = Math.round(avgGI / selectedFoods.length);
             }
 
-            document.getElementById('total-calories').textContent = Math.round(totalCal);
-            document.getElementById('avg-gi').textContent = avgGI;
-            document.getElementById('total-gl').textContent = Math.round(totalGL);
-            document.getElementById('total-protein').textContent = Math.round(totalProtein) + 'g';
-            document.getElementById('total-carbs').textContent = Math.round(totalCarbs) + 'g';
-            document.getElementById('total-fat').textContent = Math.round(totalFat) + 'g';
+            // Animate value updates
+            animateValue('total-calories', parseInt(document.getElementById('total-calories').textContent) || 0, Math.round(totalCal), 800);
+            animateValue('avg-gi', parseInt(document.getElementById('avg-gi').textContent) || 0, avgGI, 800);
+            animateValue('total-gl', parseInt(document.getElementById('total-gl').textContent) || 0, Math.round(totalGL), 800);
 
-            // Show recommendation
+            // Update macronutrient bars with animation
+            const maxMacro = Math.max(totalProtein, totalCarbs, totalFat, 1);
+            setTimeout(() => {
+                document.getElementById('total-protein').textContent = Math.round(totalProtein) + 'g';
+                document.getElementById('protein-bar').style.width = ((totalProtein / maxMacro) * 100) + '%';
+
+                document.getElementById('total-carbs').textContent = Math.round(totalCarbs) + 'g';
+                document.getElementById('carbs-bar').style.width = ((totalCarbs / maxMacro) * 100) + '%';
+
+                document.getElementById('total-fat').textContent = Math.round(totalFat) + 'g';
+                document.getElementById('fat-bar').style.width = ((totalFat / maxMacro) * 100) + '%';
+            }, 200);
+
+            // Update glucose impact meter
+            const glucoseImpact = Math.min(100, (totalGL / 20) * 100);
+            setTimeout(() => {
+                document.getElementById('glucose-impact-fill').style.width = glucoseImpact + '%';
+
+                let impactText = '';
+                if (totalGL === 0) {
+                    impactText = 'Select foods to see glucose impact';
+                } else if (glucoseImpact < 40) {
+                    impactText = '✓ Low glycemic impact - Suitable for diabetic patients';
+                } else if (glucoseImpact < 70) {
+                    impactText = '⚠ Moderate glycemic impact - Monitor blood glucose';
+                } else {
+                    impactText = '⚠ High glycemic impact - Consider alternatives';
+                }
+                document.getElementById('glucose-impact-text').textContent = impactText;
+                document.getElementById('glucose-impact-text').style.color = totalGL === 0 ? '#5f6368' : (glucoseImpact < 40 ? '#34a853' : (glucoseImpact < 70 ? '#fbbc04' : '#ea4335'));
+            }, 400);
+
+            // Show recommendation with personalization
             const recElement = document.getElementById('food-recommendation');
             const recText = document.getElementById('food-rec-text');
 
-            if (totalGL > 20) {
+            if (selectedFoods.length > 0) {
+                let recommendation = '';
+
+                if (selectedPatientData) {
+                    if (selectedPatientData.hba1c > 7.5 && totalGL > 15) {
+                        recommendation = `⚠️ For HbA1c ${selectedPatientData.hba1c}%, GL of ${Math.round(totalGL)} is high. Reduce portion by 25% or add more vegetables.`;
+                    } else if (selectedPatientData.hba1c > 7.0 && totalGL > 20) {
+                        recommendation = `⚠️ Moderate glycemic load (${Math.round(totalGL)}). Monitor blood glucose 2 hours post-meal.`;
+                    } else if (totalGL > 20) {
+                        recommendation = '⚠️ High glycemic load. Consider replacing white rice with brown rice or add more protein.';
+                    } else {
+                        recommendation = `✅ Excellent choice! GL of ${Math.round(totalGL)} aligns with HbA1c ${selectedPatientData.hba1c}% management goals.`;
+                    }
+                } else {
+                    if (totalGL > 20) {
+                        recommendation = '⚠️ High glycemic load detected. Consider healthier alternatives.';
+                    } else {
+                        recommendation = '✅ Good meal composition with moderate glycemic load!';
+                    }
+                }
+
                 recElement.style.display = 'block';
-                recElement.className = 'highlight-box warning';
-                recText.textContent = '⚠️ High glycemic load detected. Consider replacing white rice with brown rice.';
-            } else if (totalGL > 0) {
-                recElement.style.display = 'block';
-                recElement.className = 'highlight-box success';
-                recText.textContent = '✅ Good meal composition with moderate glycemic load!';
+                recElement.className = totalGL > 20 ? 'highlight-box warning' : 'highlight-box success';
+                recText.textContent = recommendation;
+
+                // Show technical info
+                document.getElementById('processing-info').style.display = 'block';
+            } else {
+                recElement.style.display = 'none';
+                document.getElementById('processing-info').style.display = 'none';
             }
         }
 
