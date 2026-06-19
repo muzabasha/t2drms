@@ -1761,7 +1761,7 @@ Threat Model:
         <div class="module-header">
             <span class="module-number">Module 12</span>
             <h1>🗺️ TRL Roadmap & Gantt Chart</h1>
-            <p>Detailed progression plan through 6 phases — from foundation to deployment — with activities, timelines, and milestones</p>
+            <p>Complete progression plan from TRL-2 concept through TRL-9 full deployment — 10 phases spanning 48 months with activities, milestones, and regulatory pathways</p>
         </div>
 
         <!-- Phase Tabs (rendered by JS) -->
@@ -4129,9 +4129,20 @@ const tourSteps = [
         target: '#vlabPipeline'
     },
     {
+        module: 'module-12',
+        title: '🗺️ TRL Roadmap — TRL-2 to TRL-9',
+        text: 'The TRL Roadmap presents our <strong>complete 10-phase, 48-month technology maturation plan</strong> from TRL-2 (concept formulation) through TRL-9 (full deployment). Click each phase tab to see detailed Gantt charts, pipeline activities, and milestones. The cumulative timeline at the bottom shows the full TRL progression with duration and target readiness levels for each phase.',
+        target: '#trl-tabs-container'
+    },
+    {
         module: 'module-11',
-        title: '🎉 TRL-4 Tour Complete!',
-        text: 'Congratulations! You\'ve explored the <strong>TRL-4 validated system</strong> — 11 integrated components with cross-module data flow, step-by-step animated demonstrations, and Sophia voice guidance. Remember: This is a TRL-4 research demonstration. The system has been validated at the component level in a simulated laboratory environment.',
+        text: 'The Virtual Lab orchestrates all 10 upstream components into a single pipeline. Watch data flow from Patient Input → OCR → FL → Agentic AI → Food → Diet → Recommendations. Speed control and JSON data export are available.',
+        target: '#vlabPipeline'
+    },
+    {
+        module: 'module-11',
+        title: '🎉 Tour Complete!',
+        text: 'Congratulations! You\'ve explored the <strong>integrated system</strong> — 12 modules covering the complete TRL progression from TRL-2 concept through TRL-9 full deployment. The TRL Roadmap (Module 12) shows our 10-phase, 48-month plan with detailed Gantt charts, pipeline flows, and cumulative timeline for each stage of technology maturation.',
         target: '.module-header h1'
     }
 ];
@@ -5118,16 +5129,161 @@ const TRL_PHASES = [
             { val: '18 mo', label: 'Total Timeline' },
         ],
     },
+    {
+        id: 'phase-7',
+        label: 'Phase 7',
+        sub: 'Months 19-24',
+        dot: '',
+        icon: '🏥',
+        title: 'Phase 7: Clinical Validation (TRL-5 → TRL-6)',
+        subtitle: 'Validating the integrated system in a relevant clinical environment with real patient data, clinician workflows, and IRB-approved protocols.',
+        stats: [
+            { val: '5', label: 'Clinical Sites' },
+            { val: '6 mo', label: 'Duration' },
+            { val: 'Critical', label: 'Priority' },
+        ],
+        pipeline: [
+            { label: 'IRB Protocol', icon: '📋', cls: 'reg' },
+            { label: 'Real Data Pipeline', icon: '🗄️', cls: 'dev' },
+            { label: 'Clinician Training', icon: '👨‍⚕️', cls: 'val' },
+            { label: 'Validation Study', icon: '📊', cls: 'val' },
+            { label: 'Performance Audit', icon: '🔍', cls: 'val' },
+        ],
+        ganttActivities: [
+            { activity: 'Multi-Center IRB Approvals', cat: 'REG', dur: '4 mo', width: '67%', cls: 'reg' },
+            { activity: 'Real Data Integration Pipeline', cat: 'DEV', dur: '5 mo', width: '83%', cls: 'dev' },
+            { activity: 'Clinician Onboarding & Training', cat: 'VAL', dur: '3 mo', width: '50%', cls: 'val' },
+            { activity: 'Clinical Validation Study Phase 1', cat: 'VAL', dur: '6 mo', width: '100%', cls: 'val' },
+            { activity: 'Model Performance Re-Evaluation', cat: 'VAL', dur: '2 mo', width: '33%', cls: 'val' },
+            { activity: 'System Usability Study', cat: 'VAL', dur: '3 mo', width: '50%', cls: 'val' },
+            { activity: 'TRL-5 Milestone Achieved', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 21' },
+            { activity: 'TRL-6 Milestone Achieved', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 24' },
+        ],
+        summary: [
+            { val: 'TRL-6', label: 'Target Level' },
+            { val: '200+', label: 'Real Patients' },
+            { val: '92%+', label: 'Target Accuracy' },
+        ],
+    },
+    {
+        id: 'phase-8',
+        label: 'Phase 8',
+        sub: 'Months 25-30',
+        dot: '',
+        icon: '⚙️',
+        title: 'Phase 8: Operational Demonstration (TRL-6 → TRL-7)',
+        subtitle: 'Demonstrating the system prototype in an operational healthcare environment with live clinical workflows and integration with hospital information systems.',
+        stats: [
+            { val: '7', label: 'Sites' },
+            { val: '6 mo', label: 'Duration' },
+            { val: 'Critical', label: 'Priority' },
+        ],
+        pipeline: [
+            { label: 'EHR Integration', icon: '🔗', cls: 'dev' },
+            { label: 'Live Pilot Study', icon: '🏥', cls: 'val' },
+            { label: 'Regulatory Filing', icon: '⚖️', cls: 'reg' },
+            { label: 'Safety Monitoring', icon: '🛡️', cls: 'val' },
+            { label: 'Outcome Analysis', icon: '📈', cls: 'val' },
+        ],
+        ganttActivities: [
+            { activity: 'EHR/HL7 FHIR Integration', cat: 'DEV', dur: '5 mo', width: '83%', cls: 'dev' },
+            { activity: 'Live Clinical Pilot Study', cat: 'VAL', dur: '6 mo', width: '100%', cls: 'val' },
+            { activity: 'FDA 510(k) Pre-Submission', cat: 'REG', dur: '4 mo', width: '67%', cls: 'reg' },
+            { activity: 'Patient Safety Monitoring Board', cat: 'VAL', dur: '6 mo', width: '100%', cls: 'val' },
+            { activity: 'Health Outcomes Data Collection', cat: 'VAL', dur: '5 mo', width: '83%', cls: 'val' },
+            { activity: 'Clinical Decision Support Validation', cat: 'VAL', dur: '3 mo', width: '50%', cls: 'val' },
+            { activity: 'TRL-7 Milestone Achieved', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 30' },
+        ],
+        summary: [
+            { val: 'TRL-7', label: 'Target Level' },
+            { val: '500+', label: 'Patients Enrolled' },
+            { val: '3', label: 'Hospital Sites' },
+        ],
+    },
+    {
+        id: 'phase-9',
+        label: 'Phase 9',
+        sub: 'Months 31-36',
+        dot: '',
+        icon: '✅',
+        title: 'Phase 9: System Qualification (TRL-7 → TRL-8)',
+        subtitle: 'Completing system qualification through rigorous testing, demonstration, and regulatory certification processes in operational environments.',
+        stats: [
+            { val: '6', label: 'Test Suites' },
+            { val: '6 mo', label: 'Duration' },
+            { val: 'High', label: 'Priority' },
+        ],
+        pipeline: [
+            { label: 'Certification', icon: '📜', cls: 'reg' },
+            { label: 'Quality Assurance', icon: '🔬', cls: 'val' },
+            { label: 'Interop Testing', icon: '🔄', cls: 'dev' },
+            { label: 'Performance Tuning', icon: '⚡', cls: 'dev' },
+            { label: 'Clinical Trial', icon: '📋', cls: 'reg' },
+        ],
+        ganttActivities: [
+            { activity: 'FDA 510(k) Submission & Review', cat: 'REG', dur: '6 mo', width: '100%', cls: 'reg' },
+            { activity: 'ISO 13485 Quality Management Audit', cat: 'REG', dur: '3 mo', width: '50%', cls: 'reg' },
+            { activity: 'HIPAA/GDPR Compliance Certification', cat: 'REG', dur: '3 mo', width: '50%', cls: 'reg' },
+            { activity: 'Multi-Site Interoperability Testing', cat: 'DEV', dur: '4 mo', width: '67%', cls: 'dev' },
+            { activity: 'System Performance Optimization', cat: 'DEV', dur: '3 mo', width: '50%', cls: 'dev' },
+            { activity: 'Pivotal Clinical Trial', cat: 'REG', dur: '6 mo', width: '100%', cls: 'val' },
+            { activity: 'TRL-8 Milestone Achieved', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 36' },
+        ],
+        summary: [
+            { val: 'TRL-8', label: 'Target Level' },
+            { val: '1', label: 'FDA Submission' },
+            { val: '1000+', label: 'Trial Patients' },
+        ],
+    },
+    {
+        id: 'phase-10',
+        label: 'Phase 10',
+        sub: 'Months 37-48',
+        dot: '',
+        icon: '🌍',
+        title: 'Phase 10: Full Deployment & Operations (TRL-9)',
+        subtitle: 'Actual system proven through successful clinical operations, with broad deployment, continuous monitoring, and sustained clinical impact.',
+        stats: [
+            { val: '10+', label: 'Hospital Networks' },
+            { val: '12 mo', label: 'Duration' },
+            { val: 'Medium', label: 'Priority' },
+        ],
+        pipeline: [
+            { label: 'National Rollout', icon: '🗺️', cls: 'dep' },
+            { label: 'Clinical Monitoring', icon: '📊', cls: 'val' },
+            { label: 'Continuous Improvement', icon: '🔄', cls: 'dev' },
+            { label: 'Outcomes Research', icon: '📝', cls: 'doc' },
+            { label: 'Global Scale-Up', icon: '🌏', cls: 'dep' },
+        ],
+        ganttActivities: [
+            { activity: 'National Healthcare System Integration', cat: 'DEP', dur: '8 mo', width: '67%', cls: 'dep' },
+            { activity: 'Post-Market Clinical Follow-Up', cat: 'VAL', dur: '12 mo', width: '100%', cls: 'val' },
+            { activity: 'AI Model Continuous Learning Pipeline', cat: 'DEV', dur: '10 mo', width: '83%', cls: 'dev' },
+            { activity: 'Real-World Evidence Publication', cat: 'DOC', dur: '8 mo', width: '67%', cls: 'doc' },
+            { activity: 'Global Health System Expansion', cat: 'DEP', dur: '12 mo', width: '100%', cls: 'dep' },
+            { activity: 'Sustainability & Impact Assessment', cat: 'DOC', dur: '6 mo', width: '50%', cls: 'doc' },
+            { activity: 'TRL-9 Full Deployment Achieved', cat: 'MIL', dur: '', width: '', cls: 'mil', milestone: 'Month 48' },
+        ],
+        summary: [
+            { val: 'TRL-9', label: 'Target Level' },
+            { val: '10K+', label: 'Patients Served' },
+            { val: '48 mo', label: 'Total Timeline' },
+        ],
+    },
 ];
 
 /* ---------- Cumulative Timeline Data ---------- */
 const TRL_TIMELINE_SEGMENTS = [
-    { label: 'Phase 1', dur: 'Months 1-3', pct: 16.7, cls: 'completed' },
-    { label: 'Phase 2', dur: 'Months 4-6', pct: 16.7, cls: 'completed' },
-    { label: 'Phase 3', dur: 'Months 7-9', pct: 16.7, cls: '' },
-    { label: 'Phase 4', dur: 'Months 10-12', pct: 16.7, cls: '' },
-    { label: 'Phase 5', dur: 'Months 13-15', pct: 16.7, cls: '' },
-    { label: 'Phase 6', dur: 'Months 16-18', pct: 16.6, cls: '' },
+    { label: 'Phase 1', dur: 'Months 1-3', pct: 6.25, cls: 'completed', trl: 'TRL-2' },
+    { label: 'Phase 2', dur: 'Months 4-6', pct: 6.25, cls: 'completed', trl: 'TRL-3' },
+    { label: 'Phase 3', dur: 'Months 7-9', pct: 6.25, cls: '', trl: 'TRL-4' },
+    { label: 'Phase 4', dur: 'Months 10-12', pct: 6.25, cls: '', trl: 'TRL-4' },
+    { label: 'Phase 5', dur: 'Months 13-15', pct: 6.25, cls: '', trl: 'TRL-5' },
+    { label: 'Phase 6', dur: 'Months 16-18', pct: 6.25, cls: '', trl: 'TRL-5' },
+    { label: 'Phase 7', dur: 'Months 19-24', pct: 12.5, cls: '', trl: 'TRL-6' },
+    { label: 'Phase 8', dur: 'Months 25-30', pct: 12.5, cls: '', trl: 'TRL-7' },
+    { label: 'Phase 9', dur: 'Months 31-36', pct: 12.5, cls: '', trl: 'TRL-8' },
+    { label: 'Phase 10', dur: 'Months 37-48', pct: 25, cls: '', trl: 'TRL-9' },
 ];
 
 /* ---------- Rendering Functions ---------- */
@@ -5213,13 +5369,13 @@ function renderTrlTimeline() {
 
     bar.innerHTML = TRL_TIMELINE_SEGMENTS.map((s, i) =>
         `<div class="trl-timeline-segment ${s.cls}${i === activeIdx ? ' active' : ''}" style="width:${s.pct}%">
-            ${s.label}
+            ${s.label}<br><small style="opacity:0.8">${s.trl || ''}</small>
         </div>`
     ).join('');
 
     labels.innerHTML = TRL_TIMELINE_SEGMENTS.map((s, i) =>
         `<div style="width:${s.pct}%">
-            ${s.dur}<br><small>${s.label}</small>
+            ${s.dur}<br><small>${s.trl || s.label}</small>
             ${i === activeIdx ? ' ⬅️' : ''}
         </div>`
     ).join('');

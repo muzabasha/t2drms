@@ -4486,6 +4486,10 @@ html {
 .trl-timeline-bar .trl-timeline-segment:not(.completed):nth-child(4) { background: linear-gradient(90deg, #ffa726, #fb8c00); }
 .trl-timeline-bar .trl-timeline-segment:not(.completed):nth-child(5) { background: linear-gradient(90deg, #ab47bc, #8e24aa); }
 .trl-timeline-bar .trl-timeline-segment:not(.completed):nth-child(6) { background: linear-gradient(90deg, #ef5350, #e53935); }
+.trl-timeline-bar .trl-timeline-segment:not(.completed):nth-child(7) { background: linear-gradient(90deg, #7c4dff, #651fff); }
+.trl-timeline-bar .trl-timeline-segment:not(.completed):nth-child(8) { background: linear-gradient(90deg, #00bcd4, #0097a7); }
+.trl-timeline-bar .trl-timeline-segment:not(.completed):nth-child(9) { background: linear-gradient(90deg, #ff6f00, #e65100); }
+.trl-timeline-bar .trl-timeline-segment:not(.completed):nth-child(10) { background: linear-gradient(90deg, #2e7d32, #1b5e20); }
 
 .trl-timeline-labels {
     display: flex;
