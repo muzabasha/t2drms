@@ -66,7 +66,7 @@ function generateCGMReadings(current, trend) {
 
     // Generate last 24 hours of readings (every 5 minutes = 288 readings)
     for (let i = 287; i >= 0; i--) {
-        const time = new Date(now - i * 5 * 60 * 1000);
+        const time = new Date(now.getTime() - i * 5 * 60 * 1000);
 
         // Add some variation based on trend
         if (trend === 'rising') {
@@ -252,7 +252,8 @@ function getCGMColorClass(glucose) {
 }
 
 function drawCGMChart(patientId, readings) {
-    const canvas = document.getElementById(`cgm-chart-${patientId}`);
+    /** @type {HTMLCanvasElement} */
+    const canvas = /** @type {HTMLCanvasElement} */ (document.getElementById(`cgm-chart-${patientId}`));
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
@@ -497,7 +498,8 @@ function showCGMPredictionPanel(selectedFoods) {
 }
 
 function drawPredictionChart(prediction) {
-    const canvas = document.getElementById('prediction-chart');
+    /** @type {HTMLCanvasElement} */
+    const canvas = /** @type {HTMLCanvasElement} */ (document.getElementById('prediction-chart'));
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
@@ -527,8 +529,8 @@ function drawPredictionChart(prediction) {
     // Draw predicted curve
     const points = [
         { time: 0, glucose: prediction.currentGlucose },
-        { time: prediction.timeToПеак / 2, glucose: (prediction.currentGlucose + prediction.predictedPeak) / 2 },
-        { time: prediction.timeToПеак, glucose: prediction.predictedPeak },
+        { time: prediction.timeToPeak / 2, glucose: (prediction.currentGlucose + prediction.predictedPeak) / 2 },
+        { time: prediction.timeToPeak, glucose: prediction.predictedPeak },
         { time: 120, glucose: prediction.predictedPostMeal }
     ];
 
