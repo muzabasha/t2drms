@@ -39,7 +39,7 @@
             <a href="https://scholar-sparkle-web.lovable.app/" target="_blank" rel="noopener noreferrer" class="pi-btn" aria-label="Visit Principal Investigator profile">
                 ≡ƒæ¿ΓÇì≡ƒö¼ Principal Investigator
             </a>
-            <a href="demo.html" class="btn btn-sm btn-outline fs-sm" style="text-decoration:none;" aria-label="Open step-by-step demo">
+            <a href="../demo.html" class="btn btn-sm btn-outline fs-sm" style="text-decoration:none;" aria-label="Open step-by-step demo">
                 👣 Demo
             </a>
             <button class="btn btn-sm btn-outline fs-sm" onclick="startGuidedTour()" aria-label="Start guided tour">
@@ -2340,7 +2340,7 @@ Threat Model:
                                     <td style="padding:10px 12px;">End-to-end system integration, testing, and clinical pilot</td>
                                     <td style="padding:10px 12px;">Months 8-12</td>
                                     <td style="padding:10px 12px;">All resources, AWS API Gateway</td>
-                                    <td style="padding:10px 12td;">All team members</td>
+                                    <td style="padding:10px 12px;">All team members</td>
                                     <td style="padding:10px 12px;">Integrated TRL-4 system + report</td>
                                 </tr>
                             </tbody>
@@ -2523,25 +2523,37 @@ Threat Model:
 
 // Navigation
 function navigateTo(moduleId) {
+    const section = document.getElementById(moduleId);
+    if (!section) return;
+    const navItem = document.querySelector(`.nav-item[data-module="${moduleId}"]`);
     document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    document.getElementById(moduleId).classList.add('active');
-    document.querySelector(`.nav-item[data-module="${moduleId}"]`).classList.add('active');
+    section.classList.add('active');
+    if (navItem) navItem.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (location.hash !== '#' + moduleId) location.hash = moduleId;
 }
 
-// Deep-link: navigate to module from URL hash on load
+// Deep-link: navigate to module from URL hash
 window.addEventListener('hashchange', () => {
     if (location.hash) {
         const id = location.hash.slice(1);
-        if (document.getElementById(id)) navigateTo(id);
+        const section = document.getElementById(id);
+        if (section && !section.classList.contains('active')) navigateTo(id);
     }
 });
+// Init from hash on page load — directly apply state to avoid hashchange loop
 (function initHash() {
     if (location.hash) {
         const id = location.hash.slice(1);
-        if (document.getElementById(id)) setTimeout(() => navigateTo(id), 100);
+        const section = document.getElementById(id);
+        if (section) {
+            document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            section.classList.add('active');
+            const navItem = document.querySelector(`.nav-item[data-module="${id}"]`);
+            if (navItem) navItem.classList.add('active');
+        }
     }
 })();
 
@@ -2640,6 +2652,9 @@ document.addEventListener('keydown', (e) => {
         if (nav && nav.classList.contains('open')) {
             toggleMobileNav();
         }
+    } else if (e.key === 'b' && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        if (typeof toggleChatbot === 'function') toggleChatbot();
     }
 });
 
@@ -4627,14 +4642,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.innerWidth <= 768) toggleMobileNav();
         });
     });
-    
-    // Close mobile nav on escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && window.innerWidth <= 768) {
-            const nav = document.getElementById('sideNav');
-            if (nav.classList.contains('open')) toggleMobileNav();
-        }
-    });
 });
 
 // --- Toast Notifications ---
@@ -4676,7 +4683,7 @@ const tourSteps = [
     {
         module: 'module-1',
         title: '≡ƒæï Welcome! I\'m Sophia ΓÇö Your AI Guide',
-        text: 'Hello! I\'m <strong>Sophia</strong>, your voice assistant. This TRL-4 system integrates <strong>5 AI paradigms</strong> across <strong>11 validated modules</strong> for personalized diabetes care. You\'ll see data flow seamlessly between OCR, Federated Learning, Agentic AI, Food Intelligence, and Diet Planning. Let me guide you through each component!',
+        text: 'Hello! I\'m <strong>Sophia</strong>, your voice assistant. This TRL-4 system integrates <strong>5 AI paradigms</strong> across <strong>13 validated modules</strong> for personalized diabetes care. You\'ll see data flow seamlessly between OCR, Federated Learning, Agentic AI, Food Intelligence, and Diet Planning. Let me guide you through each component!',
         target: '.hero-section h1'
     },
     {
@@ -4764,10 +4771,10 @@ const tourSteps = [
         target: '#module-13 .module-header'
     },
     {
-        module: 'module-11',
+        module: 'module-1',
         title: '🎉 Tour Complete!',
         text: 'Congratulations! You\'ve explored the <strong>integrated system</strong> — 13 modules covering the complete TRL progression from TRL-2 concept through TRL-9 full deployment. The TRL Roadmap (Module 12) shows our 10-phase, 48-month plan with detailed Gantt charts, pipeline flows, and cumulative timeline for each stage of technology maturation.',
-        target: '.module-header h1'
+        target: '#module-1 .module-header h2'
     }
 ];
 
@@ -6364,17 +6371,6 @@ function toggleChatbot() {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    // Add Esc to close chatbot
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && chatbotOpen) toggleChatbot();
-    });
-    // Add B shortcut for chatbot
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'b' && !e.ctrlKey && !e.metaKey && !e.target.closest('input,textarea')) {
-            e.preventDefault();
-            toggleChatbot();
-        }
-    });
     // Initial FAQ render (delayed)
     setTimeout(renderFaqs, 2000);
     // Watch scroll for module context updates
