@@ -23,17 +23,17 @@
 <a href="#mainContent" class="skip-link">Skip to main content</a>
 
 <!-- Toast Container -->
-<div class="toast-container" id="toastContainer"></div>
+<div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
 
 <!-- Hamburger Menu Button -->
-<button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu" onclick="toggleMobileNav()">
+<button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sideNav" onclick="toggleMobileNav()">
     <span></span><span></span><span></span>
 </button>
 
 <!-- Side Navigation -->
-<nav class="side-nav" id="sideNav" aria-label="Main navigation">
+<nav class="side-nav" id="sideNav" aria-label="Main navigation" role="navigation">
     <div class="nav-header">
-        <h2>🏥 Diabetes AI</h2>
+        <h2><span aria-hidden="true">🏥</span> Diabetes AI</h2>
         <p>TRL-2 Research Demonstrator</p>
         <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
             <a href="https://scholar-sparkle-web.lovable.app/" target="_blank" rel="noopener noreferrer" class="pi-btn" aria-label="Visit Principal Investigator profile">
@@ -49,70 +49,70 @@
     </div>
     </div>
     <div class="nav-items">
-        <div class="nav-item active" data-module="module-1" tabindex="0" role="button">
-            <span class="nav-icon">📊</span>
+        <div class="nav-item active" data-module="module-1" tabindex="0" role="button" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">📊</span>
             Overview Dashboard
-            <span class="nav-badge">1</span>
+            <span class="nav-badge" aria-hidden="true">1</span>
         </div>
         <div class="nav-item" data-module="module-2" tabindex="0" role="button">
-            <span class="nav-icon">🔍</span>
+            <span class="nav-icon" aria-hidden="true">🔍</span>
             Research Gap Explorer
-            <span class="nav-badge">2</span>
+            <span class="nav-badge" aria-hidden="true">2</span>
         </div>
         <div class="nav-item" data-module="module-3" tabindex="0" role="button">
-            <span class="nav-icon">📄</span>
+            <span class="nav-icon" aria-hidden="true">📄</span>
             OCR Demo Studio
-            <span class="nav-badge">3</span>
+            <span class="nav-badge" aria-hidden="true">3</span>
         </div>
         <div class="nav-item" data-module="module-4" tabindex="0" role="button">
-            <span class="nav-icon">🌐</span>
+            <span class="nav-icon" aria-hidden="true">🌐</span>
             Federated Learning
-            <span class="nav-badge">4</span>
+            <span class="nav-badge" aria-hidden="true">4</span>
         </div>
         <div class="nav-item" data-module="module-5" tabindex="0" role="button">
-            <span class="nav-icon">🤖</span>
+            <span class="nav-icon" aria-hidden="true">🤖</span>
             Agentic AI
-            <span class="nav-badge">5</span>
+            <span class="nav-badge" aria-hidden="true">5</span>
         </div>
         <div class="nav-item" data-module="module-6" tabindex="0" role="button">
-            <span class="nav-icon">🍽️</span>
+            <span class="nav-icon" aria-hidden="true">🍽️</span>
             Food Intelligence
-            <span class="nav-badge">6</span>
+            <span class="nav-badge" aria-hidden="true">6</span>
         </div>
         <div class="nav-item" data-module="module-7" tabindex="0" role="button">
-            <span class="nav-icon">💬</span>
+            <span class="nav-icon" aria-hidden="true">💬</span>
             NLP Food Understanding
-            <span class="nav-badge">7</span>
+            <span class="nav-badge" aria-hidden="true">7</span>
         </div>
         <div class="nav-item" data-module="module-8" tabindex="0" role="button">
-            <span class="nav-icon">🥗</span>
+            <span class="nav-icon" aria-hidden="true">🥗</span>
             Diet Recommendation
-            <span class="nav-badge">8</span>
+            <span class="nav-badge" aria-hidden="true">8</span>
         </div>
         <div class="nav-item" data-module="module-9" tabindex="0" role="button">
-            <span class="nav-icon">🔬</span>
+            <span class="nav-icon" aria-hidden="true">🔬</span>
             Research Workflow
-            <span class="nav-badge">9</span>
+            <span class="nav-badge" aria-hidden="true">9</span>
         </div>
         <div class="nav-item" data-module="module-10" tabindex="0" role="button">
-            <span class="nav-icon">🌍</span>
+            <span class="nav-icon" aria-hidden="true">🌍</span>
             Impact Dashboard
-            <span class="nav-badge">10</span>
+            <span class="nav-badge" aria-hidden="true">10</span>
         </div>
         <div class="nav-item" data-module="module-11" tabindex="0" role="button">
-            <span class="nav-icon">🔬</span>
+            <span class="nav-icon" aria-hidden="true">🔬</span>
             Virtual Lab
-            <span class="nav-badge" style="background:var(--medical-green);color:white;">11</span>
+            <span class="nav-badge" style="background:var(--medical-green);color:white;" aria-hidden="true">11</span>
         </div>
         <div class="nav-item" data-module="module-12" tabindex="0" role="button">
-            <span class="nav-icon">🗺️</span>
+            <span class="nav-icon" aria-hidden="true">🗺️</span>
             TRL Roadmap
-            <span class="nav-badge" style="background:#764ba2;color:white;">12</span>
+            <span class="nav-badge" style="background:#764ba2;color:white;" aria-hidden="true">12</span>
         </div>
         <div class="nav-item" data-module="module-13" tabindex="0" role="button">
-            <span class="nav-icon">💰</span>
+            <span class="nav-icon" aria-hidden="true">💰</span>
             Budget & Plan
-            <span class="nav-badge" style="background:#e67e22;color:white;">13</span>
+            <span class="nav-badge" style="background:#e67e22;color:white;" aria-hidden="true">13</span>
         </div>
     </div>
 </nav>
@@ -120,12 +120,15 @@
 <!-- Main Content -->
 <main class="main-content" id="mainContent">
 
+    <!-- ARIA live region for screen reader announcements -->
+    <div aria-live="polite" aria-atomic="true" class="sr-only" id="a11yAnnouncer"></div>
+
     <!-- TRL-4 Integration Bar -->
     <div class="trl4-bar" id="trl4Bar" role="banner" aria-label="TRL-4 Integration Controls">
         <div class="trl4-label">
-            <span class="trl4-logo">🧪</span>
+            <span class="trl4-logo" aria-hidden="true">🧪</span>
             <span>TRL-4 System Integration</span>
-            <span class="trl4-status-dot online" id="trl4StatusDot"></span>
+            <span class="trl4-status-dot online" id="trl4StatusDot" role="status" aria-label="System online"></span>
         </div>
         <select class="trl4-patient-select" id="trl4PatientSelect" onchange="trl4ChangePatient(this.value)">
             <option value="">-- Select Patient --</option>
@@ -144,16 +147,16 @@
     <div class="modal-overlay" id="navOverlay" onclick="toggleMobileNav()" style="z-index:1200;display:none;background:rgba(0,0,0,0.3);"></div>
 
     <!-- ==================== MODULE 1: RESEARCH OVERVIEW DASHBOARD ==================== -->
-    <section class="module-section active" id="module-1">
+    <section class="module-section active" id="module-1" aria-label="Module 1: Research Overview Dashboard">
         <div class="hero-section">
             <h1>AI-Enabled Personalized Type-2 Diabetic Management System</h1>
             <p>A novel integration of OCR, Federated Learning, Agentic AI, and Food Intelligence for personalized diabetes care</p>
             <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
                 <button class="start-demo-btn" onclick="navigateTo('module-3')">
-                    ▶ Start Research Demonstration
+                    <span aria-hidden="true">▶</span> Start Research Demonstration
                 </button>
                 <a href="https://scholar-sparkle-web.lovable.app/" target="_blank" rel="noopener noreferrer" class="btn pi-btn pi-btn-large">
-                    👨‍🔬 Meet the Principal Investigator
+                    <span aria-hidden="true">👨‍🔬</span> Meet the Principal Investigator
                 </a>
             </div>
         </div>
@@ -170,30 +173,30 @@
         </div>
 
         <!-- Global Statistics -->
-        <div class="grid-4 mb-4">
+        <div class="grid-4 mb-4" role="group" aria-label="Global Diabetes Statistics">
             <div class="stat-card">
-                <div class="stat-icon">👥</div>
+                <div class="stat-icon" aria-hidden="true">👥</div>
                 <div class="stat-value"><span class="counter" data-target="537">0</span>M</div>
                 <div class="stat-label">Diabetic Population (2025)</div>
-                <div class="progress-bar mt-1"><div class="progress-fill" style="width:85%"></div></div>
+                <div class="progress-bar mt-1" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="85 percent"><div class="progress-fill" style="width:85%"></div></div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon">⚠️</div>
+                <div class="stat-icon" aria-hidden="true">⚠️</div>
                 <div class="stat-value"><span class="counter" data-target="643">0</span>M</div>
                 <div class="stat-label">Prediabetic Population (At Risk)</div>
-                <div class="progress-bar mt-1"><div class="progress-fill orange" style="width:92%"></div></div>
+                <div class="progress-bar mt-1" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" aria-label="92 percent"><div class="progress-fill orange" style="width:92%"></div></div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon">🌏</div>
+                <div class="stat-icon" aria-hidden="true">🌏</div>
                 <div class="stat-value"><span class="counter" data-target="131">0</span>+</div>
                 <div class="stat-label">Countries Affected</div>
-                <div class="progress-bar mt-1"><div class="progress-fill" style="width:75%"></div></div>
+                <div class="progress-bar mt-1" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="75 percent"><div class="progress-fill" style="width:75%"></div></div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon">📈</div>
+                <div class="stat-icon" aria-hidden="true">📈</div>
                 <div class="stat-value"><span class="counter" data-target="46">0</span>%</div>
                 <div class="stat-label">Undiagnosed Cases</div>
-                <div class="progress-bar mt-1"><div class="progress-fill orange" style="width:46%"></div></div>
+                <div class="progress-bar mt-1" role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100" aria-label="46 percent"><div class="progress-fill orange" style="width:46%"></div></div>
             </div>
         </div>
 
@@ -307,7 +310,7 @@
     </section>
 
     <!-- ==================== MODULE 2: RESEARCH GAP EXPLORER ==================== -->
-    <section class="module-section" id="module-2">
+    <section class="module-section" id="module-2" aria-label="Module 2: Research Gap Explorer">
         <div class="module-header">
             <span class="module-number">Module 2</span>
             <h1>Research Gap Explorer</h1>
@@ -529,7 +532,7 @@ Constraints:
     </section>
 
     <!-- ==================== MODULE 3: OCR DEMONSTRATION STUDIO ==================== -->
-    <section class="module-section" id="module-3">
+    <section class="module-section" id="module-3" aria-label="Module 3: OCR Demonstration Studio">
         <div class="module-header">
             <span class="module-number">Module 3</span>
             <h1>OCR Demonstration Studio</h1>
@@ -663,7 +666,7 @@ Stage 5: Status Classification (ADA criteria-based rule engine)
     </section>
 
     <!-- ==================== MODULE 4: FEDERATED LEARNING DIGITAL TWIN ==================== -->
-    <section class="module-section" id="module-4">
+    <section class="module-section" id="module-4" aria-label="Module 4: Federated Learning Digital Twin">
         <div class="module-header">
             <span class="module-number">Module 4</span>
             <h1>Federated Learning Digital Twin</h1>
@@ -880,7 +883,7 @@ return w_T
     </section>
 
     <!-- ==================== MODULE 5: AGENTIC AI DEMONSTRATOR ==================== -->
-    <section class="module-section" id="module-5">
+    <section class="module-section" id="module-5" aria-label="Module 5: Agentic AI Demonstrator">
         <div class="module-header">
             <span class="module-number">Module 5</span>
             <h1>Agentic AI Demonstrator</h1>
@@ -977,7 +980,7 @@ Agent Roles:
     </section>
 
     <!-- ==================== MODULE 6: FOOD INTELLIGENCE STUDIO ==================== -->
-    <section class="module-section" id="module-6">
+    <section class="module-section" id="module-6" aria-label="Module 6: Food Intelligence Studio">
         <div class="module-header">
             <span class="module-number">Module 6</span>
             <h1>Food Intelligence Studio</h1>
@@ -1084,7 +1087,7 @@ Portion Estimation: Pixel-based area analysis → volume → weight
     </section>
 
     <!-- ==================== MODULE 7: NLP FOOD UNDERSTANDING ==================== -->
-    <section class="module-section" id="module-7">
+    <section class="module-section" id="module-7" aria-label="Module 7: NLP Food Understanding">
         <div class="module-header">
             <span class="module-number">Module 7</span>
             <h1>NLP Food Understanding</h1>
@@ -1205,7 +1208,7 @@ Training: 5,000+ synthetic Indian food descriptions
     </section>
 
     <!-- ==================== MODULE 8: DIET RECOMMENDATION ==================== -->
-    <section class="module-section" id="module-8">
+    <section class="module-section" id="module-8" aria-label="Module 8: Personalized Diet Recommendation Engine">
         <div class="module-header">
             <span class="module-number">Module 8</span>
             <h1>Personalized Diet Recommendation Engine</h1>
@@ -1338,7 +1341,7 @@ Macro Distribution (HbA1c-adjusted):
     </section>
 
     <!-- ==================== MODULE 9: END-TO-END WORKFLOW ==================== -->
-    <section class="module-section" id="module-9">
+    <section class="module-section" id="module-9" aria-label="Module 9: End-to-End Research Workflow">
         <div class="module-header">
             <span class="module-number">Module 9</span>
             <h1>End-to-End Research Workflow</h1>
@@ -1507,7 +1510,7 @@ Output Layer:
     </section>
 
     <!-- ==================== MODULE 10: SUSTAINABILITY IMPACT DASHBOARD ==================== -->
-    <section class="module-section" id="module-10">
+    <section class="module-section" id="module-10" aria-label="Module 10: Sustainability Impact Dashboard">
         <div class="module-header">
             <span class="module-number">Module 10</span>
             <h1>Sustainability Impact Dashboard</h1>
@@ -1658,7 +1661,7 @@ Threat Model:
     </section>
 
     <!-- ==================== MODULE 11: VIRTUAL LAB ==================== -->
-    <section class="module-section" id="module-11">
+    <section class="module-section" id="module-11" aria-label="Module 11: Virtual Lab">
         <div class="module-header">
             <span class="module-number">Module 11</span>
             <h1>🧪 Virtual Lab: Complete Data Flow Simulation</h1>
@@ -1770,7 +1773,7 @@ Threat Model:
     </section>
 
     <!-- ==================== MODULE 12: TRL ROADMAP & GANTT CHART ==================== -->
-    <section class="module-section" id="module-12">
+    <section class="module-section" id="module-12" aria-label="Module 12: TRL Roadmap and Gantt Chart">
         <div class="module-header">
             <span class="module-number">Module 12</span>
             <h1>🗺️ TRL Roadmap & Gantt Chart</h1>
@@ -1854,7 +1857,7 @@ Threat Model:
     <!-- ============================================================
     MODULE 13: BUDGET & PROJECT PLAN
     ============================================================ -->
-    <section class="module-section" id="module-13">
+    <section class="module-section" id="module-13" aria-label="Module 13: Budget and Project Plan">
         <div class="module-header">
             <div class="module-icon">💰</div>
             <div>
@@ -2453,7 +2456,7 @@ Threat Model:
 </div>
 
 <!-- AI Chatbot Assistant -->
-<div class="chatbot-widget" id="chatbotWidget" role="complementary" aria-label="AI Research Assistant">
+<div class="chatbot-widget" id="chatbotWidget" role="dialog" aria-modal="true" aria-label="AI Research Assistant">
     <div class="chatbot-window" id="chatbotWindow">
         <div class="chatbot-header">
             <h3>🤖 Research Assistant</h3>
@@ -2527,11 +2530,29 @@ function navigateTo(moduleId) {
     if (!section) return;
     const navItem = document.querySelector(`.nav-item[data-module="${moduleId}"]`);
     document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => {
+        n.classList.remove('active');
+        n.removeAttribute('aria-current');
+    });
     section.classList.add('active');
-    if (navItem) navItem.classList.add('active');
+    if (navItem) {
+        navItem.classList.add('active');
+        navItem.setAttribute('aria-current', 'page');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (location.hash !== '#' + moduleId) location.hash = moduleId;
+    // Focus management and screen reader announcement
+    const heading = section.querySelector('h1, h2');
+    if (heading) {
+        heading.setAttribute('tabindex', '-1');
+        heading.focus({ preventScroll: true });
+    }
+    const announcer = document.getElementById('a11yAnnouncer');
+    if (announcer) {
+        const moduleName = moduleId.replace('module-', 'Module ');
+        announcer.textContent = moduleName + ' loaded';
+        setTimeout(() => { announcer.textContent = ''; }, 3000);
+    }
 }
 
 // Deep-link: navigate to module from URL hash
@@ -2549,10 +2570,16 @@ window.addEventListener('hashchange', () => {
         const section = document.getElementById(id);
         if (section) {
             document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => {
+                n.classList.remove('active');
+                n.removeAttribute('aria-current');
+            });
             section.classList.add('active');
             const navItem = document.querySelector(`.nav-item[data-module="${id}"]`);
-            if (navItem) navItem.classList.add('active');
+            if (navItem) {
+                navItem.classList.add('active');
+                navItem.setAttribute('aria-current', 'page');
+            }
         }
     }
 })();
@@ -4630,8 +4657,10 @@ function toggleMobileNav() {
     const isOpen = nav.classList.contains('open');
     nav.classList.toggle('open');
     btn.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(!isOpen));
     if (overlay) {
         overlay.style.display = isOpen ? 'none' : 'block';
+        overlay.setAttribute('aria-hidden', String(isOpen));
     }
 }
 
