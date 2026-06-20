@@ -1847,6 +1847,579 @@ Threat Model:
         </div>
     </section>
 
+    <!-- ============================================================
+    MODULE 13: BUDGET & PROJECT PLAN
+    ============================================================ -->
+    <section class="module-section" id="module-13">
+        <div class="module-header">
+            <div class="module-icon">💰</div>
+            <div>
+                <h2 class="module-title">Budget & Project Plan</h2>
+                <p class="module-subtitle">Comprehensive budget breakdown and resource allocation for the AI-Enabled Personalized Diabetic Management System</p>
+            </div>
+            <span class="module-badge" style="background:#e67e22;">TRL-2</span>
+        </div>
+
+        <div class="module-content">
+            <!-- Budget Tabs -->
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;border-bottom:2px solid #e8eaed;padding-bottom:12px;">
+                <button class="budget-tab" onclick="switchBudgetTab('budgetOverview',this)" style="background:var(--medical-blue);color:white;border:1px solid var(--medical-blue);padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">📊 Budget Overview</button>
+                <button class="budget-tab" onclick="switchBudgetTab('costBreakdown',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">📋 Cost Breakdown</button>
+                <button class="budget-tab" onclick="switchBudgetTab('costJustification',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">✅ Cost Justification</button>
+                <button class="budget-tab" onclick="switchBudgetTab('activityMap',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">📅 Activity Map</button>
+                <button class="budget-tab" onclick="switchBudgetTab('budgetReferences',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">📚 References</button>
+            </div>
+
+            <!-- Tab 1: Budget Overview -->
+            <div class="budget-panel" id="budgetOverview" style="display:block;">
+                <div class="card" style="padding:24px;margin-bottom:20px;">
+                    <h3 style="color:var(--medical-blue);margin-bottom:16px;">💰 Budget Overview</h3>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-bottom:20px;">
+                        <div class="card" style="padding:20px;text-align:center;background:linear-gradient(135deg,#e8f0fe,#f8f9fa);">
+                            <div style="font-size:2.5rem;font-weight:700;color:var(--medical-blue);">₹2.88 Cr</div>
+                            <div style="font-size:0.9rem;color:#5f6368;margin-top:8px;">Total Budget</div>
+                        </div>
+                        <div class="card" style="padding:20px;text-align:center;background:linear-gradient(135deg,#e6f4ea,#f8f9fa);">
+                            <div style="font-size:2.5rem;font-weight:700;color:var(--medical-green);">12 Months</div>
+                            <div style="font-size:0.9rem;color:#5f6368;margin-top:8px;">Project Duration</div>
+                        </div>
+                        <div class="card" style="padding:20px;text-align:center;background:linear-gradient(135deg,#fef7e0,#f8f9fa);">
+                            <div style="font-size:2.5rem;font-weight:700;color:#e67e22;">7</div>
+                            <div style="font-size:0.9rem;color:#5f6368;margin-top:8px;">Budget Categories</div>
+                        </div>
+                        <div class="card" style="padding:20px;text-align:center;background:linear-gradient(135deg,#fce8e6,#f8f9fa);">
+                            <div style="font-size:2.5rem;font-weight:700;color:#ea4335;">6</div>
+                            <div style="font-size:0.9rem;color:#5f6368;margin-top:8px;">Project Objectives</div>
+                        </div>
+                    </div>
+                    <p style="color:#5f6368;font-size:0.95rem;line-height:1.6;">
+                        This <strong>₹2.88 crore</strong> budget supports a comprehensive 12-month research project to develop and validate an AI-Enabled Personalized Type-2 Diabetic Management System. The budget is structured into <strong>7 categories</strong> covering recurring operational costs (Personnel, Cloud Services, Consumables, Travel) and non-recurring capital investments (Hardware, Software Licenses, Contingency). Each cost item is justified with reference to specific project objectives, research activities, and deliverables. The project spans <strong>6 objectives</strong> with clearly defined activities, timelines, resource requirements, and responsible personnel.
+                    </p>
+                </div>
+
+                <div class="card" style="padding:24px;">
+                    <h3 style="color:var(--medical-blue);margin-bottom:16px;">📊 Budget Distribution</h3>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+                        <div>
+                            <div style="margin-bottom:12px;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                                    <span style="font-size:0.85rem;font-weight:600;">👨‍💻 Personnel (Recurring)</span>
+                                    <span style="font-size:0.85rem;font-weight:600;color:var(--medical-blue);">₹1.04 Cr</span>
+                                </div>
+                                <div style="height:24px;background:#e8eaed;border-radius:12px;overflow:hidden;">
+                                    <div style="height:100%;width:36%;background:var(--medical-blue);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:600;">36%</div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom:12px;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                                    <span style="font-size:0.85rem;font-weight:600;">☁️ Cloud Services (Recurring)</span>
+                                    <span style="font-size:0.85rem;font-weight:600;color:var(--medical-green);">₹0.54 Cr</span>
+                                </div>
+                                <div style="height:24px;background:#e8eaed;border-radius:12px;overflow:hidden;">
+                                    <div style="height:100%;width:19%;background:var(--medical-green);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:600;">19%</div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom:12px;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                                    <span style="font-size:0.85rem;font-weight:600;">🧪 Consumables (Recurring)</span>
+                                    <span style="font-size:0.85rem;font-weight:600;color:#e67e22;">₹0.24 Cr</span>
+                                </div>
+                                <div style="height:24px;background:#e8eaed;border-radius:12px;overflow:hidden;">
+                                    <div style="height:100%;width:8%;background:#e67e22;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:600;">8%</div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom:12px;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                                    <span style="font-size:0.85rem;font-weight:600;">✈️ Travel (Recurring)</span>
+                                    <span style="font-size:0.85rem;font-weight:600;color:#ea4335;">₹0.16 Cr</span>
+                                </div>
+                                <div style="height:24px;background:#e8eaed;border-radius:12px;overflow:hidden;">
+                                    <div style="height:100%;width:6%;background:#ea4335;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:600;">6%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="margin-bottom:12px;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                                    <span style="font-size:0.85rem;font-weight:600;">🖥️ Hardware (Non-Recurring)</span>
+                                    <span style="font-size:0.85rem;font-weight:600;color:#9334e6;">₹0.46 Cr</span>
+                                </div>
+                                <div style="height:24px;background:#e8eaed;border-radius:12px;overflow:hidden;">
+                                    <div style="height:100%;width:16%;background:#9334e6;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:600;">16%</div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom:12px;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                                    <span style="font-size:0.85rem;font-weight:600;">💾 Software Licenses (Non-Recurring)</span>
+                                    <span style="font-size:0.85rem;font-weight:600;color:#34a853;">₹0.32 Cr</span>
+                                </div>
+                                <div style="height:24px;background:#e8eaed;border-radius:12px;overflow:hidden;">
+                                    <div style="height:100%;width:11%;background:#34a853;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:600;">11%</div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom:12px;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                                    <span style="font-size:0.85rem;font-weight:600;">🛡️ Contingency (Non-Recurring)</span>
+                                    <span style="font-size:0.85rem;font-weight:600;color:#fbbc04;">₹0.12 Cr</span>
+                                </div>
+                                <div style="height:24px;background:#e8eaed;border-radius:12px;overflow:hidden;">
+                                    <div style="height:100%;width:4%;background:#fbbc04;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:0.75rem;font-weight:600;">4%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Cost Breakdown -->
+            <div class="budget-panel" id="costBreakdown" style="display:none;">
+                <div class="card" style="padding:24px;margin-bottom:20px;">
+                    <h3 style="color:var(--medical-blue);margin-bottom:16px;">📋 Detailed Cost Breakdown</h3>
+
+                    <h4 style="color:#202124;margin:20px 0 12px;">A. Recurring Costs (Operational)</h4>
+                    <div style="overflow-x:auto;">
+                        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+                            <thead>
+                                <tr style="background:#f8f9fa;border-bottom:2px solid #e8eaed;">
+                                    <th style="text-align:left;padding:10px 12px;">Category</th>
+                                    <th style="text-align:left;padding:10px 12px;">Item</th>
+                                    <th style="text-align:right;padding:10px 12px;">Quantity</th>
+                                    <th style="text-align:right;padding:10px 12px;">Rate (₹/month)</th>
+                                    <th style="text-align:right;padding:10px 12px;">Duration</th>
+                                    <th style="text-align:right;padding:10px 12px;">Amount (₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Personnel</td>
+                                    <td style="padding:10px 12px;">Principal Investigator</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">2,00,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">24,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Personnel</td>
+                                    <td style="padding:10px 12px;">Co-Investigator</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">1,50,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">18,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Personnel</td>
+                                    <td style="padding:10px 12px;">Research Associate (AI/ML)</td>
+                                    <td style="text-align:right;padding:10px 12px;">2</td>
+                                    <td style="text-align:right;padding:10px 12px;">60,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">14,40,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Personnel</td>
+                                    <td style="padding:10px 12px;">PhD Scholars (full-time)</td>
+                                    <td style="text-align:right;padding:10px 12px;">3</td>
+                                    <td style="text-align:right;padding:10px 12px;">37,500</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">13,50,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Personnel</td>
+                                    <td style="padding:10px 12px;">Project Assistant (Data)</td>
+                                    <td style="text-align:right;padding:10px 12px;">2</td>
+                                    <td style="text-align:right;padding:10px 12px;">25,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">6,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:2px solid #e8eaed;background:#f8f9fa;">
+                                    <td colspan="5" style="text-align:right;padding:10px 12px;font-weight:700;">Personnel Subtotal</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:700;color:var(--medical-blue);">75,90,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Cloud</td>
+                                    <td style="padding:10px 12px;">AWS EC2 GPU Instances (p3.2xlarge)</td>
+                                    <td style="text-align:right;padding:10px 12px;">2</td>
+                                    <td style="text-align:right;padding:10px 12px;">75,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">18,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Cloud</td>
+                                    <td style="padding:10px 12px;">AWS S3 Storage (5 TB)</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">12,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">1,44,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Cloud</td>
+                                    <td style="padding:10px 12px;">API Gateway + Lambda</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">25,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">3,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:2px solid #e8eaed;background:#f8f9fa;">
+                                    <td colspan="5" style="text-align:right;padding:10px 12px;font-weight:700;">Cloud Subtotal</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:700;color:var(--medical-blue);">22,44,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Consumables</td>
+                                    <td style="padding:10px 12px;">Medical Data Acquisition</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">1,50,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">1,50,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Consumables</td>
+                                    <td style="padding:10px 12px;">Compute/GPU Rental (supplement)</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">50,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">6,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Consumables</td>
+                                    <td style="padding:10px 12px;">Data Annotation Tools</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">25,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">12 months</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">3,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:2px solid #e8eaed;background:#f8f9fa;">
+                                    <td colspan="5" style="text-align:right;padding:10px 12px;font-weight:700;">Consumables Subtotal</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:700;color:var(--medical-blue);">10,50,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Travel</td>
+                                    <td style="padding:10px 12px;">Domestic Conferences (2)</td>
+                                    <td style="text-align:right;padding:10px 12px;">4</td>
+                                    <td style="text-align:right;padding:10px 12px;">25,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">—</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">2,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Travel</td>
+                                    <td style="padding:10px 12px;">International Conference (1)</td>
+                                    <td style="text-align:right;padding:10px 12px;">2</td>
+                                    <td style="text-align:right;padding:10px 12px;">1,00,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">—</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">2,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Travel</td>
+                                    <td style="padding:10px 12px;">Hospital Site Visits</td>
+                                    <td style="text-align:right;padding:10px 12px;">4</td>
+                                    <td style="text-align:right;padding:10px 12px;">15,000</td>
+                                    <td style="text-align:right;padding:10px 12px;">—</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">60,000</td>
+                                </tr>
+                                <tr style="border-bottom:2px solid #e8eaed;background:#f8f9fa;">
+                                    <td colspan="5" style="text-align:right;padding:10px 12px;font-weight:700;">Travel Subtotal</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:700;color:var(--medical-blue);">4,60,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 style="color:#202124;margin:24px 0 12px;">B. Non-Recurring Costs (Capital)</h4>
+                    <div style="overflow-x:auto;">
+                        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+                            <thead>
+                                <tr style="background:#f8f9fa;border-bottom:2px solid #e8eaed;">
+                                    <th style="text-align:left;padding:10px 12px;">Category</th>
+                                    <th style="text-align:left;padding:10px 12px;">Item</th>
+                                    <th style="text-align:right;padding:10px 12px;">Quantity</th>
+                                    <th style="text-align:right;padding:10px 12px;">Unit Cost (₹)</th>
+                                    <th style="text-align:right;padding:10px 12px;">Amount (₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Hardware</td>
+                                    <td style="padding:10px 12px;">GPU Workstation (NVIDIA RTX 4090)</td>
+                                    <td style="text-align:right;padding:10px 12px;">2</td>
+                                    <td style="text-align:right;padding:10px 12px;">6,50,000</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">13,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Hardware</td>
+                                    <td style="padding:10px 12px;">Server (Dell PowerEdge R750)</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">8,50,000</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">8,50,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Hardware</td>
+                                    <td style="padding:10px 12px;">NAS Storage (48 TB)</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">3,50,000</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">3,50,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Hardware</td>
+                                    <td style="padding:10px 12px;">Development Workstations</td>
+                                    <td style="text-align:right;padding:10px 12px;">5</td>
+                                    <td style="text-align:right;padding:10px 12px;">1,20,000</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">6,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:2px solid #e8eaed;background:#f8f9fa;">
+                                    <td colspan="4" style="text-align:right;padding:10px 12px;font-weight:700;">Hardware Subtotal</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:700;color:var(--medical-blue);">31,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Software</td>
+                                    <td style="padding:10px 12px;">MATLAB + Toolboxes</td>
+                                    <td style="text-align:right;padding:10px 12px;">5</td>
+                                    <td style="text-align:right;padding:10px 12px;">1,20,000</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">6,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Software</td>
+                                    <td style="padding:10px 12px;">PyCharm Professional</td>
+                                    <td style="text-align:right;padding:10px 12px;">5</td>
+                                    <td style="text-align:right;padding:10px 12px;">25,000</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">1,25,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Software</td>
+                                    <td style="padding:10px 12px;">ABBY FineReader OCR</td>
+                                    <td style="text-align:right;padding:10px 12px;">3</td>
+                                    <td style="text-align:right;padding:10px 12px;">35,000</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">1,05,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Software</td>
+                                    <td style="padding:10px 12px;">SPSS + NVivo</td>
+                                    <td style="text-align:right;padding:10px 12px;">2</td>
+                                    <td style="text-align:right;padding:10px 12px;">55,000</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">1,10,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Software</td>
+                                    <td style="padding:10px 12px;">Docker + Kubernetes Licenses</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">3,00,000</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">3,00,000</td>
+                                </tr>
+                                <tr style="border-bottom:2px solid #e8eaed;background:#f8f9fa;">
+                                    <td colspan="4" style="text-align:right;padding:10px 12px;font-weight:700;">Software Subtotal</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:700;color:var(--medical-blue);">12,40,000</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;">Contingency</td>
+                                    <td style="padding:10px 12px;">Contingency (5% of total direct costs)</td>
+                                    <td style="text-align:right;padding:10px 12px;">1</td>
+                                    <td style="text-align:right;padding:10px 12px;">—</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:600;">12,57,000</td>
+                                </tr>
+                                <tr style="border-bottom:2px solid #e8eaed;background:#f8f9fa;">
+                                    <td colspan="4" style="text-align:right;padding:10px 12px;font-weight:700;">Contingency</td>
+                                    <td style="text-align:right;padding:10px 12px;font-weight:700;color:var(--medical-blue);">12,57,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top:24px;padding:20px;background:linear-gradient(135deg,#e8f0fe,#f8f9fa);border-radius:12px;display:flex;justify-content:space-between;align-items:center;">
+                        <span style="font-size:1.2rem;font-weight:700;color:#202124;">Total Budget</span>
+                        <span style="font-size:1.8rem;font-weight:700;color:var(--medical-blue);">₹2,88,41,000</span>
+                    </div>
+                    <div style="margin-top:8px;text-align:right;font-size:0.85rem;color:#5f6368;">≈ ₹2.88 Crore</div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Cost Justification -->
+            <div class="budget-panel" id="costJustification" style="display:none;">
+                <div class="card" style="padding:24px;margin-bottom:20px;">
+                    <h3 style="color:var(--medical-blue);margin-bottom:16px;">✅ Cost Justification</h3>
+                    <p style="color:#5f6368;font-size:0.95rem;margin-bottom:20px;">
+                        Each budget item is justified in terms of its contribution to project objectives, research deliverables, and long-term institutional capacity building.
+                    </p>
+                    <div style="display:grid;gap:20px;">
+                        <div class="card" style="padding:20px;border-left:4px solid var(--medical-blue);">
+                            <h4 style="color:#202124;margin-bottom:8px;">👨‍💻 Personnel (₹75.90 Lakhs — 26% of total)</h4>
+                            <p style="font-size:0.9rem;color:#5f6368;line-height:1.6;">
+                                The largest investment is in human capital — the core of this AI research project. The <strong>Principal Investigator</strong> provides overall leadership and domain expertise in diabetic endocrinology. The <strong>Co-Investigator</strong> brings AI/ML architecture expertise. Two <strong>Research Associates</strong> lead the development of OCR, FL, and NLP modules. Three <strong>PhD Scholars</strong> contribute to novel algorithm development, creating IP that benefits the institution long after project completion. Two <strong>Project Assistants</strong> handle data curation, annotation, and documentation. All salaries are at par with DST/SERB sanctioned research project norms.
+                            </p>
+                        </div>
+                        <div class="card" style="padding:20px;border-left:4px solid var(--medical-green);">
+                            <h4 style="color:#202124;margin-bottom:8px;">🖥️ Hardware (₹31.00 Lakhs — 11% of total)</h4>
+                            <p style="font-size:0.9rem;color:#5f6368;line-height:1.6;">
+                                High-performance computing is essential for training deep learning models (FL, BERT, Vision Transformers). Two <strong>NVIDIA RTX 4090 GPU workstations</strong> (₹6.5L each) provide 24GB VRAM each for model training — without these, training times would increase 10-15x. The <strong>Dell PowerEdge R750 server</strong> hosts the FL aggregation server and API endpoints. <strong>48TB NAS storage</strong> is justified by the need to store large medical imaging datasets and model checkpoints. Five <strong>development workstations</strong> support the research team for coding, testing, and documentation. This hardware remains institutional property after project completion, supporting future research.
+                            </p>
+                        </div>
+                        <div class="card" style="padding:20px;border-left:4px solid #9334e6;">
+                            <h4 style="color:#202124;margin-bottom:8px;">☁️ Cloud Services (₹22.44 Lakhs — 8% of total)</h4>
+                            <p style="font-size:0.9rem;color:#5f6368;line-height:1.6;">
+                                Cloud infrastructure provides scalable, on-demand compute for: (a) <strong>AWS EC2 GPU instances</strong> for distributed FL training across simulated hospital nodes, (b) <strong>S3 storage</strong> for multi-site data aggregation and backup with 99.999999999% durability, and (c) <strong>API Gateway + Lambda</strong> for serverless deployment of the AI inference pipeline. Cloud costs are higher in early months (intensive training) and taper during deployment. The hybrid on-premise + cloud approach ensures 24/7 system availability for clinical pilot testing.
+                            </p>
+                        </div>
+                        <div class="card" style="padding:20px;border-left:4px solid #fbbc04;">
+                            <h4 style="color:#202124;margin-bottom:8px;">💾 Software Licenses (₹12.40 Lakhs — 4% of total)</h4>
+                            <p style="font-size:0.9rem;color:#5f6368;line-height:1.6;">
+                                Commercial and open-source software tools are needed for specialized research tasks. <strong>MATLAB</strong> provides signal processing and statistical analysis toolboxes essential for biomarker validation. <strong>PyCharm Professional</strong> supports professional-grade Python development with remote interpreter capabilities. <strong>ABBYY FineReader</strong> provides baseline OCR accuracy benchmarks against our custom model. <strong>SPSS + NVivo</strong> support qualitative data analysis from clinician interviews. <strong>Docker + Kubernetes</strong> licenses are required for container orchestration of the microservices architecture.
+                            </p>
+                        </div>
+                        <div class="card" style="padding:20px;border-left:4px solid #ea4335;">
+                            <h4 style="color:#202124;margin-bottom:8px;">🧪 Consumables + Travel + Contingency (₹27.67 Lakhs — 10% of total)</h4>
+                            <p style="font-size:0.9rem;color:#5f6368;line-height:1.6;">
+                                <strong>Consumables</strong> cover medical data acquisition costs (accessing hospital databases, anonymization services), supplemental GPU compute for peak workloads, and data annotation tool subscriptions. <strong>Travel</strong> supports dissemination of research findings at 2 domestic and 1 international conference, plus site visits to partner hospitals for data collection and requirement validation. <strong>Contingency (5%)</strong> covers unforeseen price escalations, additional GPU compute needs, and currency fluctuations for international software licenses.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 4: Activity Map -->
+            <div class="budget-panel" id="activityMap" style="display:none;">
+                <div class="card" style="padding:24px;">
+                    <h3 style="color:var(--medical-blue);margin-bottom:16px;">📅 Project Activity Map</h3>
+                    <p style="color:#5f6368;font-size:0.95rem;margin-bottom:20px;">
+                        Detailed mapping of 6 project objectives to specific activities, timelines, resource requirements, and responsible persons.
+                    </p>
+                    <div style="overflow-x:auto;">
+                        <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+                            <thead>
+                                <tr style="background:#f8f9fa;border-bottom:2px solid #e8eaed;">
+                                    <th style="text-align:left;padding:10px 12px;">Objective</th>
+                                    <th style="text-align:left;padding:10px 12px;">Activity</th>
+                                    <th style="text-align:left;padding:10px 12px;">Timeline</th>
+                                    <th style="text-align:left;padding:10px 12px;">Resources</th>
+                                    <th style="text-align:left;padding:10px 12px;">Responsible</th>
+                                    <th style="text-align:left;padding:10px 12px;">Deliverable</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;color:var(--medical-blue);">O1: Dataset Curation</td>
+                                    <td style="padding:10px 12px;">Collect & anonymize 5,000 patient records from 3 partner hospitals</td>
+                                    <td style="padding:10px 12px;">Months 1-3</td>
+                                    <td style="padding:10px 12px;">NAS Storage, Data Annotation Tools</td>
+                                    <td style="padding:10px 12px;">Principal Investigator, Project Assistants</td>
+                                    <td style="padding:10px 12px;">Anonymized dataset (5K records)</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;background:#f8f9fa;">
+                                    <td style="padding:10px 12px;font-weight:600;color:var(--medical-blue);">O2: OCR Module</td>
+                                    <td style="padding:10px 12px;">Train custom OCR model for medical reports (94.5% accuracy)</td>
+                                    <td style="padding:10px 12px;">Months 2-5</td>
+                                    <td style="padding:10px 12px;">GPU Workstations, ABBYY FineReader</td>
+                                    <td style="padding:10px 12px;">Research Associate 1, PhD Scholar 1</td>
+                                    <td style="padding:10px 12px;">OCR pipeline with entity extraction</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;color:var(--medical-blue);">O3: FL + Digital Twin</td>
+                                    <td style="padding:10px 12px;">Build FL system with differential privacy (3 hospitals, 75 rounds)</td>
+                                    <td style="padding:10px 12px;">Months 3-7</td>
+                                    <td style="padding:10px 12px;">AWS EC2 GPU, Server, Docker/K8s</td>
+                                    <td style="padding:10px 12px;">Co-Investigator, Research Associate 2</td>
+                                    <td style="padding:10px 12px;">FL system with privacy guarantees</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;background:#f8f9fa;">
+                                    <td style="padding:10px 12px;font-weight:600;color:var(--medical-blue);">O4: Food Intelligence</td>
+                                    <td style="padding:10px 12px;">Train Vision + NLP models for food analysis (500+ items)</td>
+                                    <td style="padding:10px 12px;">Months 4-8</td>
+                                    <td style="padding:10px 12px;">GPU Workstations, MATLAB Toolboxes</td>
+                                    <td style="padding:10px 12px;">Research Associate 1, PhD Scholar 2</td>
+                                    <td style="padding:10px 12px;">Food recognition & nutrition API</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;">
+                                    <td style="padding:10px 12px;font-weight:600;color:var(--medical-blue);">O5: Diet Recommendation</td>
+                                    <td style="padding:10px 12px;">Develop personalized meal planner with constraint solver</td>
+                                    <td style="padding:10px 12px;">Months 6-10</td>
+                                    <td style="padding:10px 12px;">Dev Workstations, PyCharm Pro</td>
+                                    <td style="padding:10px 12px;">PhD Scholar 3, Project Assistant 2</td>
+                                    <td style="padding:10px 12px;">Personalized diet plan engine</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #e8eaed;background:#f8f9fa;">
+                                    <td style="padding:10px 12px;font-weight:600;color:var(--medical-blue);">O6: Integration & Validation</td>
+                                    <td style="padding:10px 12px;">End-to-end system integration, testing, and clinical pilot</td>
+                                    <td style="padding:10px 12px;">Months 8-12</td>
+                                    <td style="padding:10px 12px;">All resources, AWS API Gateway</td>
+                                    <td style="padding:10px 12td;">All team members</td>
+                                    <td style="padding:10px 12px;">Integrated TRL-4 system + report</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card" style="padding:24px;margin-top:20px;">
+                    <h3 style="color:var(--medical-blue);margin-bottom:16px;">📈 Resource Allocation Timeline</h3>
+                    <div style="display:grid;gap:8px;">
+                        <div style="display:grid;grid-template-columns:180px 1fr;align-items:center;gap:12px;">
+                            <span style="font-size:0.85rem;font-weight:600;">Months 1-3</span>
+                            <div style="height:32px;background:#e8f0fe;border-radius:16px;display:flex;align-items:center;padding:0 12px;font-size:0.8rem;color:var(--medical-blue);font-weight:600;">Dataset Curation &amp; Setup</div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:180px 1fr;align-items:center;gap:12px;">
+                            <span style="font-size:0.85rem;font-weight:600;">Months 2-5</span>
+                            <div style="height:32px;background:#e6f4ea;border-radius:16px;display:flex;align-items:center;padding:0 12px;font-size:0.8rem;color:var(--medical-green);font-weight:600;">OCR &amp; Entity Extraction</div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:180px 1fr;align-items:center;gap:12px;">
+                            <span style="font-size:0.85rem;font-weight:600;">Months 3-7</span>
+                            <div style="height:32px;background:#fef7e0;border-radius:16px;display:flex;align-items:center;padding:0 12px;font-size:0.8rem;color:#e67e22;font-weight:600;">Federated Learning &amp; Digital Twin</div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:180px 1fr;align-items:center;gap:12px;">
+                            <span style="font-size:0.85rem;font-weight:600;">Months 4-8</span>
+                            <div style="height:32px;background:#fce8e6;border-radius:16px;display:flex;align-items:center;padding:0 12px;font-size:0.8rem;color:#ea4335;font-weight:600;">Food Intelligence &amp; NLP</div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:180px 1fr;align-items:center;gap:12px;">
+                            <span style="font-size:0.85rem;font-weight:600;">Months 6-10</span>
+                            <div style="height:32px;background:#f3e8fd;border-radius:16px;display:flex;align-items:center;padding:0 12px;font-size:0.8rem;color:#9334e6;font-weight:600;">Diet Recommendation Engine</div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:180px 1fr;align-items:center;gap:12px;">
+                            <span style="font-size:0.85rem;font-weight:600;">Months 8-12</span>
+                            <div style="height:32px;background:#e6f4ea;border-radius:16px;display:flex;align-items:center;padding:0 12px;font-size:0.8rem;color:#1e8e3e;font-weight:600;">Integration, Testing &amp; Pilot</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 5: References -->
+            <div class="budget-panel" id="budgetReferences" style="display:none;">
+                <div class="card" style="padding:24px;">
+                    <h3 style="color:var(--medical-blue);margin-bottom:16px;">📚 References & Supporting Documents</h3>
+                    <div style="display:grid;gap:16px;">
+                        <div class="card" style="padding:16px;border-left:4px solid var(--medical-blue);">
+                            <h4 style="color:#202124;margin-bottom:8px;">📄 Budget Breakdown (CSV Export)</h4>
+                            <p style="font-size:0.9rem;color:#5f6368;">Complete budget breakdown with all line items, quantities, rates, and totals available for download.</p>
+                            <code style="display:block;padding:12px;background:#f8f9fa;border-radius:8px;margin-top:8px;font-size:0.85rem;">📁 BUDGET_BREAKDOWN.csv</code>
+                        </div>
+                        <div class="card" style="padding:16px;border-left:4px solid var(--medical-green);">
+                            <h4 style="color:#202124;margin-bottom:8px;">📅 Project Activity Map (CSV Export)</h4>
+                            <p style="font-size:0.9rem;color:#5f6368;">Detailed project activity map with objectives, activities, timelines, resources, and responsible persons.</p>
+                            <code style="display:block;padding:12px;background:#f8f9fa;border-radius:8px;margin-top:8px;font-size:0.85rem;">📁 PROJECT_ACTIVITY_MAP.csv</code>
+                        </div>
+                        <div class="card" style="padding:16px;border-left:4px solid #e67e22;">
+                            <h4 style="color:#202124;margin-bottom:8px;">📋 Resource Plan (Detailed)</h4>
+                            <p style="font-size:0.9rem;color:#5f6368;">Comprehensive resource plan with hardware specifications, software licensing details, and personnel qualifications.</p>
+                            <code style="display:block;padding:12px;background:#f8f9fa;border-radius:8px;margin-top:8px;font-size:0.85rem;">📁 PROJECT_RESOURCE_PLAN.md</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-details" style="margin-top:24px;">
+            <div class="tech-detail">
+                <button class="tech-detail-header" onclick="toggleTechDetail(this)" aria-expanded="false">
+                    📊 Budget Methodology Notes <span class="arrow">▼</span>
+                </button>
+                <div class="tech-detail-body">
+                    <ul style="margin:12px 0;padding-left:20px;font-size:0.9rem;color:#5f6368;line-height:1.8;">
+                        <li>All costs are in Indian Rupees (₹) and inclusive of applicable taxes.</li>
+                        <li>Personnel costs are calculated based on DST/SERB sanctioned research project norms.</li>
+                        <li>Cloud costs estimated using AWS Pricing Calculator (ap-south-1 region).</li>
+                        <li>Hardware costs based on current market rates from authorized distributors.</li>
+                        <li>Contingency is calculated at 5% of total direct costs (₹2,51,41,000 × 5% = ₹12,57,000).</li>
+                        <li>Total Budget: ₹2,88,41,000 (≈ ₹2.88 Crore or ~$3,46,000 USD at ₹83/USD).</li>
+                        <li>The project spans 12 months with 6 objectives, 20+ activities, and 8 team members.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </main>
 
 <!-- Guided Tour Overlay -->
@@ -1951,7 +2524,22 @@ function navigateTo(moduleId) {
     document.getElementById(moduleId).classList.add('active');
     document.querySelector(`.nav-item[data-module="${moduleId}"]`).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (location.hash !== '#' + moduleId) location.hash = moduleId;
 }
+
+// Deep-link: navigate to module from URL hash on load
+window.addEventListener('hashchange', () => {
+    if (location.hash) {
+        const id = location.hash.slice(1);
+        if (document.getElementById(id)) navigateTo(id);
+    }
+});
+(function initHash() {
+    if (location.hash) {
+        const id = location.hash.slice(1);
+        if (document.getElementById(id)) setTimeout(() => navigateTo(id), 100);
+    }
+})();
 
 document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', () => {
