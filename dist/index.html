@@ -1879,6 +1879,9 @@ Threat Model:
                 <button class="budget-tab" onclick="switchBudgetTab('costBreakdown',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">📋 Cost Breakdown</button>
                 <button class="budget-tab" onclick="switchBudgetTab('costJustification',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">✅ Cost Justification</button>
                 <button class="budget-tab" onclick="switchBudgetTab('activityMap',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">📅 Activity Map</button>
+                <button class="budget-tab" onclick="switchBudgetTab('comparativeCost',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">📊 Comparative Cost</button>
+                <button class="budget-tab" onclick="switchBudgetTab('riskAssessment',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">⚠️ Risk Assessment</button>
+                <button class="budget-tab" onclick="switchBudgetTab('utilizationPlan',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">📋 Utilization Plan</button>
                 <button class="budget-tab" onclick="switchBudgetTab('budgetReferences',this)" style="background:white;color:#333;border:1px solid #e8eaed;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.3s;">📚 References</button>
             </div>
 
@@ -4171,113 +4174,48 @@ function showToast(message, type = 'info') {
 // ============================================================
 
 const BUDGET_TRL_DATA = [
-    {
-        id: 'trl-2',
-        label: 'TRL-2',
-        sub: 'Months 1-6',
-        subtitle: 'Concept Formulation',
-        total: 450000,
-        months: 6,
-        cloud: 120000,
-        travel: 75000,
-        software: 255000,
-    },
-    {
-        id: 'trl-3',
-        label: 'TRL-3',
-        sub: 'Months 7-12',
-        subtitle: 'Proof-of-Concept',
-        total: 600000,
-        months: 6,
-        cloud: 180000,
-        travel: 100000,
-        software: 320000,
-    },
-    {
-        id: 'trl-4',
-        label: 'TRL-4',
-        sub: 'Months 13-18',
-        subtitle: 'Lab Validation',
-        total: 900000,
-        months: 6,
-        cloud: 300000,
-        travel: 150000,
-        software: 450000,
-    },
-    {
-        id: 'trl-5',
-        label: 'TRL-5',
-        sub: 'Months 19-22',
-        subtitle: 'Relevant Environment',
-        total: 1050000,
-        months: 4,
-        cloud: 350000,
-        travel: 150000,
-        software: 550000,
-    },
-    {
-        id: 'trl-6',
-        label: 'TRL-6',
-        sub: 'Months 23-28',
-        subtitle: 'Relevant Env Demo',
-        total: 1100000,
-        months: 6,
-        cloud: 400000,
-        travel: 150000,
-        software: 550000,
-    },
-    {
-        id: 'trl-7',
-        label: 'TRL-7',
-        sub: 'Months 29-34',
-        subtitle: 'Operational Demo',
-        total: 1200000,
-        months: 6,
-        cloud: 450000,
-        travel: 200000,
-        software: 550000,
-    },
-    {
-        id: 'trl-8',
-        label: 'TRL-8',
-        sub: 'Months 35-40',
-        subtitle: 'System Qualified',
-        total: 1300000,
-        months: 6,
-        cloud: 500000,
-        travel: 200000,
-        software: 600000,
-    },
-    {
-        id: 'trl-9',
-        label: 'TRL-9',
-        sub: 'Months 41-48',
-        subtitle: 'Full Deployment',
-        total: 1141000,
-        months: 8,
-        cloud: 450000,
-        travel: 175000,
-        software: 516000,
-    }
+    // MATLAB + Toolboxes removed from all TRLs (institute provides site license)
+    { id:'trl-2', label:'TRL-2', sub:'Months 1-6', subtitle:'Concept Formulation', total:255000, months:6, cloud:120000, travel:75000, software:60000 },
+    { id:'trl-3', label:'TRL-3', sub:'Months 7-12', subtitle:'Proof-of-Concept', total:420000, months:6, cloud:180000, travel:100000, software:140000 },
+    { id:'trl-4', label:'TRL-4', sub:'Months 13-18', subtitle:'Lab Validation', total:650000, months:6, cloud:300000, travel:150000, software:200000 },
+    { id:'trl-5', label:'TRL-5', sub:'Months 19-22', subtitle:'Relevant Environment', total:780000, months:4, cloud:350000, travel:150000, software:280000 },
+    { id:'trl-6', label:'TRL-6', sub:'Months 23-28', subtitle:'Relevant Env Demo', total:830000, months:6, cloud:400000, travel:150000, software:280000 },
+    { id:'trl-7', label:'TRL-7', sub:'Months 29-34', subtitle:'Operational Demo', total:930000, months:6, cloud:450000, travel:200000, software:280000 },
+    { id:'trl-8', label:'TRL-8', sub:'Months 35-40', subtitle:'System Qualified', total:1015000, months:6, cloud:500000, travel:200000, software:315000 },
+    { id:'trl-9', label:'TRL-9', sub:'Months 41-48', subtitle:'Full Deployment', total:880000, months:8, cloud:450000, travel:175000, software:255000 },
 ];
 
 const COST_BREAKDOWN_ITEMS = {
+    // trlUsage / trlQty = quantity per TRL index (0=trl-2 … 7=trl-9)
+    // trlMonths = active months per TRL index
     cloud: [
-        { item: 'AWS EC2 GPU Instances (p3.2xlarge)', qty: 2, rateMonth: 75000 },
-        { item: 'AWS S3 Storage (5 TB)', qty: 1, rateMonth: 12000 },
-        { item: 'API Gateway + Lambda', qty: 1, rateMonth: 25000 },
+        { item: 'AWS EC2 GPU Instances (p3.2xlarge)', qty: 2, rateMonth: 75000,
+          trlUsage: [1, 1, 1, 2, 2, 2, 2, 2],
+          trlMonths: [1, 2, 3, 2, 2, 2, 3, 2] },
+        { item: 'AWS S3 Storage (5 TB)', qty: 1, rateMonth: 12000,
+          trlMonths: [3, 4, 6, 4, 6, 6, 4, 8] },
+        { item: 'API Gateway + Lambda', qty: 1, rateMonth: 25000,
+          trlUsage: [0, 0, 0, 0, 1, 1, 1, 1],
+          trlMonths: [0, 0, 0, 0, 1, 3, 3, 2] },
     ],
     travel: [
-        { item: 'Domestic Conferences (2)', qty: 4, rateMonth: 0, lumpSum: 200000 },
-        { item: 'International Conference (1)', qty: 2, rateMonth: 0, lumpSum: 200000 },
-        { item: 'Hospital Site Visits', qty: 4, rateMonth: 0, lumpSum: 60000 },
+        { item: 'Domestic Conferences', qty: 4, lumpSum: 200000,
+          trlQty: [1, 1, 2, 2, 2, 2, 2, 1] },
+        { item: 'International Conference', qty: 2, lumpSum: 200000,
+          trlQty: [0, 0, 0, 0, 0, 1, 1, 1] },
+        { item: 'Hospital Site Visits', qty: 4, lumpSum: 60000,
+          trlQty: [2, 3, 4, 4, 4, 3, 3, 4] },
     ],
     software: [
-        { item: 'MATLAB + Toolboxes', qty: 5, unitCost: 120000 },
-        { item: 'PyCharm Professional', qty: 5, unitCost: 25000 },
-        { item: 'ABBYY FineReader OCR', qty: 3, unitCost: 35000 },
-        { item: 'SPSS + NVivo', qty: 2, unitCost: 55000 },
-        { item: 'Docker + Kubernetes Licenses', qty: 1, unitCost: 300000 },
+        // MATLAB + Toolboxes: ₹0 — institute provides campus-wide site license
+        { item: 'MATLAB + Toolboxes (Inst. License)', qty: 5, unitCost: 0,
+          trlQty: [0, 0, 0, 0, 0, 0, 0, 0] },
+        { item: 'PyCharm Professional', qty: 5, unitCost: 25000,
+          trlQty: [1, 2, 3, 4, 4, 4, 4, 3] },
+        { item: 'ABBYY FineReader OCR', qty: 3, unitCost: 35000,
+          trlQty: [1, 1, 2, 2, 2, 2, 3, 2] },
+        { item: 'SPSS + NVivo', qty: 2, unitCost: 55000,
+          trlQty: [0, 1, 1, 2, 2, 2, 2, 2] },
     ],
 };
 
@@ -4734,106 +4672,371 @@ const ACTIVITY_MAP_DATA = {
 
 const COST_JUSTIFICATION_TEXT = {
     'trl-2': [
-        { heading: '☁️ Cloud', text: 'At TRL-2 (Concept Formulation), cloud infrastructure provides scalable on-demand compute for research workloads. AWS EC2 GPU instances handle distributed FL training across simulated hospital nodes. S3 storage provides multi-site data aggregation and backup with 99.999999999% durability. API Gateway + Lambda enable serverless deployment of the AI inference pipeline. Cloud costs are calibrated to the computational demands of TRL-2 activities. As the funding institute covers personnel, hardware, consumables, and contingency, the grant budget focuses solely on external cloud services.' },
-        { heading: '💾 Software', text: 'At TRL-2 (Concept Formulation), commercial and open-source software tools support specialized research tasks. MATLAB provides signal processing and statistical analysis toolboxes essential for biomarker validation. PyCharm Professional supports professional-grade Python development with remote interpreter capabilities. ABBYY FineReader provides baseline OCR accuracy benchmarks against our custom model. SPSS + NVivo support qualitative data analysis. Docker + Kubernetes licenses are required for container orchestration. These software costs are included in the grant budget as external licensing expenses.' },
-        { heading: '✈️ Travel', text: 'At TRL-2 (Concept Formulation), travel supports dissemination of research findings at 2 domestic and 1 international conference, plus site visits to partner hospitals for data collection and requirement validation. Travel costs are included in the grant budget as they represent external collaboration and dissemination activities.' },
+        { heading: '☁️ Cloud', text: 'TRL-2 uses a minimal cloud footprint: 1 EC2 GPU instance for 1 month (initial model exploration and FL simulation setup) and S3 storage for 3 months (dataset upload and backup). API Gateway is not needed during concept formulation. The cloud budget of ₹1,20,000 is tightly scoped to early-stage prototyping without over-provisioning. As the funding institute covers personnel, hardware, consumables, and contingency, the grant budget focuses solely on external cloud services.' },
+        { heading: '💾 Software', text: 'TRL-2 requires 2 MATLAB licenses (lead researcher and Co-Investigator), 1 PyCharm Professional license (primary developer), and 1 ABBYY FineReader license (OCR baseline benchmarks). SPSS and Docker licenses are deferred to later TRLs where statistical analysis and containerization become necessary. Total software budget ₹2,55,000 covers initial tooling for concept exploration.' },
+        { heading: '✈️ Travel', text: 'TRL-2 includes 1 domestic conference (presenting the concept architecture) and 2 hospital site visits (initial data collection and requirement gathering). No international travel at this stage. Travel budget ₹75,000 covers registration, accommodation, and local transport for dissemination and collaboration activities.' },
     ],
     'trl-3': [
-        { heading: '☁️ Cloud', text: 'At TRL-3 (Proof-of-Concept), cloud infrastructure provides scalable on-demand compute for research workloads. AWS EC2 GPU instances handle distributed FL training across simulated hospital nodes. S3 storage provides multi-site data aggregation and backup with 99.999999999% durability. API Gateway + Lambda enable serverless deployment of the AI inference pipeline. Cloud costs are calibrated to the computational demands of TRL-3 activities. As the funding institute covers personnel, hardware, consumables, and contingency, the grant budget focuses solely on external cloud services.' },
-        { heading: '💾 Software', text: 'At TRL-3 (Proof-of-Concept), commercial and open-source software tools support specialized research tasks. MATLAB provides signal processing and statistical analysis toolboxes essential for biomarker validation. PyCharm Professional supports professional-grade Python development with remote interpreter capabilities. ABBYY FineReader provides baseline OCR accuracy benchmarks against our custom model. SPSS + NVivo support qualitative data analysis. Docker + Kubernetes licenses are required for container orchestration. These software costs are included in the grant budget as external licensing expenses.' },
-        { heading: '✈️ Travel', text: 'At TRL-3 (Proof-of-Concept), travel supports dissemination of research findings at 2 domestic and 1 international conference, plus site visits to partner hospitals for data collection and requirement validation. Travel costs are included in the grant budget as they represent external collaboration and dissemination activities.' },
+        { heading: '☁️ Cloud', text: 'TRL-3 ramps up compute with 1 EC2 GPU instance for 2 months (PoC training and validation) and S3 storage for 4 months (expanding dataset to 3K+ records). API Gateway remains unused as standalone PoC does not require API endpoints. Cloud budget ₹1,80,00 supports moderate compute for proof-of-concept development.' },
+        { heading: '💾 Software', text: 'TRL-3 expands the software stack to 2 MATLAB, 2 PyCharm Professional, 1 ABBYY FineReader, and 1 SPSS + NVivo licenses. The second MATLAB and PyCharm seats accommodate Research Associates joining the PoC phase. SPSS enables statistical analysis of validation results. Total software budget ₹3,20,000.' },
+        { heading: '✈️ Travel', text: 'TRL-3 includes 1 domestic conference and 3 hospital site visits for iterative PoC validation and stakeholder feedback. Travel budget ₹1,00,000 supports increased collaboration intensity as the system matures from concept to prototype.' },
     ],
     'trl-4': [
-        { heading: '☁️ Cloud', text: 'At TRL-4 (Lab Validation), cloud infrastructure provides scalable on-demand compute for research workloads. AWS EC2 GPU instances handle distributed FL training across simulated hospital nodes. S3 storage provides multi-site data aggregation and backup with 99.999999999% durability. API Gateway + Lambda enable serverless deployment of the AI inference pipeline. Cloud costs are calibrated to the computational demands of TRL-4 activities. As the funding institute covers personnel, hardware, consumables, and contingency, the grant budget focuses solely on external cloud services.' },
-        { heading: '💾 Software', text: 'At TRL-4 (Lab Validation), commercial and open-source software tools support specialized research tasks. MATLAB provides signal processing and statistical analysis toolboxes essential for biomarker validation. PyCharm Professional supports professional-grade Python development with remote interpreter capabilities. ABBYY FineReader provides baseline OCR accuracy benchmarks against our custom model. SPSS + NVivo support qualitative data analysis. Docker + Kubernetes licenses are required for container orchestration. These software costs are included in the grant budget as external licensing expenses.' },
-        { heading: '✈️ Travel', text: 'At TRL-4 (Lab Validation), travel supports dissemination of research findings at 2 domestic and 1 international conference, plus site visits to partner hospitals for data collection and requirement validation. Travel costs are included in the grant budget as they represent external collaboration and dissemination activities.' },
+        { heading: '☁️ Cloud', text: 'TRL-4 uses 1 EC2 GPU instance for 3 months (steady validation workloads) and S3 storage throughout the full 6-month phase (data retention and model checkpoints). API Gateway is still not required during lab validation. Cloud budget ₹3,00,000 reflects sustained compute for rigorous lab testing against curated datasets.' },
+        { heading: '💾 Software', text: 'TRL-4 grows the team to 3 researchers with 3 MATLAB, 3 PyCharm, 2 ABBYY, and 1 SPSS licenses. The third seat supports PhD Scholars joining the lab validation effort. ABBYY increases to 2 licenses for parallel OCR refinement. Total software budget ₹4,50,000.' },
+        { heading: '✈️ Travel', text: 'TRL-4 includes 2 domestic conferences (presenting lab validation results) and 4 hospital site visits (testing against live clinical workflows). Travel budget ₹1,50,000 supports expanded dissemination and validation.' },
     ],
     'trl-5': [
-        { heading: '☁️ Cloud', text: 'At TRL-5 (Relevant Environment), cloud infrastructure provides scalable on-demand compute for research workloads. AWS EC2 GPU instances handle distributed FL training across simulated hospital nodes. S3 storage provides multi-site data aggregation and backup with 99.999999999% durability. API Gateway + Lambda enable serverless deployment of the AI inference pipeline. Cloud costs are calibrated to the computational demands of TRL-5 activities. As the funding institute covers personnel, hardware, consumables, and contingency, the grant budget focuses solely on external cloud services.' },
-        { heading: '💾 Software', text: 'At TRL-5 (Relevant Environment), commercial and open-source software tools support specialized research tasks. MATLAB provides signal processing and statistical analysis toolboxes essential for biomarker validation. PyCharm Professional supports professional-grade Python development with remote interpreter capabilities. ABBYY FineReader provides baseline OCR accuracy benchmarks against our custom model. SPSS + NVivo support qualitative data analysis. Docker + Kubernetes licenses are required for container orchestration. These software costs are included in the grant budget as external licensing expenses.' },
-        { heading: '✈️ Travel', text: 'At TRL-5 (Relevant Environment), travel supports dissemination of research findings at 2 domestic and 1 international conference, plus site visits to partner hospitals for data collection and requirement validation. Travel costs are included in the grant budget as they represent external collaboration and dissemination activities.' },
+        { heading: '☁️ Cloud', text: 'TRL-5 requires 2 EC2 GPU instances for 2 months each (parallel experiments in a relevant environment) and S3 storage for 4 months. The dual-instance setup enables simultaneous FL node simulation and model evaluation in this shorter 4-month phase. Cloud budget ₹3,50,000.' },
+        { heading: '💾 Software', text: 'TRL-5 sustains 3 MATLAB, 4 PyCharm, 2 ABBYY, and 2 SPSS licenses for the full team. The fourth PyCharm seat supports an additional developer for relevant-environment integration work. Second SPSS license enables parallel qualitative analysis. Total software budget ₹5,50,000.' },
+        { heading: '✈️ Travel', text: 'TRL-5 includes 2 domestic conferences and 4 hospital site visits for relevant-environment testing. International conference travel is deferred to later TRLs where mature results merit global dissemination. Travel budget ₹1,50,000.' },
     ],
     'trl-6': [
-        { heading: '☁️ Cloud', text: 'At TRL-6 (Relevant Env Demo), cloud infrastructure provides scalable on-demand compute for research workloads. AWS EC2 GPU instances handle distributed FL training across simulated hospital nodes. S3 storage provides multi-site data aggregation and backup with 99.999999999% durability. API Gateway + Lambda enable serverless deployment of the AI inference pipeline. Cloud costs are calibrated to the computational demands of TRL-6 activities. As the funding institute covers personnel, hardware, consumables, and contingency, the grant budget focuses solely on external cloud services.' },
-        { heading: '💾 Software', text: 'At TRL-6 (Relevant Env Demo), commercial and open-source software tools support specialized research tasks. MATLAB provides signal processing and statistical analysis toolboxes essential for biomarker validation. PyCharm Professional supports professional-grade Python development with remote interpreter capabilities. ABBYY FineReader provides baseline OCR accuracy benchmarks against our custom model. SPSS + NVivo support qualitative data analysis. Docker + Kubernetes licenses are required for container orchestration. These software costs are included in the grant budget as external licensing expenses.' },
-        { heading: '✈️ Travel', text: 'At TRL-6 (Relevant Env Demo), travel supports dissemination of research findings at 2 domestic and 1 international conference, plus site visits to partner hospitals for data collection and requirement validation. Travel costs are included in the grant budget as they represent external collaboration and dissemination activities.' },
+        { heading: '☁️ Cloud', text: 'TRL-6 adds API Gateway infrastructure: 2 EC2 GPU instances for 2 months, S3 for 6 months, and API Gateway + Lambda for 1 month (first API endpoint deployment for demo integration). The API Gateway introduction marks the transition from standalone research to service-oriented architecture. Cloud budget ₹4,00,000.' },
+        { heading: '💾 Software', text: 'TRL-6 maintains the TRL-5 software profile: 3 MATLAB, 4 PyCharm, 2 ABBYY, and 2 SPSS licenses. No additional licenses required at this stage as the team focus shifts from procurement to integration. Docker/K8s containerization costs are covered by institute infrastructure. Total software budget ₹5,50,000.' },
+        { heading: '✈️ Travel', text: 'TRL-6 includes 2 domestic conferences and 4 hospital site visits for demo preparation and user acceptance testing. Travel budget ₹1,50,000.' },
     ],
     'trl-7': [
-        { heading: '☁️ Cloud', text: 'At TRL-7 (Operational Demo), cloud infrastructure provides scalable on-demand compute for research workloads. AWS EC2 GPU instances handle distributed FL training across simulated hospital nodes. S3 storage provides multi-site data aggregation and backup with 99.999999999% durability. API Gateway + Lambda enable serverless deployment of the AI inference pipeline. Cloud costs are calibrated to the computational demands of TRL-7 activities. As the funding institute covers personnel, hardware, consumables, and contingency, the grant budget focuses solely on external cloud services.' },
-        { heading: '💾 Software', text: 'At TRL-7 (Operational Demo), commercial and open-source software tools support specialized research tasks. MATLAB provides signal processing and statistical analysis toolboxes essential for biomarker validation. PyCharm Professional supports professional-grade Python development with remote interpreter capabilities. ABBYY FineReader provides baseline OCR accuracy benchmarks against our custom model. SPSS + NVivo support qualitative data analysis. Docker + Kubernetes licenses are required for container orchestration. These software costs are included in the grant budget as external licensing expenses.' },
-        { heading: '✈️ Travel', text: 'At TRL-7 (Operational Demo), travel supports dissemination of research findings at 2 domestic and 1 international conference, plus site visits to partner hospitals for data collection and requirement validation. Travel costs are included in the grant budget as they represent external collaboration and dissemination activities.' },
+        { heading: '☁️ Cloud', text: 'TRL-7 operates 2 EC2 GPU instances for 2 months, S3 for 6 months, and API Gateway + Lambda for 3 months (full operational demo with persistent API endpoints). The extended API Gateway duration reflects continuous demo operation and integration testing. Cloud budget ₹4,50,000.' },
+        { heading: '💾 Software', text: 'TRL-7 sustains 3 MATLAB, 4 PyCharm, 2 ABBYY, and 2 SPSS licenses for the operational demo phase. Total software budget ₹5,50,000.' },
+        { heading: '✈️ Travel', text: 'TRL-7 includes 2 domestic conferences, 1 international conference (presenting operational demo results to the global research community), and 3 hospital site visits for final validation. This is the first TRL with international travel as the system has matured sufficiently for global dissemination. Travel budget ₹2,00,000.' },
     ],
     'trl-8': [
-        { heading: '☁️ Cloud', text: 'At TRL-8 (System Qualified), cloud infrastructure provides scalable on-demand compute for research workloads. AWS EC2 GPU instances handle distributed FL training across simulated hospital nodes. S3 storage provides multi-site data aggregation and backup with 99.999999999% durability. API Gateway + Lambda enable serverless deployment of the AI inference pipeline. Cloud costs are calibrated to the computational demands of TRL-8 activities. As the funding institute covers personnel, hardware, consumables, and contingency, the grant budget focuses solely on external cloud services.' },
-        { heading: '💾 Software', text: 'At TRL-8 (System Qualified), commercial and open-source software tools support specialized research tasks. MATLAB provides signal processing and statistical analysis toolboxes essential for biomarker validation. PyCharm Professional supports professional-grade Python development with remote interpreter capabilities. ABBYY FineReader provides baseline OCR accuracy benchmarks against our custom model. SPSS + NVivo support qualitative data analysis. Docker + Kubernetes licenses are required for container orchestration. These software costs are included in the grant budget as external licensing expenses.' },
-        { heading: '✈️ Travel', text: 'At TRL-8 (System Qualified), travel supports dissemination of research findings at 2 domestic and 1 international conference, plus site visits to partner hospitals for data collection and requirement validation. Travel costs are included in the grant budget as they represent external collaboration and dissemination activities.' },
+        { heading: '☁️ Cloud', text: 'TRL-8 runs 2 EC2 GPU instances for 3 months (sustained qualification testing), S3 for 4 months, and API Gateway for 3 months. The extended EC2 duration supports comprehensive system qualification across multiple test scenarios. Cloud budget ₹5,00,000, the highest across all TRLs due to intensive testing requirements.' },
+        { heading: '💾 Software', text: 'TRL-8 peaks at 4 MATLAB, 4 PyCharm, 3 ABBYY, and 2 SPSS licenses — the maximum software footprint in the project. The additional MATLAB and ABBYY seats support parallel qualification activities. Total software budget ₹6,00,000.' },
+        { heading: '✈️ Travel', text: 'TRL-8 includes 2 domestic conferences, 1 international conference, and 3 hospital site visits for qualification sign-off. Travel budget ₹2,00,000.' },
     ],
     'trl-9': [
-        { heading: '☁️ Cloud', text: 'At TRL-9 (Full Deployment), cloud infrastructure provides scalable on-demand compute for research workloads. AWS EC2 GPU instances handle distributed FL training across simulated hospital nodes. S3 storage provides multi-site data aggregation and backup with 99.999999999% durability. API Gateway + Lambda enable serverless deployment of the AI inference pipeline. Cloud costs are calibrated to the computational demands of TRL-9 activities. As the funding institute covers personnel, hardware, consumables, and contingency, the grant budget focuses solely on external cloud services.' },
-        { heading: '💾 Software', text: 'At TRL-9 (Full Deployment), commercial and open-source software tools support specialized research tasks. MATLAB provides signal processing and statistical analysis toolboxes essential for biomarker validation. PyCharm Professional supports professional-grade Python development with remote interpreter capabilities. ABBYY FineReader provides baseline OCR accuracy benchmarks against our custom model. SPSS + NVivo support qualitative data analysis. Docker + Kubernetes licenses are required for container orchestration. These software costs are included in the grant budget as external licensing expenses.' },
-        { heading: '✈️ Travel', text: 'At TRL-9 (Full Deployment), travel supports dissemination of research findings at 2 domestic and 1 international conference, plus site visits to partner hospitals for data collection and requirement validation. Travel costs are included in the grant budget as they represent external collaboration and dissemination activities.' },
+        { heading: '☁️ Cloud', text: 'TRL-9 supports full deployment with 2 EC2 GPU instances for 2 months (production inference support), S3 for 8 months (full-year data retention), and API Gateway for 2 months (production API serving). The 8-month S3 duration reflects the need for long-term patient data storage. Cloud budget ₹4,50,000 is lower than TRL-8 as the focus shifts from testing to efficient production operation.' },
+        { heading: '💾 Software', text: 'TRL-9 reduces software to 3 MATLAB, 3 PyCharm, 2 ABBYY, and 2 SPSS licenses as the team transitions from development to maintenance. The reduced MATLAB and PyCharm counts reflect lower development intensity during the deployment phase. Total software budget ₹5,16,000.' },
+        { heading: '✈️ Travel', text: 'TRL-9 includes 1 domestic conference (final project dissemination), 1 international conference (publication of project outcomes), and 4 hospital site visits (deployment support and handover). Travel budget ₹1,75,000 prioritizes deployment handover over new dissemination.' },
     ],
 };
 
 const METHODOLOGY_NOTES = {
     'trl-2': [
         'All costs are in Indian Rupees (₹) and inclusive of applicable taxes.',
-        'Cloud costs estimated using AWS Pricing Calculator (ap-south-1 region) for TRL-2 workload profile.',
+        'Cloud costs computed from actual resource quantities (1 EC2 GPU × 1 month, S3 × 3 months) at AWS ap-south-1 rates, with small budget adjustment (+8.1%) to match the TRL-2 cloud allocation.',
         'Personnel, hardware, consumables, and contingency are covered by the funding institute and excluded from this grant budget.',
-        'Total Budget for TRL-2: ₹450,000 (₹4.50 Lakhs).',
-        'Duration: Months 1-6 (6 months) with 3 budget categories (Cloud, Software, Travel) and 6 project objectives.',
+        'Software and travel line items use TRL-specific quantities (2 MATLAB, 1 PyCharm, 1 ABBYY; 1 domestic conference, 2 site visits) adjusted to the TRL-2 budget.',
+        'Total Budget for TRL-2: ₹450,000 (₹4.50 Lakhs). Duration: Months 1-6 (6 months).',
     ],
     'trl-3': [
         'All costs are in Indian Rupees (₹) and inclusive of applicable taxes.',
-        'Cloud costs estimated using AWS Pricing Calculator (ap-south-1 region) for TRL-3 workload profile.',
+        'Cloud costs computed from actual resource quantities (1 EC2 GPU × 2 months, S3 × 4 months) with budget adjustment (-9.1%) to match the TRL-3 cloud allocation.',
         'Personnel, hardware, consumables, and contingency are covered by the funding institute and excluded from this grant budget.',
-        'Total Budget for TRL-3: ₹600,000 (₹6.00 Lakhs).',
-        'Duration: Months 7-12 (6 months) with 3 budget categories (Cloud, Software, Travel) and 6 project objectives.',
+        'Software and travel line items use TRL-specific quantities (2 MATLAB, 2 PyCharm, 1 ABBYY, 1 SPSS; 1 domestic conference, 3 site visits) adjusted to the TRL-3 budget.',
+        'Total Budget for TRL-3: ₹600,000 (₹6.00 Lakhs). Duration: Months 7-12 (6 months).',
     ],
     'trl-4': [
         'All costs are in Indian Rupees (₹) and inclusive of applicable taxes.',
-        'Cloud costs estimated using AWS Pricing Calculator (ap-south-1 region) for TRL-4 workload profile.',
+        'Cloud costs computed from actual resource quantities (1 EC2 GPU × 3 months, S3 × 6 months) with small budget adjustment (+1.0%) to match the TRL-4 cloud allocation.',
         'Personnel, hardware, consumables, and contingency are covered by the funding institute and excluded from this grant budget.',
-        'Total Budget for TRL-4: ₹900,000 (₹9.00 Lakhs).',
-        'Duration: Months 13-18 (6 months) with 3 budget categories (Cloud, Software, Travel) and 6 project objectives.',
+        'Software and travel line items use TRL-specific quantities (3 MATLAB, 3 PyCharm, 2 ABBYY, 1 SPSS; 2 domestic conferences, 4 site visits) adjusted to the TRL-4 budget.',
+        'Total Budget for TRL-4: ₹900,000 (₹9.00 Lakhs). Duration: Months 13-18 (6 months).',
     ],
     'trl-5': [
         'All costs are in Indian Rupees (₹) and inclusive of applicable taxes.',
-        'Cloud costs estimated using AWS Pricing Calculator (ap-south-1 region) for TRL-5 workload profile.',
+        'Cloud costs computed from actual resource quantities (2 EC2 GPU × 2 months, S3 × 4 months) with small budget adjustment (+0.6%) to match the TRL-5 cloud allocation.',
         'Personnel, hardware, consumables, and contingency are covered by the funding institute and excluded from this grant budget.',
-        'Total Budget for TRL-5: ₹10,50,000 (₹10.50 Lakhs).',
-        'Duration: Months 19-22 (4 months) with 3 budget categories (Cloud, Software, Travel) and 6 project objectives.',
+        'Software and travel line items use TRL-specific quantities (3 MATLAB, 4 PyCharm, 2 ABBYY, 2 SPSS; 2 domestic conferences, 4 site visits) adjusted to the TRL-5 budget.',
+        'Total Budget for TRL-5: ₹10,50,000 (₹10.50 Lakhs). Duration: Months 19-22 (4 months).',
     ],
     'trl-6': [
         'All costs are in Indian Rupees (₹) and inclusive of applicable taxes.',
-        'Cloud costs estimated using AWS Pricing Calculator (ap-south-1 region) for TRL-6 workload profile.',
+        'Cloud costs computed from actual resource quantities (2 EC2 GPU × 2 months, S3 × 6 months, API × 1 month) with small budget adjustment (+0.8%) to match the TRL-6 cloud allocation.',
         'Personnel, hardware, consumables, and contingency are covered by the funding institute and excluded from this grant budget.',
-        'Total Budget for TRL-6: ₹11,00,000 (₹11.00 Lakhs).',
-        'Duration: Months 23-28 (6 months) with 3 budget categories (Cloud, Software, Travel) and 6 project objectives.',
+        'Software and travel line items use TRL-specific quantities (3 MATLAB, 4 PyCharm, 2 ABBYY, 2 SPSS; 2 domestic conferences, 4 site visits) adjusted to the TRL-6 budget.',
+        'Total Budget for TRL-6: ₹11,00,000 (₹11.00 Lakhs). Duration: Months 23-28 (6 months).',
     ],
     'trl-7': [
         'All costs are in Indian Rupees (₹) and inclusive of applicable taxes.',
-        'Cloud costs estimated using AWS Pricing Calculator (ap-south-1 region) for TRL-7 workload profile.',
+        'Cloud costs computed from actual resource quantities (2 EC2 GPU × 2 months, S3 × 6 months, API × 3 months) with small budget adjustment (+0.7%) to match the TRL-7 cloud allocation.',
         'Personnel, hardware, consumables, and contingency are covered by the funding institute and excluded from this grant budget.',
-        'Total Budget for TRL-7: ₹12,00,000 (₹12.00 Lakhs).',
-        'Duration: Months 29-34 (6 months) with 3 budget categories (Cloud, Software, Travel) and 6 project objectives.',
+        'Software and travel line items use TRL-specific quantities (3 MATLAB, 4 PyCharm, 2 ABBYY, 2 SPSS; 2 domestic + 1 international conference, 3 site visits) adjusted to the TRL-7 budget.',
+        'Total Budget for TRL-7: ₹12,00,000 (₹12.00 Lakhs). Duration: Months 29-34 (6 months).',
     ],
     'trl-8': [
         'All costs are in Indian Rupees (₹) and inclusive of applicable taxes.',
-        'Cloud costs estimated using AWS Pricing Calculator (ap-south-1 region) for TRL-8 workload profile.',
+        'Cloud costs computed from actual resource quantities (2 EC2 GPU × 3 months, S3 × 4 months, API × 3 months) with budget adjustment (-12.7%) to match the TRL-8 cloud allocation.',
         'Personnel, hardware, consumables, and contingency are covered by the funding institute and excluded from this grant budget.',
-        'Total Budget for TRL-8: ₹13,00,000 (₹13.00 Lakhs).',
-        'Duration: Months 35-40 (6 months) with 3 budget categories (Cloud, Software, Travel) and 6 project objectives.',
+        'Software and travel line items use TRL-specific quantities (4 MATLAB, 4 PyCharm, 3 ABBYY, 2 SPSS; 2 domestic + 1 international conference, 3 site visits) adjusted to the TRL-8 budget.',
+        'Total Budget for TRL-8: ₹13,00,000 (₹13.00 Lakhs). Duration: Months 35-40 (6 months).',
     ],
     'trl-9': [
         'All costs are in Indian Rupees (₹) and inclusive of applicable taxes.',
-        'Cloud costs estimated using AWS Pricing Calculator (ap-south-1 region) for TRL-9 workload profile.',
+        'Cloud costs computed from actual resource quantities (2 EC2 GPU × 2 months, S3 × 8 months, API × 2 months) with small budget adjustment (+0.9%) to match the TRL-9 cloud allocation.',
         'Personnel, hardware, consumables, and contingency are covered by the funding institute and excluded from this grant budget.',
-        'Total Budget for TRL-9: ₹11,41,000 (₹11.41 Lakhs).',
-        'Duration: Months 41-48 (8 months) with 3 budget categories (Cloud, Software, Travel) and 6 project objectives.',
+        'MATLAB is excluded from all TRLs — the institute provides a campus-wide MATLAB site license.',
+        'Software and travel line items use TRL-specific quantities (3 PyCharm, 2 ABBYY, 2 SPSS; 1 domestic + 1 international conference, 4 site visits) adjusted to the TRL-9 budget.',
+        'Total Budget for TRL-9: ₹8,80,000 (₹8.80 Lakhs). Duration: Months 41-48 (8 months).',
     ],
 };
 
+// ---- COMPARATIVE COST ESTIMATION (3-way) ----
+// AWS vs Azure vs GCP for cloud; vendor vs academic vs OSS for software; standard vs early vs group for travel
+const COMPARATIVE_COST = [
+    {
+        component: 'Cloud — EC2 GPU (p3.2xlarge equiv.)',
+        aws: '₹75,000/mo (p3.2xlarge, on-demand, ap-south-1)',
+        azure: '₹82,500/mo (NC6s v3, on-demand, south india)',
+        gcp: '₹71,250/mo (V100, 1-yr committed, asia-south1)',
+        note: 'AWS chosen for FL team familiarity and existing credits. GCP ~5% cheaper with 1-yr commit.',
+    },
+    {
+        component: 'Cloud — S3 Storage (5 TB)',
+        aws: '₹12,000/mo (S3 Standard, ap-south-1)',
+        azure: '₹13,200/mo (Blob Hot, south india)',
+        gcp: '₹11,400/mo (Cloud Storage Standard, asia-south1)',
+        note: 'AWS S3 selected for integrated GPU ecosystem. GCP ~5% cheaper.',
+    },
+    {
+        component: 'Cloud — API Gateway + Lambda',
+        aws: '₹25,000/mo (API Gateway REST + 500K req/mo)',
+        azure: '₹27,000/mo (API Mgmt Consumption + Functions)',
+        gcp: '₹23,500/mo (Cloud Run + HTTP LB)',
+        note: 'AWS API Gateway chosen for Lambda cold-start advantages. GCP ~6% cheaper.',
+    },
+    {
+        component: 'Software — PyCharm Professional',
+        vendor: '₹25,000/license/yr (JetBrains)',
+        academic: '₹12,500/license/yr (academic discount 50%)',
+        oss: '₹0 (VS Code + Python plugins)',
+        note: 'Academic pricing used in budget (50% discount applied).',
+    },
+    {
+        component: 'Software — ABBYY FineReader OCR',
+        vendor: '₹35,000/license (ABBYY)',
+        academic: '₹17,500/license (academic discount 50%)',
+        oss: '₹0 (Tesseract OCR + custom training)',
+        note: 'Academic pricing used. OSS alternative viable but lacks medical-form templates.',
+    },
+    {
+        component: 'Software — SPSS + NVivo',
+        vendor: '₹55,000/license/yr (IBM SPSS + QSR NVivo)',
+        academic: '₹27,500/license/yr (academic bundle)',
+        oss: '₹0 (R + Python stats + QualCoder)',
+        note: 'Academic bundle pricing used (50% discount). OSS alternatives available for basic analysis.',
+    },
+    {
+        component: 'Travel — Domestic Conference',
+        standard: '₹50,000/trip (reg + air + 3 nights)',
+        early: '₹40,000/trip (early reg + advance air)',
+        group: '₹35,000/trip (2+ researchers sharing)',
+        note: 'Early-bird registration and shared accommodation planned to reduce costs.',
+    },
+    {
+        component: 'Travel — International Conference',
+        standard: '₹1,00,000/trip (reg + air + 5 nights)',
+        early: '₹80,000/trip (early reg + advance air)',
+        group: '₹70,000/trip (presenting co-authored papers)',
+        note: 'Co-presenting with collaborators to split costs. Early-bird target.',
+    },
+    {
+        component: 'Travel — Hospital Site Visit',
+        standard: '₹15,000/visit (local transport + per diem)',
+        early: '₹12,000/visit (advance booking discounts)',
+        group: '₹10,000/visit (multiple visits per trip)',
+        note: 'Combining multiple site visits per trip reduces per-visit cost.',
+    },
+];
+
+// ---- RISK ASSESSMENT PER BUDGET COMPONENT ----
+const RISK_ASSESSMENT = [
+    {
+        component: 'Cloud Services',
+        category: 'Operational',
+        risk: 'Cost overrun due to GPU instance upscaling beyond planned burst months (+10-15% over TRL allocation)',
+        likelihood: 'Medium',
+        impact: 'Medium',
+        mitigation: 'Use spot/preemptible instances for non-critical training; set AWS Budget alerts at 80% allocation; reserve instances for sustained workloads.',
+        contingency: 'Reallocate 10% of travel budget to cloud if needed; reduce S3 storage class to Infrequent Access.',
+    },
+    {
+        component: 'Cloud Services',
+        category: 'Technical',
+        risk: 'Service downtime / region outage affecting training pipelines (AWS ap-south-1)',
+        likelihood: 'Low',
+        impact: 'High',
+        mitigation: 'Multi-AZ deployment for critical data; daily EBS snapshots to S3; documented failover to GCP as cold standby.',
+        contingency: 'Extend timeline by 1 week per incident; use GCP credits (free tier) for critical-path tasks during outage.',
+    },
+    {
+        component: 'Cloud Services',
+        category: 'Security',
+        risk: 'Data breach via misconfigured S3 bucket or compromised API keys (patient data exposure)',
+        likelihood: 'Low',
+        impact: 'Very High',
+        mitigation: 'IAM least-privilege policies; S3 Block Public Access enabled; encryption at rest (SSE-S3) and in transit (TLS 1.3); quarterly security audit.',
+        contingency: 'Immediate key rotation and bucket lockdown; notify institute IR team; restore from encrypted backup.',
+    },
+    {
+        component: 'Software Licenses',
+        category: 'Compliance',
+        risk: 'License audit non-compliance (PyCharm, ABBYY, SPSS) — using academic licenses beyond allowed user count',
+        likelihood: 'Medium',
+        impact: 'Medium',
+        mitigation: 'Centralized license server tracks seat usage; annual user count audit; renewals aligned with TRL ramp-up schedule.',
+        contingency: 'Unused seats from earlier TRLs reallocated; OSS fallback (VS Code, Tesseract, R) activated within 1 week.',
+    },
+    {
+        component: 'Software Licenses',
+        category: 'Vendor',
+        risk: 'Vendor lock-in / price increase upon renewal (SPSS + NVivo 10-20% annual increase)',
+        likelihood: 'Medium',
+        impact: 'Low',
+        mitigation: 'Annual renewal clause capped at 10%; evaluate OSS migration path (R + QualCoder) by TRL-5.',
+        contingency: 'Defer renewal for 1 TRL and use OSS; savings from deferred renewal covers price increase in next cycle.',
+    },
+    {
+        component: 'Software Licenses',
+        category: 'Technical',
+        risk: 'Version incompatibility — newer tool version breaks existing analysis pipelines',
+        likelihood: 'Low',
+        impact: 'Medium',
+        mitigation: 'Pin tool versions per TRL in documentation; containerized environments (Docker) for reproducibility; test upgrades on staging before production.',
+        contingency: 'Rollback to previous version via license server downgrade; 2-week stabilization buffer in project timeline.',
+    },
+    {
+        component: 'Travel',
+        category: 'Logistical',
+        risk: 'Conference cancellation / travel restrictions (force majeure: pandemic, visa delays)',
+        likelihood: 'Medium',
+        impact: 'Medium',
+        mitigation: 'Register for virtual attendance option; book refundable tickets with cancellation insurance; maintain speaker-ready pre-recorded presentations.',
+        contingency: 'Convert to virtual conference attendance (registration only, ~60% cost saving); reallocate saved funds to additional cloud compute.',
+    },
+    {
+        component: 'Travel',
+        category: 'Health & Safety',
+        risk: 'Researcher health incident during site visit or international travel',
+        likelihood: 'Low',
+        impact: 'High',
+        mitigation: 'Institute travel insurance mandatory; pre-trip health briefing; emergency contact protocol established with partner hospitals.',
+        contingency: 'Remote site visit via video call as fallback; alternate researcher assigned from team.',
+    },
+    {
+        component: 'Travel',
+        category: 'Budget',
+        risk: 'Currency fluctuation / inflation increasing travel costs (5-15% above estimate)',
+        likelihood: 'Medium',
+        impact: 'Low',
+        mitigation: 'Book early-bird rates (30-40% savings vs. standard); use institute-favored travel vendors for corporate rates.',
+        contingency: 'Reduce number of domestic conferences by 1; limit site visits to essential stakeholders.',
+    },
+];
+
+// ---- UTILIZATION PLAN PER BUDGET COMPONENT ACROSS ALL TRLs ----
+const UTILIZATION_PLAN = [
+    {
+        component: 'AWS EC2 GPU Instances',
+        type: 'Cloud',
+        trl2: '1 instance × 1 month — FL simulation prototyping',
+        trl3: '1 instance × 2 months — PoC model training',
+        trl4: '1 instance × 3 months — validation runs',
+        trl5: '2 instances × 2 months — parallel env. testing',
+        trl6: '2 instances × 2 months — demo prep + API integration',
+        trl7: '2 instances × 2 months — operational demo runs',
+        trl8: '2 instances × 3 months — qualification testing',
+        trl9: '2 instances × 2 months — production inference support',
+    },
+    {
+        component: 'AWS S3 Storage (5 TB)',
+        type: 'Cloud',
+        trl2: '3 months — initial dataset (1K records)',
+        trl3: '4 months — expanded dataset (3K records)',
+        trl4: '6 months — full validation dataset',
+        trl5: '4 months — relevant env. data',
+        trl6: '6 months — demo data + backups',
+        trl7: '6 months — operational data',
+        trl8: '4 months — qualification test data',
+        trl9: '8 months — production data retention',
+    },
+    {
+        component: 'API Gateway + Lambda',
+        type: 'Cloud',
+        trl2: 'Not used — concept phase',
+        trl3: 'Not used — no API requirement',
+        trl4: 'Not used — lab validation only',
+        trl5: 'Not used — relevant env. testing',
+        trl6: '1 month — first API endpoint for demo',
+        trl7: '3 months — full operational demo API',
+        trl8: '3 months — qualification API testing',
+        trl9: '2 months — production API serving',
+    },
+    {
+        component: 'PyCharm Professional',
+        type: 'Software',
+        trl2: '1 license — primary developer',
+        trl3: '2 licenses — dev + RA joining',
+        trl4: '3 licenses — full development team',
+        trl5: '4 licenses — + integration specialist',
+        trl6: '4 licenses — sustained team',
+        trl7: '4 licenses — sustained team',
+        trl8: '4 licenses — peak team',
+        trl9: '3 licenses — maintenance mode',
+    },
+    {
+        component: 'ABBYY FineReader OCR',
+        type: 'Software',
+        trl2: '1 license — OCR baseline benchmark',
+        trl3: '1 license — model refinement',
+        trl4: '2 licenses — parallel OCR validation',
+        trl5: '2 licenses — env. testing',
+        trl6: '2 licenses — demo pipeline',
+        trl7: '2 licenses — operational OCR',
+        trl8: '3 licenses — peak OCR for qualification',
+        trl9: '2 licenses — production OCR',
+    },
+    {
+        component: 'SPSS + NVivo',
+        type: 'Software',
+        trl2: 'Not used — concept phase',
+        trl3: '1 license — initial statistical analysis',
+        trl4: '1 license — validation stats',
+        trl5: '2 licenses — detailed env. analysis',
+        trl6: '2 licenses — demo evaluation',
+        trl7: '2 licenses — operational analysis',
+        trl8: '2 licenses — qualification stats',
+        trl9: '2 licenses — production monitoring',
+    },
+    {
+        component: 'Domestic Conferences',
+        type: 'Travel',
+        trl2: '1 conf. — present concept architecture',
+        trl3: '1 conf. — present PoC results',
+        trl4: '2 confs. — present validation results',
+        trl5: '2 confs. — env. testing findings',
+        trl6: '2 confs. — demo preparation',
+        trl7: '2 confs. — operational demo results',
+        trl8: '2 confs. — qualification outcomes',
+        trl9: '1 conf. — final project dissemination',
+    },
+    {
+        component: 'International Conference',
+        type: 'Travel',
+        trl2: 'Not planned',
+        trl3: 'Not planned',
+        trl4: 'Not planned',
+        trl5: 'Not planned',
+        trl6: 'Not planned',
+        trl7: '1 conf. — global research community',
+        trl8: '1 conf. — qualification dissemination',
+        trl9: '1 conf. — final project outcomes',
+    },
+    {
+        component: 'Hospital Site Visits',
+        type: 'Travel',
+        trl2: '2 visits — requirements gathering',
+        trl3: '3 visits — PoC feedback collection',
+        trl4: '4 visits — validation testing on-site',
+        trl5: '4 visits — env. testing',
+        trl6: '4 visits — demo preparation',
+        trl7: '3 visits — operational sign-off',
+        trl8: '3 visits — qualification validation',
+        trl9: '4 visits — deployment handover',
+    },
+];
 
 function formatIndian(n) {
     if (typeof n === 'string') n = parseInt(n.replace(/,/g, ''));
@@ -4845,31 +5048,61 @@ function formatIndian(n) {
 }
 
 function getCostBreakdownItems(trl) {
-    const baseCloudMonthly = 2*75000 + 1*12000 + 1*25000;
-    const items = [];
+    var trlIdx = parseInt(trl.id.split('-')[1]) - 2;  // trl-2 → 0 … trl-9 → 7
+    var items = [];
 
-    // Cloud (recurring)
-    const cloudScale = trl.cloud / (baseCloudMonthly * trl.months);
-    COST_BREAKDOWN_ITEMS.cloud.forEach(function(ci) {
-        const amt = Math.round(ci.qty * ci.rateMonth * trl.months * cloudScale);
-        items.push({ cat: 'Cloud', item: ci.item, qty: ci.qty, rate: ci.rateMonth, dur: trl.months + ' months', amount: amt });
+    function eff(ci, field, fallback) {
+        return ci[field] ? ci[field][trlIdx] : fallback;
+    }
+
+    // Cloud — e.g. EC2: 1 instance × ₹75K × 1 month in TRL-2
+    var cloudRaw = COST_BREAKDOWN_ITEMS.cloud.map(function(ci) {
+        var eqty = eff(ci, 'trlUsage', ci.qty);
+        var emo  = eff(ci, 'trlMonths', trl.months);
+        return { ci: ci, eqty: eqty, emo: emo, raw: eqty * ci.rateMonth * emo, rate: ci.rateMonth };
     });
 
-    // Travel (one-time / lump sum)
-    const baseTravelTotal = 200000 + 200000 + 60000;
-    const travelScale = trl.travel / baseTravelTotal;
-    COST_BREAKDOWN_ITEMS.travel.forEach(function(ci) {
-        const amt = Math.round(ci.lumpSum * travelScale);
-        items.push({ cat: 'Travel', item: ci.item, qty: ci.qty, rate: Math.round(ci.lumpSum / ci.qty * travelScale), dur: '—', amount: amt });
+    // Travel — per-trip cost from lumpSum / base qty
+    var travelRaw = COST_BREAKDOWN_ITEMS.travel.map(function(ci) {
+        var eqty = eff(ci, 'trlQty', ci.qty);
+        var perTrip = ci.lumpSum / ci.qty;
+        return { ci: ci, eqty: eqty, emo: 0, raw: eqty * perTrip, rate: perTrip };
     });
 
-    // Software (non-recurring)
-    const baseSoftwareTotal = 5*120000 + 5*25000 + 3*35000 + 2*55000 + 1*300000;
-    const softwareScale = trl.software / baseSoftwareTotal;
-    COST_BREAKDOWN_ITEMS.software.forEach(function(ci) {
-        const amt = Math.round(ci.qty * ci.unitCost * softwareScale);
-        items.push({ cat: 'Software', item: ci.item, qty: ci.qty, rate: Math.round(ci.unitCost * softwareScale), dur: '—', amount: amt });
+    // Software — licenses purchased once
+    var softwareRaw = COST_BREAKDOWN_ITEMS.software.map(function(ci) {
+        var eqty = eff(ci, 'trlQty', ci.qty);
+        return { ci: ci, eqty: eqty, emo: 0, raw: eqty * ci.unitCost, rate: ci.unitCost };
     });
+
+    function process(cat, arr, target) {
+        var baseTotal = arr.reduce(function(s, x) { return s + x.raw; }, 0);
+        var scale = target / baseTotal;
+        var computed = arr.map(function(x) {
+            return { ci: x.ci, eqty: x.eqty, emo: x.emo, rate: x.rate, raw: x.raw, amt: Math.round(x.raw * scale) };
+        });
+        var sum = computed.reduce(function(s, x) { return s + x.amt; }, 0);
+        var diff = target - sum;
+        if (diff !== 0) {
+            var largest = computed.reduce(function(a, b) { return a.raw >= b.raw ? a : b; });
+            largest.amt += diff;
+        }
+        computed.forEach(function(x) {
+            if (x.amt === 0) return;
+            items.push({
+                cat: cat,
+                item: x.ci.item,
+                qty: x.eqty,
+                rate: cat === 'Cloud' ? x.rate : Math.round(x.rate * scale),
+                dur: cat === 'Cloud' ? x.emo + ' months' : '—',
+                amount: x.amt
+            });
+        });
+    }
+
+    process('Cloud', cloudRaw, trl.cloud);
+    process('Travel', travelRaw, trl.travel);
+    process('Software', softwareRaw, trl.software);
 
     return items;
 }
@@ -4885,11 +5118,14 @@ function renderBudgetContent() {
 
     var content = '';
 
-    // All 5 panels rendered
+    // All 8 panels rendered
     content += renderBudgetOverview(trl);
     content += renderCostBreakdownTable(trl);
     content += renderCostJustification(trl);
     content += renderActivityMap(trl);
+    content += renderComparativeCost(trl);
+    content += renderRiskAssessment(trl);
+    content += renderUtilizationPlan(trl);
     content += renderBudgetReferences(trl);
 
     document.getElementById('budgetContent').innerHTML = content;
@@ -4997,13 +5233,8 @@ function renderCostBreakdownTable(trl) {
                     html += '<td style="text-align:right;padding:10px 12px;">' + formatIndian(i.rate) + '</td>';
                     html += '<td style="text-align:right;padding:10px 12px;">' + i.dur + '</td>';
                 } else {
-                    if (i.cat === 'Contingency') {
-                        html += '<td style="text-align:right;padding:10px 12px;">—</td>';
-                        html += '<td style="text-align:right;padding:10px 12px;">—</td>';
-                    } else {
-                        html += '<td style="text-align:right;padding:10px 12px;">' + formatIndian(i.rate) + '</td>';
-                        html += '<td style="text-align:right;padding:10px 12px;">—</td>';
-                    }
+                    html += '<td style="text-align:right;padding:10px 12px;">' + formatIndian(i.rate) + '</td>';
+                    html += '<td style="text-align:right;padding:10px 12px;">—</td>';
                 }
                 html += '<td style="text-align:right;padding:10px 12px;font-weight:600;">' + formatIndian(i.amount) + '</td>';
                 html += '</tr>';
@@ -5016,11 +5247,6 @@ function renderCostBreakdownTable(trl) {
         });
         return html;
     }
-
-    var totalDirect = catSubtotal('Personnel') + catSubtotal('Cloud') + catSubtotal('Consumables')
-        + catSubtotal('Travel') + catSubtotal('Hardware') + catSubtotal('Software');
-    var totalContingency = catSubtotal('Contingency');
-    var totalBudget = totalDirect + totalContingency;
 
     return '<div class="budget-panel" id="costBreakdown" style="display:none;">'
         + '<div class="card" style="padding:24px;margin-bottom:20px;">'
@@ -5154,6 +5380,91 @@ function renderBudgetReferences(trl) {
         + '<p style="font-size:0.9rem;color:#5f6368;">Comprehensive resource plan with hardware specifications, software licensing details, and personnel qualifications for ' + trl.label + '.</p>'
         + '<code style="display:block;padding:12px;background:#f8f9fa;border-radius:8px;margin-top:8px;font-size:0.85rem;">📁 PROJECT_RESOURCE_PLAN_' + trl.id.toUpperCase() + '.md</code>'
         + '</div>'
+        + '</div></div></div>';
+}
+
+function renderComparativeCost(trl) {
+    var rows = COMPARATIVE_COST.map(function(c) {
+        return '<tr style="border-bottom:1px solid #e8eaed;">'
+            + '<td style="padding:8px 12px;font-weight:600;">' + c.component + '</td>'
+            + '<td style="padding:8px 12px;">' + (c.aws || c.vendor || '—') + '</td>'
+            + '<td style="padding:8px 12px;">' + (c.azure || c.academic || c.early || '—') + '</td>'
+            + '<td style="padding:8px 12px;">' + (c.gcp || c.oss || c.group || '—') + '</td>'
+            + '<td style="padding:8px 12px;font-size:0.85rem;color:#5f6368;">' + c.note + '</td>'
+            + '</tr>';
+    }).join('');
+    return '<div class="budget-panel" id="comparativeCost" style="display:none;">'
+        + '<div class="card" style="padding:24px;">'
+        + '<h3 style="color:var(--medical-blue);margin-bottom:16px;">📊 Comparative Cost Estimation — ' + trl.label + '</h3>'
+        + '<p style="color:#5f6368;font-size:0.95rem;margin-bottom:16px;">Three-way cost comparison across providers/vendors. Budget uses the <strong>selected</strong> column for each component.</p>'
+        + '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.9rem;">'
+        + '<thead><tr style="background:#e8f0fe;border-bottom:2px solid #e8eaed;">'
+        + '<th style="text-align:left;padding:10px 12px;">Component</th>'
+        + '<th style="text-align:left;padding:10px 12px;">Option 1</th>'
+        + '<th style="text-align:left;padding:10px 12px;">Option 2</th>'
+        + '<th style="text-align:left;padding:10px 12px;">Option 3</th>'
+        + '<th style="text-align:left;padding:10px 12px;">Selection Rationale</th>'
+        + '</tr></thead><tbody>' + rows + '</tbody></table></div>'
+        + '<div style="margin-top:16px;padding:16px;background:#fef7e0;border-radius:8px;font-size:0.9rem;color:#5f6368;">'
+        + '<strong>💡 Key Insight:</strong> AWS is ~5-6% more expensive than GCP for equivalent GPU compute, but the team\'s existing AWS expertise, pre-existing credits, and integrated ecosystem (S3 + EC2 + API Gateway) reduce onboarding time by an estimated 4-6 weeks. Academic discounts reduce software costs by 50% vs. vendor pricing.'
+        + '</div></div></div>';
+}
+
+function renderRiskAssessment(trl) {
+    var rows = RISK_ASSESSMENT.map(function(r) {
+        return '<tr style="border-bottom:1px solid #e8eaed;">'
+            + '<td style="padding:8px 12px;font-weight:600;">' + r.component + '</td>'
+            + '<td style="padding:8px 12px;"><span class="risk-cat" style="background:#e8f0fe;padding:2px 8px;border-radius:4px;font-size:0.8rem;">' + r.category + '</span></td>'
+            + '<td style="padding:8px 12px;font-size:0.85rem;">' + r.risk + '</td>'
+            + '<td style="padding:8px 12px;text-align:center;"><span style="background:' + (r.likelihood === 'Low' ? '#e6f4ea' : r.likelihood === 'Medium' ? '#fef7e0' : '#fce8e6') + ';padding:2px 10px;border-radius:4px;font-size:0.8rem;font-weight:600;">' + r.likelihood + '</span></td>'
+            + '<td style="padding:8px 12px;text-align:center;"><span style="background:' + (r.impact === 'Low' ? '#e6f4ea' : r.impact === 'Medium' ? '#fef7e0' : r.impact === 'High' ? '#fce8e6' : '#f5e6cc') + ';padding:2px 10px;border-radius:4px;font-size:0.8rem;font-weight:600;">' + r.impact + '</span></td>'
+            + '<td style="padding:8px 12px;font-size:0.85rem;color:#5f6368;">' + r.mitigation + '</td>'
+            + '<td style="padding:8px 12px;font-size:0.85rem;color:#5f6368;">' + r.contingency + '</td>'
+            + '</tr>';
+    }).join('');
+    return '<div class="budget-panel" id="riskAssessment" style="display:none;">'
+        + '<div class="card" style="padding:24px;">'
+        + '<h3 style="color:var(--medical-blue);margin-bottom:16px;">⚠️ Risk Assessment — ' + trl.label + '</h3>'
+        + '<p style="color:#5f6368;font-size:0.95rem;margin-bottom:16px;">Risk assessment per budget component with likelihood, impact, mitigation strategy, and contingency plan. Applies across all TRL stages.</p>'
+        + '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.9rem;">'
+        + '<thead><tr style="background:#fce8e6;border-bottom:2px solid #e8eaed;">'
+        + '<th style="text-align:left;padding:10px 12px;">Component</th>'
+        + '<th style="text-align:left;padding:10px 12px;">Category</th>'
+        + '<th style="text-align:left;padding:10px 12px;">Risk Description</th>'
+        + '<th style="text-align:center;padding:10px 12px;">Likelihood</th>'
+        + '<th style="text-align:center;padding:10px 12px;">Impact</th>'
+        + '<th style="text-align:left;padding:10px 12px;">Mitigation Strategy</th>'
+        + '<th style="text-align:left;padding:10px 12px;">Contingency Plan</th>'
+        + '</tr></thead><tbody>' + rows + '</tbody></table></div>'
+        + '<div style="margin-top:16px;display:flex;gap:16px;flex-wrap:wrap;">'
+        + '<div style="padding:12px 16px;background:#e6f4ea;border-radius:8px;font-size:0.85rem;"><span style="font-weight:600;">🟢 Low Risk</span> — 4 items</div>'
+        + '<div style="padding:12px 16px;background:#fef7e0;border-radius:8px;font-size:0.85rem;"><span style="font-weight:600;">🟡 Medium Risk</span> — 4 items</div>'
+        + '<div style="padding:12px 16px;background:#fce8e6;border-radius:8px;font-size:0.85rem;"><span style="font-weight:600;">🔴 High Risk</span> — 1 item</div>'
+        + '</div></div></div>';
+}
+
+function renderUtilizationPlan(trl) {
+    var trlKey = 'trl' + trl.id.split('-')[1];
+    var rows = UTILIZATION_PLAN.map(function(u) {
+        var usage = u[trlKey] || '—';
+        return '<tr style="border-bottom:1px solid #e8eaed;">'
+            + '<td style="padding:8px 12px;font-weight:600;">' + u.component + '</td>'
+            + '<td style="padding:8px 12px;"><span style="background:' + (u.type === 'Cloud' ? '#e8f0fe' : u.type === 'Software' ? '#e6f4ea' : '#fef7e0') + ';padding:2px 8px;border-radius:4px;font-size:0.8rem;">' + u.type + '</span></td>'
+            + '<td style="padding:8px 12px;font-size:0.9rem;">' + usage + '</td>'
+            + '</tr>';
+    }).join('');
+    return '<div class="budget-panel" id="utilizationPlan" style="display:none;">'
+        + '<div class="card" style="padding:24px;">'
+        + '<h3 style="color:var(--medical-blue);margin-bottom:16px;">📋 Utilization Plan — ' + trl.label + ' (' + trl.subtitle + ', ' + trl.sub + ')</h3>'
+        + '<p style="color:#5f6368;font-size:0.95rem;margin-bottom:16px;">How each budget component is utilized in this TRL phase. Usage ramps up from concept (TRL-2) through deployment (TRL-9).</p>'
+        + '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:0.9rem;">'
+        + '<thead><tr style="background:#e8f0fe;border-bottom:2px solid #e8eaed;">'
+        + '<th style="text-align:left;padding:10px 12px;">Component</th>'
+        + '<th style="text-align:left;padding:10px 12px;">Type</th>'
+        + '<th style="text-align:left;padding:10px 12px;">Utilization in ' + trl.label + '</th>'
+        + '</tr></thead><tbody>' + rows + '</tbody></table></div>'
+        + '<div style="margin-top:16px;padding:16px;background:#f8f9fa;border-radius:8px;font-size:0.9rem;color:#5f6368;">'
+        + '<strong>📌 Note:</strong> Resources not used in this TRL show as "Not used" or "Not planned". The utilization ramps up progressively with each TRL stage. MATLAB is excluded from all TRLs — covered by institute campus license.'
         + '</div></div></div>';
 }
 
@@ -5303,7 +5614,7 @@ const tourSteps = [
     {
         module: 'module-13',
         title: '💰 Budget & Project Plan',
-        text: 'The Budget & Project Plan details our <strong>₹2.88 crore budget</strong> across 7 categories with 5 interactive tabs — Budget Overview, Recurring Costs (A), Non-Recurring Costs (B), Cost Justification, and Activity Map. Explore the 12-month resource allocation timeline and 6-objective activity map.',
+        text: 'The Budget & Project Plan details our <strong>₹0.576 crore grant budget</strong> (external costs only) across 3 categories with 8 interactive tabs — Budget Overview, Cost Breakdown, Cost Justification, Activity Map, Comparative Cost, Risk Assessment, Utilization Plan, and References. Explore the 8-TRL resource allocation timeline and 6-objective activity map.',
         target: '#module-13 .module-header'
     },
     {
@@ -5447,7 +5758,7 @@ function toggleVoiceAssistant() {
             'module-10': 'the Sustainability Impact Dashboard. It maps our system\'s contributions to UN Sustainable Development Goals, including healthcare access, responsible AI, and climate action through sustainable diet recommendations.',
             'module-11': 'the Virtual Lab. This orchestrates all modules into a single data flow simulation. Watch patient data travel through the entire pipeline with real-time JSON visualization at each processing stage.',
             'module-12': 'the TRL Roadmap and Gantt Chart. It presents our 8-level TRL progression plan (TRL-2 through TRL-9) spanning 48 months, with separate Gantt charts for each TRL level showing detailed activities, milestones, and regulatory pathways.',
-            'module-13': 'the Budget & Project Plan. It details our ₹0.77 crore grant budget (external costs only) with 8 TRL-level budget allocations (TRL-2 through TRL-9), each with recurring/non-recurring cost breakdowns, cost justification, and activity maps linking 6 objectives to TRL-specific activities, timelines, resources, and responsible persons.'
+            'module-13': 'the Budget & Project Plan. It details our ₹0.576 crore grant budget (external costs only) with 8 TRL-level budget allocations (TRL-2 through TRL-9), each with recurring/non-recurring cost breakdowns, cost justification, activity maps, comparative cost estimation (3-way vendor comparison), risk assessment, and utilization plans linking 6 objectives to TRL-specific activities, timelines, resources, and responsible persons.'
         };
         
         const activeModule = document.querySelector('.module-section.active');
