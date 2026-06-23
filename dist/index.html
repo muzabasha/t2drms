@@ -220,6 +220,23 @@
             </div>
         </div>
 
+        <!-- TRL-2 to TRL-4 Journey Mind Map -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="card-title">🧠 Research Journey: TRL-2 → TRL-4 Transformation</span>
+                <span class="badge" style="background:var(--medical-blue);color:white;padding:4px 12px;border-radius:12px;font-size:0.8rem;">🖱️ Interactive — Hover & Click</span>
+            </div>
+            <div style="padding:16px;">
+                <div id="trlJourneyMindmap" style="width:100%;height:500px;border-radius:12px;border:2px solid #e8eaed;background:#fafbfc;overflow:hidden;position:relative;"></div>
+                <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;font-size:0.85rem;">
+                    <div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:14px;height:14px;background:#4285f4;border-radius:50%;"></span> TRL-2: Concept Formulation</div>
+                    <div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:14px;height:14px;background:#ea4335;border-radius:50%;"></span> TRL-3: Proof of Concept</div>
+                    <div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:14px;height:14px;background:#34a853;border-radius:50%;"></span> TRL-4: Integration & Validation</div>
+                    <div style="display:flex;align-items:center;gap:6px;color:#5f6368;">💡 Hover nodes for details · Click a module to navigate</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Research Motivation Timeline -->
         <div class="card mb-3">
             <div class="card-header">
@@ -6909,11 +6926,171 @@ function zoomToFeature(feature, layer) {
     if (diabetesMap) diabetesMap.fitBounds(layer.getBounds(), { padding: [30, 30], maxZoom: 5 });
 }
 
+// ---- TRL-2 → TRL-4 JOURNEY MIND MAP (D3.js) ----
+var TRL_JOURNEY_DATA = {
+    name: 'AI Diabetes Management System',
+    trl: 'TRL-2 → TRL-4',
+    type: 'root',
+    children: [
+        {
+            name: 'TRL-2: Concept Formulation',
+            type: 'trl2',
+            children: [
+                { name: 'OCR + Medical NER', type: 'trl2', module: 'module-3', desc: 'DigiƟze medical reports — extract HbA1c, FBS, PPBS with 94.5% accuracy' },
+                { name: 'Federated Learning', type: 'trl2', module: 'module-4', desc: 'Privacy-preserving risk prediction — FedAvg + DP (ε=0.5)' },
+                { name: 'Agentic AI', type: 'trl2', module: 'module-5', desc: 'Multi-agent clinical reasoning — 5 agents with message-passing' },
+                { name: 'Food CV + NLP', type: 'trl2', module: 'module-7', desc: 'Food recognition (CNN) + dietary assessment (BERT-NER)' },
+                { name: 'Personalized Diet', type: 'trl2', module: 'module-8', desc: 'HbA1c-adaptive macro optimization with real-time adjustment' },
+            ]
+        },
+        {
+            name: 'TRL-3: Proof of Concept',
+            type: 'trl3',
+            children: [
+                { name: 'Integrated Pipeline', type: 'trl3', module: 'module-9', desc: 'End-to-end data flow — patient input through recommendation' },
+                { name: 'Sustainability Impact', type: 'trl3', module: 'module-10', desc: 'Track CO₂, water, land footprint of recommended diets' },
+                { name: 'Virtual Lab', type: 'trl3', module: 'module-11', desc: 'Full pipeline simulation with real-time JSON data inspection' },
+            ]
+        },
+        {
+            name: 'TRL-4: Integration & Validation',
+            type: 'trl4',
+            children: [
+                { name: 'System Integration Hub', type: 'trl4', module: 'module-1', desc: 'Cross-module patient context — select once, update all' },
+                { name: 'Research Gap Validator', type: 'trl4', module: 'module-2', desc: 'Validate gaps addressed by the integrated approach' },
+                { name: 'TRL Roadmap & Gantt', type: 'trl4', module: 'module-12', desc: '48-month progression plan with 8 TRL-level Gantt charts' },
+                { name: 'Budget & Project Plan', type: 'trl4', module: 'module-13', desc: '₹0.576Cr grant budget across 8 TRL phases' },
+            ]
+        }
+    ]
+};
+
+var mindmapSvg = null;
+var mindmapZoom = null;
+
+function initTRLJourneyMindmap() {
+    var container = document.getElementById('trlJourneyMindmap');
+    if (!container || mindmapSvg) return;
+
+    var width = container.clientWidth || 900;
+    var height = container.clientHeight || 500;
+
+    // Clear any leftover content
+    container.innerHTML = '';
+
+    // Create SVG with a group for zoom/pan
+    mindmapSvg = d3.select('#trlJourneyMindmap').append('svg')
+        .attr('width', width)
+        .attr('height', height)
+        .style('cursor', 'grab');
+
+    var g = mindmapSvg.append('g').attr('transform', 'translate(180,40)');
+
+    mindmapZoom = d3.zoom()
+        .scaleExtent([0.3, 3])
+        .on('zoom', function(e) { g.attr('transform', e.transform); });
+
+    mindmapSvg.call(mindmapZoom);
+
+    // Tree layout
+    var root = d3.hierarchy(TRL_JOURNEY_DATA);
+    var treeLayout = d3.tree().size([height - 80, width - 220]);
+    treeLayout(root);
+
+    // Color mapping
+    var colors = { trl2: '#4285f4', trl3: '#ea4335', trl4: '#34a853', root: '#1a1a2e' };
+    var bgColors = { trl2: '#e8f0fe', trl3: '#fce8e6', trl4: '#e6f4ea', root: '#1a1a2e' };
+
+    // Links
+    g.selectAll('.link')
+        .data(root.links())
+        .enter().append('path')
+        .attr('class', 'link')
+        .attr('d', function(d) {
+            return 'M' + d.source.y + ',' + d.source.x
+                + 'C' + (d.source.y + d.target.y) / 2 + ',' + d.source.x
+                + ' ' + (d.source.y + d.target.y) / 2 + ',' + d.target.x
+                + ' ' + d.target.y + ',' + d.target.x;
+        })
+        .attr('fill', 'none')
+        .attr('stroke', '#ccc')
+        .attr('stroke-width', 2)
+        .attr('stroke-opacity', 0.7);
+
+    // Nodes
+    var nodes = g.selectAll('.node')
+        .data(root.descendants())
+        .enter().append('g')
+        .attr('class', 'node')
+        .attr('transform', function(d) { return 'translate(' + d.y + ',' + d.x + ')'; })
+        .style('cursor', function(d) { return d.data.module ? 'pointer' : 'default'; })
+        .on('click', function(e, d) {
+            if (d.data.module) {
+                navigateTo(d.data.module);
+            }
+        });
+
+    // Node circles
+    nodes.append('circle')
+        .attr('r', function(d) { return d.depth === 0 ? 22 : d.depth === 1 ? 16 : 12; })
+        .attr('fill', function(d) { return colors[d.data.type] || '#999'; })
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 2.5)
+        .attr('opacity', function(d) { return d.depth === 0 ? 1 : 0.9; })
+        .style('transition', 'r 0.2s')
+        .on('mouseenter', function() { d3.select(this).attr('r', function() { return parseInt(d3.select(this).attr('r')) + 3; }); })
+        .on('mouseleave', function() { d3.select(this).attr('r', function() { return Math.max(parseInt(d3.select(this).attr('r')) - 3, 10); }); });
+
+    // Root icon
+    nodes.filter(function(d) { return d.depth === 0; })
+        .append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '0.35em')
+        .attr('fill', '#fff')
+        .attr('font-size', '16px')
+        .text('🧠');
+
+    // Node labels
+    nodes.append('text')
+        .attr('dy', function(d) { return d.depth === 2 ? '0.35em' : '-0.35em'; })
+        .attr('x', function(d) { return d.depth === 0 ? 28 : d.depth === 1 ? 20 : 14; })
+        .attr('y', function(d) { return d.depth === 2 ? 0 : -20; })
+        .attr('text-anchor', 'start')
+        .attr('font-size', function(d) { return d.depth === 0 ? '14px' : d.depth === 1 ? '13px' : '12px'; })
+        .attr('font-weight', function(d) { return d.depth <= 1 ? '600' : '500'; })
+        .attr('fill', function(d) { return d.depth === 0 ? '#1a1a2e' : '#202124'; })
+        .text(function(d) { return d.data.name; });
+
+    // Hover tooltips for leaf nodes
+    nodes.filter(function(d) { return d.data.desc; })
+        .append('title')
+        .text(function(d) {
+            var mod = d.data.module ? d.data.module.replace('module-', 'Module ') : '';
+            return mod + '\n' + d.data.desc + '\n\nClick to navigate →';
+        });
+
+    // Brief instruction overlay
+    container.style.position = 'relative';
+    var instr = document.createElement('div');
+    instr.style.cssText = 'position:absolute;top:8px;right:12px;font-size:0.75rem;color:#9aa0a6;background:rgba(255,255,255,0.85);padding:4px 10px;border-radius:6px;pointer-events:none;';
+    instr.textContent = '🖱️ Scroll to zoom · Drag to pan';
+    container.appendChild(instr);
+}
+
+function ensureTRLJourneyMindmap() {
+    var el = document.getElementById('trlJourneyMindmap');
+    if (!el) return;
+    if (!mindmapSvg) { initTRLJourneyMindmap(); }
+    else { if (mindmapSvg) mindmapSvg.call(mindmapZoom.transform, d3.zoomIdentity); }
+}
+
 function ensureDiabetesMap() {
     var el = document.getElementById('diabetesMap');
     if (!el) return;
     if (!diabetesMap) { initDiabetesMap(); }
     setTimeout(function() { if (diabetesMap) diabetesMap.invalidateSize(); }, 100);
+    // Also init mind map if not yet done
+    ensureTRLJourneyMindmap();
 }
 
 /* Initialize on DOM load */
@@ -6922,6 +7099,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Init diabetes map if module-1 is active
         if (document.getElementById('diabetesMap')) {
             initDiabetesMap();
+        }
+        // Init TRL journey mind map if module-1 is active
+        if (document.getElementById('trlJourneyMindmap')) {
+            initTRLJourneyMindmap();
         }
         if (document.getElementById('trl-roadmap-content')) {
             initTrlRoadmap();
