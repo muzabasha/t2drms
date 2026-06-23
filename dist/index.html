@@ -227,7 +227,7 @@
                 <span class="badge" style="background:var(--medical-blue);color:white;padding:4px 12px;border-radius:12px;font-size:0.8rem;">🖱️ Interactive — Hover & Click</span>
             </div>
             <div style="padding:16px;">
-                <div id="trlJourneyMindmap" style="width:100%;height:500px;border-radius:12px;border:2px solid #e8eaed;background:#fafbfc;overflow:hidden;position:relative;"></div>
+                <div id="trlJourneyMindmap" style="width:100%;height:560px;border-radius:12px;border:2px solid #e8eaed;background:#fafbfc;overflow:hidden;position:relative;"></div>
                 <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;font-size:0.85rem;">
                     <div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:14px;height:14px;background:#4285f4;border-radius:50%;"></span> TRL-2: Concept Formulation</div>
                     <div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:14px;height:14px;background:#ea4335;border-radius:50%;"></span> TRL-3: Proof of Concept</div>
@@ -6927,6 +6927,8 @@ function zoomToFeature(feature, layer) {
 }
 
 // ---- TRL-2 → TRL-4 JOURNEY MIND MAP (D3.js) ----
+// 4-level hierarchy: Root → TRL Phase → Module → Activity
+// Activities start collapsed; click a module node to expand/collapse its activities
 var TRL_JOURNEY_DATA = {
     name: 'AI Diabetes Management System',
     trl: 'TRL-2 → TRL-4',
@@ -6936,30 +6938,78 @@ var TRL_JOURNEY_DATA = {
             name: 'TRL-2: Concept Formulation',
             type: 'trl2',
             children: [
-                { name: 'OCR + Medical NER', type: 'trl2', module: 'module-3', desc: 'DigiƟze medical reports — extract HbA1c, FBS, PPBS with 94.5% accuracy' },
-                { name: 'Federated Learning', type: 'trl2', module: 'module-4', desc: 'Privacy-preserving risk prediction — FedAvg + DP (ε=0.5)' },
-                { name: 'Agentic AI', type: 'trl2', module: 'module-5', desc: 'Multi-agent clinical reasoning — 5 agents with message-passing' },
-                { name: 'Food CV + NLP', type: 'trl2', module: 'module-7', desc: 'Food recognition (CNN) + dietary assessment (BERT-NER)' },
-                { name: 'Personalized Diet', type: 'trl2', module: 'module-8', desc: 'HbA1c-adaptive macro optimization with real-time adjustment' },
+                { name: 'OCR + Medical NER', type: 'trl2', module: 'module-3', desc: 'DigiƟze medical reports — extract HbA1c, FBS, PPBS with 94.5% accuracy', children: [
+                    { name: 'OCR pre-processing & deskew', type: 'act2' },
+                    { name: 'Medical entity extraction (BiLSTM-CRF)', type: 'act2' },
+                    { name: 'Confidence scoring & validation', type: 'act2' },
+                ]},
+                { name: 'Federated Learning', type: 'trl2', module: 'module-4', desc: 'Privacy-preserving risk prediction — FedAvg + DP (ε=0.5)', children: [
+                    { name: 'Multi-hospital FL simulation (5 clients)', type: 'act2' },
+                    { name: 'FedAvg aggregation rounds (10-20)', type: 'act2' },
+                    { name: 'Privacy budget auditing (ε=0.5 DP)', type: 'act2' },
+                ]},
+                { name: 'Agentic AI', type: 'trl2', module: 'module-5', desc: 'Multi-agent clinical reasoning — 5 agents with message-passing', children: [
+                    { name: '5-agent message-passing protocol', type: 'act2' },
+                    { name: 'Observation→Analysis→Recommendation chain', type: 'act2' },
+                    { name: 'Explainable AI reasoning logs', type: 'act2' },
+                ]},
+                { name: 'Food CV + NLP', type: 'trl2', module: 'module-7', desc: 'Food recognition (CNN) + dietary assessment (BERT-NER)', children: [
+                    { name: 'Food image classification (EfficientNet)', type: 'act2' },
+                    { name: 'Glycemic index / load estimation', type: 'act2' },
+                    { name: 'Text-based dietary assessment (BERT-NER)', type: 'act2' },
+                ]},
+                { name: 'Personalized Diet', type: 'trl2', module: 'module-8', desc: 'HbA1c-adaptive macro optimization with real-time adjustment', children: [
+                    { name: 'HbA1c-adaptive macro optimization', type: 'act2' },
+                    { name: 'Meal plan generation (4 meals/day)', type: 'act2' },
+                    { name: 'Real-time constraint-based adjustment', type: 'act2' },
+                ]},
             ]
         },
         {
             name: 'TRL-3: Proof of Concept',
             type: 'trl3',
             children: [
-                { name: 'Integrated Pipeline', type: 'trl3', module: 'module-9', desc: 'End-to-end data flow — patient input through recommendation' },
-                { name: 'Sustainability Impact', type: 'trl3', module: 'module-10', desc: 'Track CO₂, water, land footprint of recommended diets' },
-                { name: 'Virtual Lab', type: 'trl3', module: 'module-11', desc: 'Full pipeline simulation with real-time JSON data inspection' },
+                { name: 'Integrated Pipeline', type: 'trl3', module: 'module-9', desc: 'End-to-end data flow — patient input through recommendation', children: [
+                    { name: 'Data transformation pipeline (7 stages)', type: 'act3' },
+                    { name: 'Cross-module data flow validation', type: 'act3' },
+                    { name: 'Real-time progress tracking', type: 'act3' },
+                ]},
+                { name: 'Sustainability Impact', type: 'trl3', module: 'module-10', desc: 'Track CO₂, water, land footprint of recommended diets', children: [
+                    { name: 'CO₂ water land footprint computation', type: 'act3' },
+                    { name: 'Composite sustainability score (1-10)', type: 'act3' },
+                    { name: 'Diet vs average comparison chart', type: 'act3' },
+                ]},
+                { name: 'Virtual Lab', type: 'trl3', module: 'module-11', desc: 'Full pipeline simulation with real-time JSON data inspection', children: [
+                    { name: '7-stage pipeline orchestration', type: 'act3' },
+                    { name: 'JSON syntax-highlighted data viewer', type: 'act3' },
+                    { name: 'Play/pause/step/speed controls', type: 'act3' },
+                ]},
             ]
         },
         {
             name: 'TRL-4: Integration & Validation',
             type: 'trl4',
             children: [
-                { name: 'System Integration Hub', type: 'trl4', module: 'module-1', desc: 'Cross-module patient context — select once, update all' },
-                { name: 'Research Gap Validator', type: 'trl4', module: 'module-2', desc: 'Validate gaps addressed by the integrated approach' },
-                { name: 'TRL Roadmap & Gantt', type: 'trl4', module: 'module-12', desc: '48-month progression plan with 8 TRL-level Gantt charts' },
-                { name: 'Budget & Project Plan', type: 'trl4', module: 'module-13', desc: '₹0.576Cr grant budget across 8 TRL phases' },
+                { name: 'System Integration Hub', type: 'trl4', module: 'module-1', desc: 'Cross-module patient context — select once, update all', children: [
+                    { name: 'Global patient context propagation', type: 'act4' },
+                    { name: 'Geo map & mind map visualizations', type: 'act4' },
+                    { name: 'TRL-2→TRL-4 journey mapping', type: 'act4' },
+                ]},
+                { name: 'Research Gap Validator', type: 'trl4', module: 'module-2', desc: 'Validate gaps addressed by the integrated approach', children: [
+                    { name: '6 research gap analysis', type: 'act4' },
+                    { name: 'Before/after comparison per gap', type: 'act4' },
+                    { name: 'Technical deep-dive accordions', type: 'act4' },
+                ]},
+                { name: 'TRL Roadmap & Gantt', type: 'trl4', module: 'module-12', desc: '48-month progression plan with 8 TRL-level Gantt charts', children: [
+                    { name: '8-level TRL Gantt chart rendering', type: 'act4' },
+                    { name: 'Activity-to-objective mapping', type: 'act4' },
+                    { name: 'Regulatory timeline overlay', type: 'act4' },
+                ]},
+                { name: 'Budget & Project Plan', type: 'trl4', module: 'module-13', desc: '₹0.576Cr grant budget across 8 TRL phases', children: [
+                    { name: 'TRL-level budget allocation (8 phases)', type: 'act4' },
+                    { name: 'Comparative cost estimation (3-vendor)', type: 'act4' },
+                    { name: 'Risk assessment & utilization plans', type: 'act4' },
+                ]},
             ]
         }
     ]
@@ -6967,6 +7017,7 @@ var TRL_JOURNEY_DATA = {
 
 var mindmapSvg = null;
 var mindmapZoom = null;
+var mindmapRoot = null;
 
 function initTRLJourneyMindmap() {
     var container = document.getElementById('trlJourneyMindmap');
@@ -6975,105 +7026,216 @@ function initTRLJourneyMindmap() {
     var width = container.clientWidth || 900;
     var height = container.clientHeight || 500;
 
-    // Clear any leftover content
     container.innerHTML = '';
 
-    // Create SVG with a group for zoom/pan
     mindmapSvg = d3.select('#trlJourneyMindmap').append('svg')
         .attr('width', width)
         .attr('height', height)
         .style('cursor', 'grab');
 
-    var g = mindmapSvg.append('g').attr('transform', 'translate(180,40)');
+    var g = mindmapSvg.append('g').attr('transform', 'translate(200,40)');
 
     mindmapZoom = d3.zoom()
-        .scaleExtent([0.3, 3])
+        .scaleExtent([0.25, 3])
         .on('zoom', function(e) { g.attr('transform', e.transform); });
 
     mindmapSvg.call(mindmapZoom);
 
-    // Tree layout
-    var root = d3.hierarchy(TRL_JOURNEY_DATA);
-    var treeLayout = d3.tree().size([height - 80, width - 220]);
-    treeLayout(root);
+    var typeColors = { root:'#1a1a2e', trl2:'#4285f4', trl3:'#ea4335', trl4:'#34a853', act2:'#a8c7fa', act3:'#f7a8a3', act4:'#a8e6b5' };
 
-    // Color mapping
-    var colors = { trl2: '#4285f4', trl3: '#ea4335', trl4: '#34a853', root: '#1a1a2e' };
-    var bgColors = { trl2: '#e8f0fe', trl3: '#fce8e6', trl4: '#e6f4ea', root: '#1a1a2e' };
+    // Prepare data: clone so we can store _children without mutating original
+    mindmapRoot = d3.hierarchy(JSON.parse(JSON.stringify(TRL_JOURNEY_DATA)));
 
-    // Links
-    g.selectAll('.link')
-        .data(root.links())
-        .enter().append('path')
-        .attr('class', 'link')
-        .attr('d', function(d) {
-            return 'M' + d.source.y + ',' + d.source.x
-                + 'C' + (d.source.y + d.target.y) / 2 + ',' + d.source.x
-                + ' ' + (d.source.y + d.target.y) / 2 + ',' + d.target.x
-                + ' ' + d.target.y + ',' + d.target.x;
-        })
-        .attr('fill', 'none')
-        .attr('stroke', '#ccc')
-        .attr('stroke-width', 2)
-        .attr('stroke-opacity', 0.7);
+    // Initially collapse all depth-3 nodes (activities)
+    mindmapRoot.descendants().forEach(function(d, i) {
+        if (d.depth === 2 && d.children) {
+            d._children = d.children;
+            d.children = null;
+        }
+    });
 
-    // Nodes
-    var nodes = g.selectAll('.node')
-        .data(root.descendants())
-        .enter().append('g')
-        .attr('class', 'node')
-        .attr('transform', function(d) { return 'translate(' + d.y + ',' + d.x + ')'; })
-        .style('cursor', function(d) { return d.data.module ? 'pointer' : 'default'; })
-        .on('click', function(e, d) {
-            if (d.data.module) {
-                navigateTo(d.data.module);
-            }
+    function update(source) {
+        var treeLayout = d3.tree().size([height - 80, width - 220]);
+        treeLayout(mindmapRoot);
+
+        // Re-compute nodes and links from the current tree state
+        var nodesArr = mindmapRoot.descendants();
+        var linksArr = mindmapRoot.links();
+
+        // ---- LINKS (enter/update/exit) ----
+        var link = g.selectAll('path.link')
+            .data(linksArr, function(d) { return d.target.data.name; });
+
+        link.exit().transition().duration(300).attr('stroke-opacity', 0).remove();
+
+        var linkEnter = link.enter().append('path')
+            .attr('class', 'link')
+            .attr('fill', 'none')
+            .attr('stroke', '#ccc')
+            .attr('stroke-width', 2)
+            .attr('stroke-opacity', 0);
+
+        linkEnter.merge(link).transition().duration(300)
+            .attr('d', function(d) {
+                return 'M' + d.source.y + ',' + d.source.x
+                    + 'C' + (d.source.y + d.target.y) / 2 + ',' + d.source.x
+                    + ' ' + (d.source.y + d.target.y) / 2 + ',' + d.target.x
+                    + ' ' + d.target.y + ',' + d.target.x;
+            })
+            .attr('stroke-opacity', 0.6);
+
+        // ---- NODES (enter/update/exit) ----
+        var node = g.selectAll('g.node')
+            .data(nodesArr, function(d) { return d.data.name; });
+
+        node.exit().transition().duration(300)
+            .attr('transform', function(d) { return 'translate(' + source.y + ',' + source.x + ')'; })
+            .attr('opacity', 0).remove();
+
+        var nodeEnter = node.enter().append('g')
+            .attr('class', 'node')
+            .attr('transform', function(d) { return 'translate(' + source.y0 + ',' + source.x0 + ')'; })
+            .attr('opacity', 0)
+            .style('cursor', function(d) {
+                if (d.data.module) return 'pointer';
+                if (d._children) return 'pointer';
+                return 'default';
+            });
+
+        nodeEnter
+            .on('click', function(e, d) {
+                e.stopPropagation();
+                if (d._children) {
+                    d.children = d._children;
+                    d._children = null;
+                    update(d);
+                } else if (d.children) {
+                    d._children = d.children;
+                    d.children = null;
+                    update(d);
+                } else if (d.data.module) {
+                    navigateTo(d.data.module);
+                }
+            })
+            .on('mouseenter', function() { d3.select(this).select('circle').attr('r', function() { return parseFloat(d3.select(this).attr('r')) + 3; }); })
+            .on('mouseleave', function() { d3.select(this).select('circle').attr('r', function() { return Math.max(parseFloat(d3.select(this).attr('r')) - 3, 6); }); });
+
+        // Circle
+        nodeEnter.append('circle')
+            .attr('r', function(d) { return d.depth === 0 ? 22 : d.depth === 1 ? 16 : d.depth === 2 ? 12 : 8; })
+            .attr('fill', function(d) { return typeColors[d.data.type] || '#999'; })
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2.5);
+
+        // Root icon
+        nodeEnter.filter(function(d) { return d.depth === 0; })
+            .append('text')
+            .attr('class', 'root-icon')
+            .attr('text-anchor', 'middle')
+            .attr('dy', '0.35em')
+            .attr('fill', '#fff')
+            .attr('font-size', '16px')
+            .text('🧠');
+
+        // Label
+        nodeEnter.append('text')
+            .attr('class', 'node-label')
+            .attr('dy', function(d) {
+                if (d.depth === 0) return '-0.35em';
+                if (d.depth === 1) return '-0.35em';
+                if (d.depth === 2) return '-0.35em';
+                return '0.35em';
+            })
+            .attr('x', function(d) {
+                if (d.depth === 0) return 28;
+                if (d.depth === 1) return 20;
+                if (d.depth === 2) return 16;
+                return 12;
+            })
+            .attr('y', function(d) {
+                if (d.depth === 0) return -24;
+                if (d.depth === 1) return -18;
+                if (d.depth === 2) return -14;
+                return 0;
+            })
+            .attr('text-anchor', 'start')
+            .attr('font-size', function(d) {
+                if (d.depth === 0) return '14px';
+                if (d.depth === 1) return '13px';
+                if (d.depth === 2) return '12px';
+                return '11px';
+            })
+            .attr('font-weight', function(d) {
+                if (d.depth <= 1) return '600';
+                if (d.depth === 2) return '500';
+                return '400';
+            })
+            .attr('fill', function(d) {
+                if (d.depth === 0) return '#1a1a2e';
+                if (d.depth === 3) return '#5f6368';
+                return '#202124';
+            })
+            .text(function(d) { return d.data.name; });
+
+        // Toggle badge — rendered via merge to update text on expand/collapse
+        var badgeSel = nodeEnter.filter(function(d) { return d.depth === 2; })
+            .append('text')
+            .attr('class', 'toggle-badge')
+            .attr('text-anchor', 'middle')
+            .attr('dy', '0.35em')
+            .attr('x', '18')
+            .attr('y', '0')
+            .attr('font-size', '11px')
+            .attr('font-weight', 'bold')
+            .attr('fill', '#5f6368');
+
+        // Merge enter + update selections for badges to keep text current
+        var nodeMerge = nodeEnter.merge(node);
+        nodeMerge.selectAll('.toggle-badge').text(function(d) {
+            if (d.depth !== 2) return '';
+            if (d._children) return '+';
+            if (d.children) return '−';
+            return '';
         });
 
-    // Node circles
-    nodes.append('circle')
-        .attr('r', function(d) { return d.depth === 0 ? 22 : d.depth === 1 ? 16 : 12; })
-        .attr('fill', function(d) { return colors[d.data.type] || '#999'; })
-        .attr('stroke', '#fff')
-        .attr('stroke-width', 2.5)
-        .attr('opacity', function(d) { return d.depth === 0 ? 1 : 0.9; })
-        .style('transition', 'r 0.2s')
-        .on('mouseenter', function() { d3.select(this).attr('r', function() { return parseInt(d3.select(this).attr('r')) + 3; }); })
-        .on('mouseleave', function() { d3.select(this).attr('r', function() { return Math.max(parseInt(d3.select(this).attr('r')) - 3, 10); }); });
+        // Tooltip
+        nodeEnter.filter(function(d) { return d.data.desc; })
+            .append('title')
+            .text(function(d) {
+                var mod = d.data.module ? d.data.module.replace('module-', 'Module ') : '';
+                return (mod ? mod + '\n' : '') + d.data.desc + '\n\nClick to ' + (d.depth === 2 ? 'toggle activities' : 'navigate');
+            });
 
-    // Root icon
-    nodes.filter(function(d) { return d.depth === 0; })
-        .append('text')
-        .attr('text-anchor', 'middle')
-        .attr('dy', '0.35em')
-        .attr('fill', '#fff')
-        .attr('font-size', '16px')
-        .text('🧠');
+        // Transition enter + update nodes to final positions
+        nodeMerge.transition().duration(300)
+            .attr('transform', function(d) { return 'translate(' + d.y + ',' + d.x + ')'; })
+            .attr('opacity', 1);
 
-    // Node labels
-    nodes.append('text')
-        .attr('dy', function(d) { return d.depth === 2 ? '0.35em' : '-0.35em'; })
-        .attr('x', function(d) { return d.depth === 0 ? 28 : d.depth === 1 ? 20 : 14; })
-        .attr('y', function(d) { return d.depth === 2 ? 0 : -20; })
-        .attr('text-anchor', 'start')
-        .attr('font-size', function(d) { return d.depth === 0 ? '14px' : d.depth === 1 ? '13px' : '12px'; })
-        .attr('font-weight', function(d) { return d.depth <= 1 ? '600' : '500'; })
-        .attr('fill', function(d) { return d.depth === 0 ? '#1a1a2e' : '#202124'; })
-        .text(function(d) { return d.data.name; });
+        // Store old positions for next transition
+        nodesArr.forEach(function(d) { d.x0 = d.x; d.y0 = d.y; });
 
-    // Hover tooltips for leaf nodes
-    nodes.filter(function(d) { return d.data.desc; })
-        .append('title')
-        .text(function(d) {
-            var mod = d.data.module ? d.data.module.replace('module-', 'Module ') : '';
-            return mod + '\n' + d.data.desc + '\n\nClick to navigate →';
-        });
+        // Update instruction text
+        var expandedCount = mindmapRoot.descendants().filter(function(d) { return d.depth === 3; }).length;
+        var instrEl = container.querySelector('.mindmap-instr');
+        if (instrEl) {
+            instrEl.textContent = '🖱️ Scroll to zoom · Drag to pan · Click module to ' + (expandedCount > 0 ? 'hide' : 'show') + ' activities';
+        }
+    }
 
-    // Brief instruction overlay
+    // Store initial positions
+    mindmapRoot.x0 = height / 2;
+    mindmapRoot.y0 = 0;
+    mindmapRoot.descendants().forEach(function(d, i) { d.x0 = d.x || height / 2; d.y0 = d.y || 0; });
+
+    // First render (all activities collapsed)
+    update(mindmapRoot);
+
+    // Instruction overlay
     container.style.position = 'relative';
     var instr = document.createElement('div');
+    instr.className = 'mindmap-instr';
     instr.style.cssText = 'position:absolute;top:8px;right:12px;font-size:0.75rem;color:#9aa0a6;background:rgba(255,255,255,0.85);padding:4px 10px;border-radius:6px;pointer-events:none;';
-    instr.textContent = '🖱️ Scroll to zoom · Drag to pan';
+    instr.textContent = '🖱️ Scroll to zoom · Drag to pan · Click module to show activities';
     container.appendChild(instr);
 }
 
@@ -7081,7 +7243,11 @@ function ensureTRLJourneyMindmap() {
     var el = document.getElementById('trlJourneyMindmap');
     if (!el) return;
     if (!mindmapSvg) { initTRLJourneyMindmap(); }
-    else { if (mindmapSvg) mindmapSvg.call(mindmapZoom.transform, d3.zoomIdentity); }
+    else {
+        if (mindmapZoom && mindmapSvg) {
+            mindmapSvg.call(mindmapZoom.transform, d3.zoomIdentity);
+        }
+    }
 }
 
 function ensureDiabetesMap() {
