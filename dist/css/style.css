@@ -4542,3 +4542,24 @@ input:focus-visible,
         border: 1px solid ButtonText;
     }
 }
+
+/* Leaflet map overrides for consistent theming */
+#diabetesMap {
+    background: #f0f4f8;
+    z-index: 0;
+}
+#diabetesMap .leaflet-control-zoom a {
+    background: #fff;
+    color: #333;
+    border-color: #ccc;
+}
+#diabetesMap .leaflet-control-zoom a:hover {
+    background: #e8f0fe;
+}
+#diabetesMap .leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+#diabetesMap .leaflet-popup-tip {
+    box-shadow: none;
+}

@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -197,6 +198,25 @@
                 <div class="stat-value"><span class="counter" data-target="46">0</span>%</div>
                 <div class="stat-label">Undiagnosed Cases</div>
                 <div class="progress-bar mt-1" role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100" aria-label="46 percent"><div class="progress-fill orange" style="width:46%"></div></div>
+            </div>
+        </div>
+
+        <!-- Global Diabetes Impact Map -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="card-title">🌍 Global Diabetes Impact Map — Regional Prevalence & Study Intensity</span>
+                <span class="badge" style="background:var(--medical-green);color:white;padding:4px 12px;border-radius:12px;font-size:0.8rem;">🔄 Zoom & Pan</span>
+            </div>
+            <div style="padding:16px;">
+                <div id="diabetesMap" style="height:450px;border-radius:12px;border:2px solid #e8eaed;z-index:0;"></div>
+                <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;font-size:0.85rem;">
+                    <div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:16px;height:16px;background:#fee5d9;border-radius:3px;"></span> Low (&lt;5%)</div>
+                    <div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:16px;height:16px;background:#fcae91;border-radius:3px;"></span> Moderate (5-8%)</div>
+                    <div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:16px;height:16px;background:#fb6a4a;border-radius:3px;"></span> High (8-12%)</div>
+                    <div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:16px;height:16px;background:#cb181d;border-radius:3px;"></span> Very High (12%+)</div>
+                    <div style="display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:16px;height:16px;background:#1a1a2e;border-radius:3px;"></span> Not Included</div>
+                </div>
+                <p style="color:#5f6368;font-size:0.85rem;margin-top:8px;">Source: International Diabetes Federation (IDF) 2023. Regions colored by diabetes prevalence in adults (20-79 years). Hover over a region for details. Zoom in/out with scroll or +/- controls.</p>
             </div>
         </div>
 
@@ -1992,6 +2012,7 @@ Threat Model:
 <!-- Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/synthetic-data.js"></script>
 
 <!-- Main Application -->
@@ -2011,6 +2032,7 @@ function navigateTo(moduleId) {
         n.removeAttribute('aria-current');
     });
     section.classList.add('active');
+    if (moduleId === 'module-1') { ensureDiabetesMap(); }
     if (navItem) {
         navItem.classList.add('active');
         navItem.setAttribute('aria-current', 'page');
@@ -6394,7 +6416,7 @@ const TRL_PHASES = [
         label: 'TRL-2',
         sub: 'Months 1-6',
         dot: 'current',
-        icon: '\U0001f52c',
+        icon: '🔬',
         title: 'TRL-2: Technology Concept & AI Formulation',
         subtitle: 'Formulating the technology concept — literature review, data curation, and developing 5 core AI modules (OCR, CV, NLP, FL, Agentic AI) with baseline performance metrics.',
         stats: [
@@ -6403,10 +6425,10 @@ const TRL_PHASES = [
             { val: '85%', label: 'Baseline Acc' },
         ],
         pipeline: [
-            { label: 'Research Foundation', icon: '\U0001f4da', cls: 'dev' },
-            { label: 'Data Curation', icon: '\U0001f4cb', cls: 'val' },
-            { label: 'AI Development', icon: '\U0001f4bb', cls: 'dev' },
-            { label: 'Unit Testing', icon: '\U0001f9ea', cls: 'val' },
+            { label: 'Research Foundation', icon: '📚', cls: 'dev' },
+            { label: 'Data Curation', icon: '📋', cls: 'val' },
+            { label: 'AI Development', icon: '💻', cls: 'dev' },
+            { label: 'Unit Testing', icon: '🧪', cls: 'val' },
         ],
         ganttActivities: [
             { activity: 'Systematic Literature Review & Gap Analysis', cat: 'DEV', dur: '3 mo', width: '50%', cls: 'dev' },
@@ -6440,10 +6462,10 @@ const TRL_PHASES = [
             { val: '96%', label: 'Integration Rate' },
         ],
         pipeline: [
-            { label: 'Pipeline Integration', icon: '\U0001f517', cls: 'dev' },
-            { label: 'Frontend Build', icon: '\U0001f5a5\ufe0f', cls: 'dev' },
-            { label: 'Validation Suite', icon: '\U0001f4ca', cls: 'val' },
-            { label: 'Dissemination', icon: '\U0001f4dd', cls: 'doc' },
+            { label: 'Pipeline Integration', icon: '🔗', cls: 'dev' },
+            { label: 'Frontend Build', icon: '🖥️', cls: 'dev' },
+            { label: 'Validation Suite', icon: '📊', cls: 'val' },
+            { label: 'Dissemination', icon: '📝', cls: 'doc' },
         ],
         ganttActivities: [
             { activity: 'Pipeline Orchestration & Data Flow Design', cat: 'DEV', dur: '3 mo', width: '50%', cls: 'dev' },
@@ -6468,7 +6490,7 @@ const TRL_PHASES = [
         label: 'TRL-4',
         sub: 'Months 13-18',
         dot: '',
-        icon: '\U0001f9ea',
+        icon: '🧪',
         title: 'TRL-4: Component & Subsystem Validation in Lab',
         subtitle: 'Validating individual components and the integrated system in a controlled laboratory environment with comprehensive test suites and deployment preparation.',
         stats: [
@@ -6477,10 +6499,10 @@ const TRL_PHASES = [
             { val: '3', label: 'Deliverables' },
         ],
         pipeline: [
-            { label: 'Component Validation', icon: '\U0001f52c', cls: 'val' },
-            { label: 'System Integration Test', icon: '\U0001f517', cls: 'val' },
-            { label: 'Demonstrator Build', icon: '\U0001f3af', cls: 'dev' },
-            { label: 'Documentation', icon: '\U0001f4c4', cls: 'doc' },
+            { label: 'Component Validation', icon: '🔬', cls: 'val' },
+            { label: 'System Integration Test', icon: '🔗', cls: 'val' },
+            { label: 'Demonstrator Build', icon: '🎯', cls: 'dev' },
+            { label: 'Documentation', icon: '📄', cls: 'doc' },
         ],
         ganttActivities: [
             { activity: 'Component-Level Validation (Per Module)', cat: 'VAL', dur: '4 mo', width: '67%', cls: 'val' },
@@ -6503,7 +6525,7 @@ const TRL_PHASES = [
         label: 'TRL-5',
         sub: 'Months 19-22',
         dot: '',
-        icon: '\U0001f680',
+        icon: '🚀',
         title: 'TRL-5: Subsystem Validation in Relevant Environment',
         subtitle: 'Preparing for and initiating validation in a relevant clinical environment — IRB applications, clinician UAT, regulatory compliance, and stakeholder engagement.',
         stats: [
@@ -6513,9 +6535,9 @@ const TRL_PHASES = [
         ],
         pipeline: [
             { label: 'Regulatory Prep', icon: '\u2696\ufe0f', cls: 'reg' },
-            { label: 'Clinician UAT', icon: '\U0001f468\u200d\u2695\ufe0f', cls: 'val' },
-            { label: 'Data Privacy', icon: '\U0001f512', cls: 'reg' },
-            { label: 'Stakeholder Demo', icon: '\U0001f3a4', cls: 'doc' },
+            { label: 'Clinician UAT', icon: '👨‍⚕️', cls: 'val' },
+            { label: 'Data Privacy', icon: '🔒', cls: 'reg' },
+            { label: 'Stakeholder Demo', icon: '🎤', cls: 'doc' },
         ],
         ganttActivities: [
             { activity: 'Clinical IRB Application & Approvals', cat: 'REG', dur: '4 mo', width: '100%', cls: 'reg' },
@@ -6536,7 +6558,7 @@ const TRL_PHASES = [
         label: 'TRL-6',
         sub: 'Months 23-28',
         dot: '',
-        icon: '\U0001f3e5',
+        icon: '🏥',
         title: 'TRL-6: System/Subsystem Model Demo in Relevant Environment',
         subtitle: 'Demonstrating the integrated system with real patient data in a relevant clinical environment — multi-center IRB, clinician training, and formal validation studies.',
         stats: [
@@ -6545,10 +6567,10 @@ const TRL_PHASES = [
             { val: '92%+', label: 'Target Acc' },
         ],
         pipeline: [
-            { label: 'IRB Protocol', icon: '\U0001f4cb', cls: 'reg' },
-            { label: 'Real Data Pipeline', icon: '\U0001f5c4\ufe0f', cls: 'dev' },
-            { label: 'Clinician Training', icon: '\U0001f468\u200d\u2695\ufe0f', cls: 'val' },
-            { label: 'Validation Study', icon: '\U0001f4ca', cls: 'val' },
+            { label: 'IRB Protocol', icon: '📋', cls: 'reg' },
+            { label: 'Real Data Pipeline', icon: '🗄️', cls: 'dev' },
+            { label: 'Clinician Training', icon: '👨‍⚕️', cls: 'val' },
+            { label: 'Validation Study', icon: '📊', cls: 'val' },
         ],
         ganttActivities: [
             { activity: 'Multi-Center IRB Approvals (5 sites)', cat: 'REG', dur: '4 mo', width: '67%', cls: 'reg' },
@@ -6579,10 +6601,10 @@ const TRL_PHASES = [
             { val: 'Critical', label: 'Priority' },
         ],
         pipeline: [
-            { label: 'EHR Integration', icon: '\U0001f517', cls: 'dev' },
-            { label: 'Live Pilot Study', icon: '\U0001f3e5', cls: 'val' },
+            { label: 'EHR Integration', icon: '🔗', cls: 'dev' },
+            { label: 'Live Pilot Study', icon: '🏥', cls: 'val' },
             { label: 'Regulatory Filing', icon: '\u2696\ufe0f', cls: 'reg' },
-            { label: 'Safety Monitoring', icon: '\U0001f6e1\ufe0f', cls: 'val' },
+            { label: 'Safety Monitoring', icon: '🛡️', cls: 'val' },
         ],
         ganttActivities: [
             { activity: 'EHR/HL7 FHIR Integration (7 hospitals)', cat: 'DEV', dur: '5 mo', width: '83%', cls: 'dev' },
@@ -6613,10 +6635,10 @@ const TRL_PHASES = [
             { val: 'High', label: 'Priority' },
         ],
         pipeline: [
-            { label: 'Certification', icon: '\U0001f4dc', cls: 'reg' },
-            { label: 'Quality Assurance', icon: '\U0001f52c', cls: 'val' },
-            { label: 'Interop Testing', icon: '\U0001f504', cls: 'dev' },
-            { label: 'Clinical Trial', icon: '\U0001f4cb', cls: 'reg' },
+            { label: 'Certification', icon: '📜', cls: 'reg' },
+            { label: 'Quality Assurance', icon: '🔬', cls: 'val' },
+            { label: 'Interop Testing', icon: '🔄', cls: 'dev' },
+            { label: 'Clinical Trial', icon: '📋', cls: 'reg' },
         ],
         ganttActivities: [
             { activity: 'FDA 510(k) Submission & Regulatory Review', cat: 'REG', dur: '6 mo', width: '100%', cls: 'reg' },
@@ -6638,7 +6660,7 @@ const TRL_PHASES = [
         label: 'TRL-9',
         sub: 'Months 41-48',
         dot: '',
-        icon: '\U0001f30d',
+        icon: '🌍',
         title: 'TRL-9: Full Deployment & Operations',
         subtitle: 'Actual system proven through successful clinical operations, with broad national deployment, continuous monitoring, real-world evidence generation, and global scale-up.',
         stats: [
@@ -6647,10 +6669,10 @@ const TRL_PHASES = [
             { val: '10K+', label: 'Patients Served' },
         ],
         pipeline: [
-            { label: 'National Rollout', icon: '\U0001f5fa\ufe0f', cls: 'dep' },
-            { label: 'Clinical Monitoring', icon: '\U0001f4ca', cls: 'val' },
-            { label: 'Continuous Learning', icon: '\U0001f504', cls: 'dev' },
-            { label: 'Global Scale-Up', icon: '\U0001f30f', cls: 'dep' },
+            { label: 'National Rollout', icon: '🗺️', cls: 'dep' },
+            { label: 'Clinical Monitoring', icon: '📊', cls: 'val' },
+            { label: 'Continuous Learning', icon: '🔄', cls: 'dev' },
+            { label: 'Global Scale-Up', icon: '🌏', cls: 'dep' },
         ],
         ganttActivities: [
             { activity: 'National Healthcare System Integration', cat: 'DEP', dur: '6 mo', width: '75%', cls: 'dep' },
@@ -6781,9 +6803,126 @@ function initTrlRoadmap() {
     renderTrlTimeline();
 }
 
+// ---- GLOBAL DIABETES IMPACT MAP ----
+var DIABETES_REGIONS = {
+    type: 'FeatureCollection',
+    features: [
+        { type:'Feature', properties:{ name:'North America', prevalence:9.2, diagnosed:'38M', intensity:8, color:'#fb6a4a' }, geometry:{ type:'Polygon', coordinates:[[[-170,15.5],[-5,15.5],[-5,85],[-170,85],[-170,15.5]]] } },
+        { type:'Feature', properties:{ name:'South America', prevalence:7.8, diagnosed:'25M', intensity:6, color:'#fcae91' }, geometry:{ type:'Polygon', coordinates:[[[-82,0],[-82,-56],[-35,-56],[-35,0],[-82,0]]] } },
+        { type:'Feature', properties:{ name:'Europe', prevalence:6.4, diagnosed:'59M', intensity:5, color:'#fdcc8a' }, geometry:{ type:'Polygon', coordinates:[[[-10,35],[45,35],[45,70],[-10,70],[-10,35]]] } },
+        { type:'Feature', properties:{ name:'Middle East & North Africa', prevalence:12.2, diagnosed:'55M', intensity:9, color:'#cb181d' }, geometry:{ type:'Polygon', coordinates:[[[-10,12],[65,12],[65,38],[-10,38],[-10,12]]] } },
+        { type:'Feature', properties:{ name:'Sub-Saharan Africa', prevalence:4.5, diagnosed:'24M', intensity:3, color:'#fee5d9' }, geometry:{ type:'Polygon', coordinates:[[[-18,-35],[52,-35],[52,12],[-18,12],[-18,-35]]] } },
+        { type:'Feature', properties:{ name:'South Asia', prevalence:10.4, diagnosed:'90M', intensity:9, color:'#cb181d' }, geometry:{ type:'Polygon', coordinates:[[[60,5],[92,5],[92,37],[60,37],[60,5]]] } },
+        { type:'Feature', properties:{ name:'Southeast Asia', prevalence:8.3, diagnosed:'48M', intensity:7, color:'#fb6a4a' }, geometry:{ type:'Polygon', coordinates:[[[92,-12],[142,-12],[142,22],[92,22],[92,-12]]] } },
+        { type:'Feature', properties:{ name:'East Asia', prevalence:9.8, diagnosed:'85M', intensity:8, color:'#fb6a4a' }, geometry:{ type:'Polygon', coordinates:[[[100,18],[150,18],[150,55],[100,55],[100,18]]] } },
+        { type:'Feature', properties:{ name:'Oceania', prevalence:5.8, diagnosed:'2M', intensity:4, color:'#fdcc8a' }, geometry:{ type:'Polygon', coordinates:[[[112,-48],[180,-48],[180,-8],[112,-8],[112,-48]]] } },
+    ]
+};
+
+var diabetesMap = null;
+
+function initDiabetesMap() {
+    var container = document.getElementById('diabetesMap');
+    if (!container || diabetesMap) return;
+
+    // Reset any leftover state
+    container.innerHTML = '';
+    container.style.height = '450px';
+
+    diabetesMap = L.map('diabetesMap', {
+        center: [20, 30],
+        zoom: 2,
+        minZoom: 1,
+        maxZoom: 6,
+        zoomControl: true,
+        attributionControl: true,
+        scrollWheelZoom: true,
+        worldCopyJump: true,
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OSM</a>',
+    }).addTo(diabetesMap);
+
+    function getColor(d) {
+        return d >= 12 ? '#cb181d' : d >= 8 ? '#fb6a4a' : d >= 6 ? '#fcae91' : d >= 4 ? '#fee5d9' : '#1a1a2e';
+    }
+
+    function style(feature) {
+        return {
+            fillColor: getColor(feature.properties.prevalence),
+            weight: 1.5,
+            opacity: 1,
+            color: '#ffffff',
+            dashArray: '2',
+            fillOpacity: 0.65,
+        };
+    }
+
+    function highlightFeature(e) {
+        var layer = e.target;
+        layer.setStyle({ weight: 3, color: '#333', dashArray: '', fillOpacity: 0.85 });
+        layer.bringToFront();
+    }
+
+    function resetHighlight(e) {
+        geojson.resetStyle(e.target);
+    }
+
+    function onEachFeature(feature, layer) {
+        var p = feature.properties;
+        layer.on({ mouseover: highlightFeature, mouseout: resetHighlight, click: function() { zoomToFeature(feature, layer); } });
+        layer.bindTooltip(
+            '<strong>' + p.name + '</strong><br>' +
+            'Prevalence: <strong>' + p.prevalence + '%</strong><br>' +
+            'Diagnosed: <strong>' + p.diagnosed + '</strong>',
+            { sticky: true, direction: 'top' }
+        );
+        layer.bindPopup(
+            '<div style="font-family:sans-serif;min-width:200px;">' +
+            '<h3 style="margin:0 0 8px 0;color:var(--medical-blue);">' + p.name + '</h3>' +
+            '<table style="width:100%;font-size:0.9rem;border-collapse:collapse;">' +
+            '<tr><td style="padding:4px 0;color:#5f6368;">Diabetes Prevalence</td><td style="text-align:right;font-weight:600;">' + p.prevalence + '%</td></tr>' +
+            '<tr><td style="padding:4px 0;color:#5f6368;">Diagnosed Adults</td><td style="text-align:right;font-weight:600;">' + p.diagnosed + '</td></tr>' +
+            '<tr><td style="padding:4px 0;color:#5f6368;">Impact Intensity</td><td style="text-align:right;font-weight:600;">' + p.intensity + '/10</td></tr>' +
+            '</table>' +
+            '<p style="margin:8px 0 0 0;font-size:0.8rem;color:#5f6368;">Click outside to close</p>' +
+            '</div>',
+            { maxWidth: 300, closeButton: true }
+        );
+    }
+
+    var geojson = L.geoJSON(DIABETES_REGIONS, { style: style, onEachFeature: onEachFeature }).addTo(diabetesMap);
+
+    // Fit bounds to show all regions
+    diabetesMap.fitBounds(geojson.getBounds(), { padding: [20, 20] });
+
+    // Add a scale overlay
+    L.control.scale({ imperial: false, metric: true, position: 'bottomleft' }).addTo(diabetesMap);
+
+    // Invalidate size after a short delay to handle layout shifts
+    setTimeout(function() { if (diabetesMap) diabetesMap.invalidateSize(); }, 300);
+}
+
+function zoomToFeature(feature, layer) {
+    if (diabetesMap) diabetesMap.fitBounds(layer.getBounds(), { padding: [30, 30], maxZoom: 5 });
+}
+
+function ensureDiabetesMap() {
+    var el = document.getElementById('diabetesMap');
+    if (!el) return;
+    if (!diabetesMap) { initDiabetesMap(); }
+    setTimeout(function() { if (diabetesMap) diabetesMap.invalidateSize(); }, 100);
+}
+
 /* Initialize on DOM load */
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
+        // Init diabetes map if module-1 is active
+        if (document.getElementById('diabetesMap')) {
+            initDiabetesMap();
+        }
         if (document.getElementById('trl-roadmap-content')) {
             initTrlRoadmap();
         }
